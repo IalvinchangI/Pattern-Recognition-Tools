@@ -1,13 +1,17 @@
 package indi.IalvinchangI.patternrecognitionapp;
 
+import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+
 /**
- * Hello world!
- *
+ * 主程式
+ * @author IalvinchangI
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        MainFrame mainWindow = new MainFrame();
+
+        mainWindow.setVisible(true);
     }
 }
