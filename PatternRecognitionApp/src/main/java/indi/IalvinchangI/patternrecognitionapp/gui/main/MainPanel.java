@@ -7,14 +7,11 @@ import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.drawing.DrawingPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.setting.SettingPanel;
-import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
@@ -64,11 +61,8 @@ public class MainPanel extends TransparentPanel {
         this.settingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(SETTING_PAGE_NAME));
         this.drawingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(DRAWING_PAGE_NAME));
 
-        this.settingPageButton.setIcon(GUITools.getScaledImageIcon(
-            App.RESOURCES_PATH + "images/setting.png", 
-            ChangePageButton.MIN_HEIGHT, ChangePageButton.MIN_HEIGHT
-        ));
-        this.settingPageButton.setWidth(100);
+        this.settingPageButton.setIcon(App.RESOURCES_PATH + "images/setting.png");
+        this.settingPageButton.setWidth(50);
         this.settingPageButton.color = settingPanel.getBackground();
 
         this.drawingPageButton.setText("繪圖");
