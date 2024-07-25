@@ -21,12 +21,17 @@ public class MainFrame extends JFrame {
     /** 視窗最小高度 */
     public static final int MIN_HEIGHT = 500;
 
+
+    /** 背景顏色 */
+    public static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
+
+
     /**
      * 主視窗
      */
     public MainFrame() {
         this.setTitle("pattern recognition app");
-        this.setBackground(Color.WHITE);
+        this.setBackground(BACKGROUND_COLOR);
 
         // set size
         this.setSize(MIN_WIDTH, MIN_HEIGHT);
