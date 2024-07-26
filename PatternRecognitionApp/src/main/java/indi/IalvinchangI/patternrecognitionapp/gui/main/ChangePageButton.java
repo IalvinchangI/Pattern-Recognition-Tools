@@ -17,7 +17,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.EditableButton;
  * @author IalvinchangI
  */
 public class ChangePageButton extends EditableButton {
-    public final static int MIN_HEIGHT = 30;
+    public final static int MIN_HEIGHT = 35;
 
     public ChangePageButton() {
         super();
@@ -29,7 +29,7 @@ public class ChangePageButton extends EditableButton {
      * @param path 圖檔路徑
      */
     public void setIcon(String path) {
-        this.icon = GUITools.getScaledImage(path, MIN_HEIGHT - 2, MIN_HEIGHT - 2);
+        this.icon = GUITools.getScaledImage(path, MIN_HEIGHT - 5, MIN_HEIGHT - 5);
     }
 
     private Image icon = null;
@@ -78,6 +78,7 @@ public class ChangePageButton extends EditableButton {
                 null
             );
         }
+        // TODO getSize -> getPreferredSize ?
 
         // delete g2d
         g2d.dispose();

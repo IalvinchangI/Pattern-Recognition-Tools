@@ -1,6 +1,7 @@
 package indi.IalvinchangI.patternrecognitionapp.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -24,6 +25,9 @@ public class MainFrame extends JFrame {
 
     /** 背景顏色 */
     public static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
+
+    /** 字體 */
+    public static final Font SUBTITLE_FONT = new Font("微軟正黑體", Font.BOLD, 18);
 
 
     /**

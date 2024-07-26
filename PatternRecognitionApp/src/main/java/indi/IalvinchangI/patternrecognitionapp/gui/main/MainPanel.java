@@ -3,7 +3,6 @@ package indi.IalvinchangI.patternrecognitionapp.gui.main;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,7 +46,7 @@ public class MainPanel extends TransparentPanel {
         this.buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.contentPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        this.buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 1, 0));
         this.buttonPanel.add(settingPageButton);
         this.buttonPanel.add(drawingPageButton);
         this.add(buttonPanel);
@@ -64,12 +63,13 @@ public class MainPanel extends TransparentPanel {
         this.settingPageButton.setIcon(App.RESOURCES_PATH + "images/setting.png");
         this.settingPageButton.setWidth(50);
         this.settingPageButton.color = settingPanel.getBackground();
-
-        this.drawingPageButton.setText("繪圖");
-        this.drawingPageButton.setFont(new Font("微軟正黑體", Font.BOLD, 18));
-        this.drawingPageButton.setForeground(Color.BLACK);
+        
+        // this.drawingPageButton.setText("繪圖");
+        // this.drawingPageButton.setFont(MainFrame.SUBTITLE_FONT);
+        // this.drawingPageButton.setForeground(Color.BLACK);
+        this.drawingPageButton.setIcon(App.RESOURCES_PATH + "images/drawing.png");
         this.drawingPageButton.setWidth(100);
-        this.drawingPageButton.color = Color.GRAY;
+        this.drawingPageButton.color = Color.YELLOW;
         
         this.buttonPanel.setBackground(MainFrame.BACKGROUND_COLOR);
 
