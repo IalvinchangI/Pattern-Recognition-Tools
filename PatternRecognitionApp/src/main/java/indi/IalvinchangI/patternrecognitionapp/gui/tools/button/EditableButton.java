@@ -1,5 +1,8 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JButton;
 
 
@@ -15,5 +18,40 @@ public abstract class EditableButton extends JButton {
         setContentAreaFilled(false);
         setFocusPainted(false);  // 不繪製焦點框
         setBorderPainted(false);  // 不繪製按鈕邊框
+    }
+    
+    
+    /**
+     * 設定 統一的繪製設定
+     * @param g2d 元件的 Graphics
+     */
+    protected abstract void paintComponentSetting(Graphics2D g2d);
+
+    /**
+     * 繪製按鈕的背景、邊框
+     * @param g2d 元件的 Graphics
+     */
+    protected abstract void paintComponentBackground(Graphics2D g2d);
+
+    /**
+     * 繪製按鈕的內容
+     * @param g2d 元件的 Graphics
+     */
+    protected abstract void paintComponentContent(Graphics2D g2d);
+
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        this.paintComponentSetting(g2d);
+
+        this.paintComponentBackground(g2d);
+        
+        this.paintComponentContent(g2d);
+
+        // delete g2d
+        g2d.dispose();
     }
 }

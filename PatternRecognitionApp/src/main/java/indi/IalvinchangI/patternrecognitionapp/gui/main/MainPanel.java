@@ -33,8 +33,8 @@ public class MainPanel extends TransparentPanel {
         this.buttonPanel = new TransparentPanel();
         this.contentPanel = new ChangeablePanel();
 
-        this.settingPageButton = new ChangePageButton();
-        this.drawingPageButton = new ChangePageButton();
+        this.settingPageButton = new ChangePageButton(App.RESOURCES_PATH + "images/setting.png", 50);
+        this.drawingPageButton = new ChangePageButton(App.RESOURCES_PATH + "images/drawing.png", 100);
 
         this.settingPanel = new SettingPanel();
         this.drawingPanel = new DrawingPanel();
@@ -60,15 +60,11 @@ public class MainPanel extends TransparentPanel {
         this.settingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(SETTING_PAGE_NAME));
         this.drawingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(DRAWING_PAGE_NAME));
 
-        this.settingPageButton.setIcon(App.RESOURCES_PATH + "images/setting.png");
-        this.settingPageButton.setWidth(50);
         this.settingPageButton.color = settingPanel.getBackground();
         
         // this.drawingPageButton.setText("繪圖");
         // this.drawingPageButton.setFont(MainFrame.SUBTITLE_FONT);
         // this.drawingPageButton.setForeground(Color.BLACK);
-        this.drawingPageButton.setIcon(App.RESOURCES_PATH + "images/drawing.png");
-        this.drawingPageButton.setWidth(100);
         this.drawingPageButton.color = Color.YELLOW;
         
         this.buttonPanel.setBackground(MainFrame.BACKGROUND_COLOR);

@@ -21,7 +21,6 @@ public class DrawingPanel extends TransparentPanel {
     public static String[] labels = {"圓形", "三角形", "矩形", "五邊形", "五角星"};
 
     public DrawingPanel() {
-        // this.add(new JLabel("DrawingPanel"));
         this.setBackground(Color.YELLOW);
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -29,7 +28,7 @@ public class DrawingPanel extends TransparentPanel {
         constraints.insets = new Insets(3, 2, 3, 20);
 
         // new
-        this.canva = new GridCanvaPanel();
+        this.canvas = new GridCanvasPanel();
         this.patterns = new PatternsPanel();
         this.labelPanel = new JList<>(DrawingPanel.labels);
 
@@ -42,7 +41,7 @@ public class DrawingPanel extends TransparentPanel {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.NORTHEAST;
-        this.add(canva, constraints);
+        this.add(canvas, constraints);
         constraints.gridx = 1;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.WEST;
@@ -55,7 +54,7 @@ public class DrawingPanel extends TransparentPanel {
         this.add(patterns, constraints);
     }
 
-    private GridCanvaPanel canva = null;
+    private GridCanvasPanel canvas = null;
     private PatternsPanel patterns = null;
     private JList<String> labelPanel = null;
 

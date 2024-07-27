@@ -2,37 +2,21 @@ package indi.IalvinchangI.patternrecognitionapp.gui.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
-import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
-import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.EditableButton;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 
 /**
  * 切換頁面用的 Button
  * @author IalvinchangI
  */
-public class ChangePageButton extends EditableButton {
+public class ChangePageButton extends GraphButton {
     public final static int MIN_HEIGHT = 35;
 
-    public ChangePageButton() {
-        super();
+    public ChangePageButton(String path, int width) {
+        super(path, width, MIN_HEIGHT);
     }
-
-
-    /**
-     * 設定 icon 並縮放它
-     * @param path 圖檔路徑
-     */
-    public void setIcon(String path) {
-        this.icon = GUITools.getScaledImage(path, MIN_HEIGHT - 5, MIN_HEIGHT - 5);
-    }
-
-    private Image icon = null;
 
 
     /**
@@ -40,6 +24,7 @@ public class ChangePageButton extends EditableButton {
      * @param width 寬度
      */
     public void setWidth(int width) {
+        this.width = width;
         this.setPreferredSize(new Dimension(width, MIN_HEIGHT));
     }
 
@@ -49,17 +34,19 @@ public class ChangePageButton extends EditableButton {
 
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
-
+    protected void paintComponentSetting(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(this.color);
-        
-        // background
-        g2d.fillRoundRect(0, 0, this.getPreferredSize().width, this.getPreferredSize().height + 10, 20, 20);
+    }
 
-        // text
+    @Override
+    protected void paintComponentBackground(Graphics2D g2d) {
+        g2d.fillRoundRect(0, 0, this.getPreferredSize().width, this.getPreferredSize().height + 10, 20, 20);
+    }
+
+    /*
+    @Override
+    protected void paintComponentContent(Graphics2D g2d) {
         if (this.getText() != null) {
             FontMetrics fm = g2d.getFontMetrics();
             Rectangle stringBounds = fm.getStringBounds(getText(), g2d).getBounds();
@@ -69,18 +56,7 @@ public class ChangePageButton extends EditableButton {
             g2d.drawString(getText(), textX, textY);
         }
 
-        // icon
-        if (this.icon != null) {
-            g2d.drawImage(
-                this.icon, 
-                (this.getSize().width - this.icon.getWidth(null)) / 2, 
-                (this.getSize().height - this.icon.getHeight(null)) / 2, 
-                null
-            );
-        }
-        // TODO getSize -> getPreferredSize ?
-
-        // delete g2d
-        g2d.dispose();
+        super.paintComponentContent(g2d);
     }
+    */
 }

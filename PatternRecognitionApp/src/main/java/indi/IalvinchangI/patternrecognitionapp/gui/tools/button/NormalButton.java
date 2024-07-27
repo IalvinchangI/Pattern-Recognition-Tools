@@ -2,47 +2,60 @@ package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 
 /**
  * 一般的 Button
  * @author IalvinchangI
  */
-public class NormalButton extends EditableButton {
-    public NormalButton() {
-        // TODO
-        
+public class NormalButton extends GraphButton {
+
+    public NormalButton(String path, int width) {
+        super(path, width);
+    }
+
+    public NormalButton(Image image, int width) {
+        super(image, width);
     }
 
 
+    public int arcDiameter = 10;
+
+    private static final int STROKE_RADIUS = 1;
+
+
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
-
-        final int strokeRadius = 2;
-        g2d.setStroke(new BasicStroke(strokeRadius * 2));
+    protected void paintComponentSetting(Graphics2D g2d) {
+        g2d.setStroke(new BasicStroke(STROKE_RADIUS * 2));
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+    }
+
+    @Override
+    protected void paintComponentBackground(Graphics2D g2d) {
         // background
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(new Color(220, 220, 220));
         g2d.fillRoundRect(
-            strokeRadius, strokeRadius, 
-            this.getPreferredSize().width - strokeRadius * 2 - 1, this.getPreferredSize().height - strokeRadius * 2 - 1, 
-            10, 10
+            STROKE_RADIUS, STROKE_RADIUS, 
+            this.getPreferredSize().width - STROKE_RADIUS * 2 - 1, this.getPreferredSize().height - STROKE_RADIUS * 2 - 1, 
+            this.arcDiameter, this.arcDiameter
         );
-
+    
         // border
-        g2d.setColor(Color.LIGHT_GRAY);
+        if (this.getModel().isPressed()) {
+            g2d.setColor(Color.WHITE);
+        }
+        else if (this.getModel().isRollover()) {
+            g2d.setColor(new Color(210, 210, 210));
+        }
+        else {
+            g2d.setColor(Color.WHITE);
+        }
         g2d.drawRoundRect(
-            strokeRadius, strokeRadius, 
-            this.getPreferredSize().width - strokeRadius * 2 - 1, this.getPreferredSize().height - strokeRadius * 2 - 1, 
-            10, 10
+            STROKE_RADIUS, STROKE_RADIUS, 
+            this.getPreferredSize().width - STROKE_RADIUS * 2 - 1, this.getPreferredSize().height - STROKE_RADIUS * 2 - 1, 
+            this.arcDiameter, this.arcDiameter
         );
-
-        // delete g2d
-        g2d.dispose();
     }
 }

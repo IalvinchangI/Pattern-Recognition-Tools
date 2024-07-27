@@ -1,29 +1,36 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
 
+
 /**
  * 可插入圖片的 Button
  * @author IalvinchangI
  */
-public class GraphButton extends NormalButton {
+public class GraphButton extends EditableButton {
 
     protected Image icon = null;
 
+    /** 按鈕的寬 */
     protected int width = 0;
+    /** 按鈕的長 (高) */
+    protected int height = 0;
     
     
-    public GraphButton() {
-        this.setBackground(Color.LIGHT_GRAY);
-        // TODO
+    /**
+     * 設定按鈕長寬
+     * @param width 寬
+     * @param height 長 (高)
+     */
+    public GraphButton(int width, int height) {
+        this.width = width;
+        this.height = height;
+        this.setPreferredSize(new Dimension(width, height));
     }
-
 
     /**
      * 1. 設定 icon 並縮放它
@@ -34,29 +41,94 @@ public class GraphButton extends NormalButton {
      * @param width 長寬
      */
     public GraphButton(String path, int width) {
-        this.width = width;
-        this.setIcon(path);
-        this.setPreferredSize(new Dimension(width, width));
+        this(path, width, width);
     }
 
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param path 圖檔路徑
+     * @param width 寬
+     * @param height 長 (高)
+     */
+    public GraphButton(String path, int width, int height) {
+        this(width, height);
+        this.setIcon(path);
+    }
+
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param image 圖
+     * @param width 長寬
+     */
+    public GraphButton(Image image, int width) {
+        this(image, width, width);
+    }
+
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param image 圖
+     * @param width 寬
+     * @param height 長 (高)
+     */
+    public GraphButton(Image image, int width, int height) {
+        this(width, height);
+        this.setIcon(image);
+    }
+
+
+    private int iconMargin = 5;
+    
+    public void setIconMargin(int margin) {
+        this.iconMargin = margin;
+        this.setIcon(this.icon);
+        repaint();
+    }
+
+    /**
+     * 設定 icon 並縮放它
+     * @param image 圖
+     */
+    public void setIcon(Image image) {
+        Dimension iconSize = this.computeIconSize(image);
+        this.icon = GUITools.getScaledImage(image, iconSize.width - iconMargin, iconSize.height - iconMargin);
+    }
 
     /**
      * 設定 icon 並縮放它
      * @param path 圖檔路徑
      */
     public void setIcon(String path) {
-        this.icon = GUITools.getScaledImage(path, this.width - 5, this.width - 5);
+        this.setIcon(GUITools.getImage(path));
     }
 
 
+    private Dimension computeIconSize(Image image) {
+        float width = image.getWidth(null);
+        float height = image.getHeight(null);
+
+        float scale = Math.min(this.width / width, this.height / height);
+
+        return new Dimension((int)(width * scale), (int)(height * scale));
+    }
+    
+    
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
+    protected void paintComponentSetting(Graphics2D g2d) {}
 
-        // g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    @Override
+    protected void paintComponentBackground(Graphics2D g2d) {}
 
-        // icon
+    @Override
+    protected void paintComponentContent(Graphics2D g2d) {
         if (this.icon != null) {
             g2d.drawImage(
                 this.icon, 
@@ -66,8 +138,5 @@ public class GraphButton extends NormalButton {
             );
         }
         // TODO getSize -> getPreferredSize ?
-
-        // delete g2d
-        g2d.dispose();
     }
 }

@@ -14,18 +14,28 @@ import javax.swing.ImageIcon;
 public class GUITools {
     /**
      * 縮放 {@code Image}
+     * @param image 圖
+     * @param width 寬度
+     * @param height 高度
+     * @return 縮放完的 {@code Image}
+     */
+    public static Image getScaledImage(Image image, int width, int height) {
+        return image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    }
+
+    /**
+     * 縮放 {@code Image}
      * @param path 圖檔路徑
      * @param width 寬度
      * @param height 高度
      * @return 縮放完的 {@code Image} or {@code null}
      */
     public static Image getScaledImage(String path, int width, int height) {
-        try {
-            return ImageIO.read(new File(path)).getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Image image = GUITools.getImage(path);
+        if (image == null) {
             return null;
         }
+        return GUITools.getScaledImage(image, width, height);
     }
     
     /**
@@ -41,5 +51,19 @@ public class GUITools {
             return null;
         }
         return new ImageIcon(image);
+    }
+
+    /**
+     * 從 path 讀取 {@code Image}
+     * @param path 圖檔路徑
+     * @return 讀取的 {@code Image} or {@code null}
+     */
+    public static Image getImage(String path) {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
