@@ -29,8 +29,10 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
  */
 public class GridCanvasPanel extends TransparentPanel {
 
-    public static final int GRID_COUNT = 64;
+    public static final int GRID_COUNT = App.PATTERN_WIDTH;
     public static final int GRID_WIDTH = 8;
+
+    public static final int STROKE_WIDTH = 2;
 
 
     public GridCanvasPanel() {
@@ -74,7 +76,7 @@ public class GridCanvasPanel extends TransparentPanel {
         this.drawingPattern = new BufferedImage(GRID_COUNT, GRID_COUNT, BufferedImage.TYPE_BYTE_GRAY);
         this.drawingPatternG2D = this.drawingPattern.createGraphics();
         clearCanvas();
-        this.drawingPatternG2D.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+        this.drawingPatternG2D.setStroke(new BasicStroke(STROKE_WIDTH, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {

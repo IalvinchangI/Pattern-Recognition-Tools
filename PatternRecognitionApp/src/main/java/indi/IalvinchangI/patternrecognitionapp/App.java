@@ -11,9 +11,12 @@ public class App {
     /** "resources/" */
     public static final String RESOURCES_PATH = App.class.getResource("../../../").getPath();
 
-    public static void main(String[] args) {
-        System.out.println(RESOURCES_PATH);
 
+    /** pattern 的邊長 */
+    public static final int PATTERN_WIDTH = 64;
+
+
+    public static void main(String[] args) {
         MainFrame mainWindow = new MainFrame();
 
         mainWindow.setVisible(true);

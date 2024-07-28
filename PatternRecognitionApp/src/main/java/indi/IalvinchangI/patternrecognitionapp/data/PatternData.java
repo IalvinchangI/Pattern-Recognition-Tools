@@ -3,6 +3,8 @@ package indi.IalvinchangI.patternrecognitionapp.data;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+import indi.IalvinchangI.patternrecognitionapp.App;
+
 /**
  * 管理 pattern 資料
  * @author IalvinchangI
@@ -26,7 +28,8 @@ public class PatternData {
 
 
     public PatternData() {
-        // TODO
+        this.pattern = new int[App.PATTERN_WIDTH][App.PATTERN_WIDTH];
+        this.speed = new float[App.PATTERN_WIDTH][App.PATTERN_WIDTH];
     }
 
 
@@ -41,7 +44,6 @@ public class PatternData {
      */
     public Image toImage() {
         BufferedImage output = new BufferedImage(pattern[0].length, pattern.length, BufferedImage.TYPE_BYTE_GRAY);
-        // TODO
         return output;
     }
 }

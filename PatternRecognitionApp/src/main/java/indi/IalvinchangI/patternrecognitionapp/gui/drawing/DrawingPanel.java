@@ -5,9 +5,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JList;
-import javax.swing.ListSelectionModel;
-
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
@@ -30,12 +27,11 @@ public class DrawingPanel extends TransparentPanel {
         // new
         this.canvas = new GridCanvasPanel();
         this.patterns = new PatternsPanel();
-        this.labelPanel = new JList<>(DrawingPanel.labels);
+        this.labelList = new LabelList(DrawingPanel.labels);
 
         // set
-        this.labelPanel.setBackground(Color.MAGENTA);
-        this.labelPanel.setFont(MainFrame.SUBTITLE_FONT);
-        this.labelPanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.labelList.setBackground(Color.MAGENTA);
+        this.labelList.setFont(MainFrame.SUBTITLE_FONT);
 
         // add
         constraints.gridx = 0;
@@ -45,7 +41,7 @@ public class DrawingPanel extends TransparentPanel {
         constraints.gridx = 1;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.WEST;
-        this.add(labelPanel, constraints);
+        this.add(labelList, constraints);
         
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -56,6 +52,6 @@ public class DrawingPanel extends TransparentPanel {
 
     private GridCanvasPanel canvas = null;
     private PatternsPanel patterns = null;
-    private JList<String> labelPanel = null;
+    private LabelList labelList = null;
 
 }
