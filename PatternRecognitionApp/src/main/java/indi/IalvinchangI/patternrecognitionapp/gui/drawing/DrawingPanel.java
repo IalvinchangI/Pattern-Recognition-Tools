@@ -4,8 +4,13 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.data.DataController;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
 
@@ -17,7 +22,16 @@ public class DrawingPanel extends TransparentPanel {
 
     public static String[] labels = {"圓形", "三角形", "矩形", "五邊形", "五角星"};
 
+
+    DataController dataController = null;
+
+
     public DrawingPanel() {
+        // data
+        this.dataController = new DataController();
+
+
+        // GUI
         this.setBackground(Color.YELLOW);
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -26,32 +40,57 @@ public class DrawingPanel extends TransparentPanel {
 
         // new
         this.canvas = new GridCanvasPanel();
-        this.patterns = new PatternsPanel();
         this.labelList = new LabelList(DrawingPanel.labels);
+
+        this.patterns = new PatternsPanel();
+        this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
 
         // set
         this.labelList.setBackground(Color.MAGENTA);
         this.labelList.setFont(MainFrame.SUBTITLE_FONT);
 
+        this.addNewPattern();
+
+        this.addPatternButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addNewPattern();
+                canvas.clearCanvas();
+            }
+        });
+
+
         // add
         constraints.gridx = 0;
         constraints.gridy = 0;
+        constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.NORTHEAST;
         this.add(canvas, constraints);
-        constraints.gridx = 1;
+        constraints.gridx = 2;
         constraints.gridy = 0;
+        constraints.gridwidth = 1;
         constraints.anchor = GridBagConstraints.WEST;
         this.add(labelList, constraints);
         
         constraints.gridx = 0;
         constraints.gridy = 1;
-        constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.WEST;
         this.add(patterns, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 1;
+        constraints.anchor = GridBagConstraints.WEST;
+        this.add(this.addPatternButton, constraints);
     }
 
     private GridCanvasPanel canvas = null;
-    private PatternsPanel patterns = null;
     private LabelList labelList = null;
+    
+    PatternsPanel patterns = null;
+    private NormalButton addPatternButton = null;
 
+
+    private void addNewPattern() {
+        this.dataController.newPattern();
+        this.patterns.addPattern(dataController.getPattern());
+    }
 }

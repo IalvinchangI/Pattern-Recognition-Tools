@@ -18,6 +18,7 @@ public class LabelList extends JList<String> {
 
     public LabelList(String[] listData) {
         super(listData);
+        
         this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setCellRenderer(new LabelListCellRenderer());
         this.setPreferredSize(new Dimension(100, 30 * listData.length));

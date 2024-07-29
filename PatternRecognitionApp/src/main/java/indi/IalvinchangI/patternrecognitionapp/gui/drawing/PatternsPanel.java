@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
-import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
 /**
@@ -15,7 +13,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
  */
 public class PatternsPanel extends TransparentPanel {
 
-    private static final int BUTTON_WIDTH = 50;
+    public static final int BUTTON_WIDTH = 50;
 
     
     public PatternsPanel() {
@@ -24,15 +22,9 @@ public class PatternsPanel extends TransparentPanel {
 
         // new
         this.patterns = new ArrayList<>();
-        this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", BUTTON_WIDTH);
-
-
-        // add
-        this.add(this.addPatternButton);
     }
 
     public ArrayList<PatternButton> patterns = null;
-    private NormalButton addPatternButton = null;
 
 
     /**
@@ -40,9 +32,10 @@ public class PatternsPanel extends TransparentPanel {
      * @param pattern 要新增的 pattern
      */
     public void addPattern(PatternData pattern) {
-        this.patterns.add(new PatternButton(pattern, BUTTON_WIDTH));
-
-        this.add(this.patterns.get(this.patterns.size() - 1), this.getComponentCount() - 1);
+        PatternButton button = new PatternButton(pattern, BUTTON_WIDTH);
+        
+        this.patterns.add(button);
+        this.add(button);
 
         this.revalidate();
         this.repaint();

@@ -9,8 +9,19 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
  * @author IalvinchangI
  */
 public class PatternButton extends NormalButton {
+
+    private PatternData pattern = null;
+
     public PatternButton(PatternData pattern, int width) {
         super(pattern.toImage(), width);
-        // TODO
+        this.pattern = pattern;
+
+        this.setIconMargin(9);
+        // TODO action listener
+    }
+
+
+    public void reloadPattern() {
+        this.setIcon(pattern.toImage());
     }
 }

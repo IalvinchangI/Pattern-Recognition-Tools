@@ -100,6 +100,7 @@ public class GraphButton extends EditableButton {
     public void setIcon(Image image) {
         Dimension iconSize = this.computeIconSize(image);
         this.icon = GUITools.getScaledImage(image, iconSize.width - iconMargin, iconSize.height - iconMargin);
+        repaint();
     }
 
     /**

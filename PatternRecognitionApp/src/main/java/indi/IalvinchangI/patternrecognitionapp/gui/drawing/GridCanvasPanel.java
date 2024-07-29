@@ -68,6 +68,7 @@ public class GridCanvasPanel extends TransparentPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearCanvas();
+                savePattern();
             }
         });
 
@@ -146,22 +147,29 @@ public class GridCanvasPanel extends TransparentPanel {
     private byte emptyCheck = 0;
 
 
-    /** 清空畫布 */
+    /** 畫布不是空的的時候，會清空畫布 */
     public void clearCanvas() {
-        this.drawingPatternG2D.setColor(Color.WHITE);
-        this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
-        this.drawingPatternG2D.setColor(Color.BLACK);
+        if (this.emptyCheck == 0) {
+            this.drawingPatternG2D.setColor(Color.WHITE);
+            this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
+            this.drawingPatternG2D.setColor(Color.BLACK);
 
-        this.lastX = -1;
-        this.lastY = -1;
-        this.emptyCheck = 3;
-        repaint();
+            this.lastX = -1;
+            this.lastY = -1;
+            this.emptyCheck = 3;
+            repaint();
+        }
     }
 
 
     /** 儲存 pattern 的 圖形、各點速度 */
-    private void savePattern() {
-        // TODO
+    public void savePattern() {
+        DrawingPanel drawingPanel = (DrawingPanel) this.getParent();
+
+        drawingPanel.dataController.fillData(drawingPattern);
+        // TODO drawingPanel.dataController.fillData();
+
+        drawingPanel.patterns.patterns.get(drawingPanel.dataController.getCurrentIndex()).reloadPattern();
     }
 
 
