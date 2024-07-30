@@ -12,20 +12,20 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
  * @author IalvinchangI
  */
 public class ChangePageButton extends GraphButton {
-    public final static int MIN_HEIGHT = 35;
+    public final static int MIN_WIDTH = 35;
 
-    public ChangePageButton(String path, int width) {
-        super(path, width, MIN_HEIGHT);
+    public ChangePageButton(String path, int height) {
+        super(path, MIN_WIDTH, height);
     }
 
 
     /**
      * 設定按鈕寬度
-     * @param width 寬度
+     * @param height 寬度
      */
-    public void setWidth(int width) {
-        this.width = width;
-        this.setPreferredSize(new Dimension(width, MIN_HEIGHT));
+    public void setWidth(int height) {
+        this.height = height;
+        this.setPreferredSize(new Dimension(MIN_WIDTH, height));
     }
 
 
@@ -41,7 +41,7 @@ public class ChangePageButton extends GraphButton {
 
     @Override
     protected void paintComponentBackground(Graphics2D g2d) {
-        g2d.fillRoundRect(0, 0, this.getPreferredSize().width, this.getPreferredSize().height + 10, 20, 20);
+        g2d.fillRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height, 20, 20);
     }
 
     /*
@@ -55,8 +55,6 @@ public class ChangePageButton extends GraphButton {
             g2d.setColor(getForeground());
             g2d.drawString(getText(), textX, textY);
         }
-
-        super.paintComponentContent(g2d);
     }
     */
 }

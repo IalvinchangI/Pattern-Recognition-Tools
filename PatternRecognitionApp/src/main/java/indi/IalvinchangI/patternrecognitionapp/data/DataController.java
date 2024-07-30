@@ -31,12 +31,17 @@ public class DataController {
      * 
      * @throws ArrayIndexOutOfBoundsException
      */
-    public void setCurrentIndex(int index) {
-        // TODO 還未編輯完的話？
+    public boolean setCurrentIndex(int index) {
+        if (this.getPattern().getFinishEditing_TF() == false) {
+            return false;
+        }
+
         if (index < 0 && index >= this.patterns.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
+        
         this.currentIndex = index;
+        return true;
     }
 
 
@@ -64,9 +69,14 @@ public class DataController {
     /**
      * 新增新的 pattern，並將編輯指針指向他
      */
-    public void newPattern() {
+    public boolean newPattern() {
+        if (this.currentIndex != -1 && this.getPattern().getFinishEditing_TF() == false) {
+            return false;
+        }
+
         this.currentIndex = patterns.size();
         this.patterns.add(new PatternData());
+        return true;
     }
 
 
@@ -89,19 +99,7 @@ public class DataController {
      * @throws IllegalArgumentException
      */
     public void fillData(BufferedImage pattern) {
-        PatternData patternData = this.getPattern();
-
-        if ((patternData.pattern.length != pattern.getHeight(null)) || (patternData.pattern[0].length != pattern.getWidth(null))) {
-            throw new IllegalArgumentException("image size is incompatible");
-        }
-
-        byte[] data = ((DataBufferByte) pattern.getRaster().getDataBuffer()).getData();
-        int width = patternData.pattern[0].length;
-        for (int y = 0; y < patternData.pattern.length; y++) {
-            for (int x = 0; x < width; x++) {
-                patternData.pattern[y][x] = data[y * width + x];
-            }
-        }
+        this.getPattern().fillData(pattern);
     }
     
     /**
@@ -109,10 +107,7 @@ public class DataController {
      * @param speed 要存入的 畫筆在各點的速度
      */
     public void fillData(float[][] speed) {
-        PatternData patternData = this.getPattern();
-        for (int y = 0; y < patternData.speed.length; y++) {
-            patternData.speed[y] = speed[y].clone();
-        }
+        this.getPattern().fillData(speed);
     }
 
     /**
@@ -120,8 +115,7 @@ public class DataController {
      * @param strokeWidth 要存入的 畫筆粗度
      */
     public void fillData(int strokeWidth) {
-        PatternData patternData = this.getPattern();
-        patternData.strokeWidth = strokeWidth;
+        this.getPattern().fillData(strokeWidth);
     }
 
     /**
@@ -129,8 +123,7 @@ public class DataController {
      * @param label 要存入的 圖形標籤
      */
     public void fillData(String label) {
-        PatternData patternData = this.getPattern();
-        patternData.label = label;
+        this.getPattern().fillData(label);
     }
 
 

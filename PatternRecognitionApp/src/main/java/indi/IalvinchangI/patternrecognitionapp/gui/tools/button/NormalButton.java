@@ -43,8 +43,8 @@ public class NormalButton extends GraphButton {
         );
     
         // border
-        if (this.getModel().isPressed()) {
-            g2d.setColor(Color.WHITE);
+        if (this.getModel().isPressed() || (this.canSelectTF == true && this.getModel().isSelected())) {
+            g2d.setColor(new Color(180, 180, 180));
         }
         else if (this.getModel().isRollover()) {
             g2d.setColor(new Color(210, 210, 210));

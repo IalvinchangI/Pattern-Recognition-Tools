@@ -30,6 +30,7 @@ public class GraphButton extends EditableButton {
         this.width = width;
         this.height = height;
         this.setPreferredSize(new Dimension(width, height));
+        this.setMinimumSize(new Dimension(width, height));
     }
 
     /**
@@ -133,11 +134,10 @@ public class GraphButton extends EditableButton {
         if (this.icon != null) {
             g2d.drawImage(
                 this.icon, 
-                (this.getSize().width - this.icon.getWidth(null)) / 2, 
-                (this.getSize().height - this.icon.getHeight(null)) / 2, 
+                (this.getPreferredSize().width - this.icon.getWidth(null)) / 2, 
+                (this.getPreferredSize().height - this.icon.getHeight(null)) / 2, 
                 null
             );
         }
-        // TODO getSize -> getPreferredSize ?
     }
 }

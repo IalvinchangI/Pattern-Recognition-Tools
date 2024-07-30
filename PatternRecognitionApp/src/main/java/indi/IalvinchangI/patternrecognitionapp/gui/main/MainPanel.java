@@ -27,7 +27,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
  */
 public class MainPanel extends TransparentPanel {
     public MainPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         // new
         this.buttonPanel = new TransparentPanel();
@@ -41,13 +41,17 @@ public class MainPanel extends TransparentPanel {
         
         
         // add
-        this.add(Box.createVerticalStrut(3));
+        this.add(Box.createHorizontalStrut(30));
 
-        this.buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.contentPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.buttonPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        this.contentPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         
-        this.buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 1, 0));
+        this.buttonPanel.setLayout(new BoxLayout(this.buttonPanel, BoxLayout.Y_AXIS));
+        // this.buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 1));
+        this.settingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.drawingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.buttonPanel.add(settingPageButton);
+        this.buttonPanel.add(Box.createVerticalStrut(100));
         this.buttonPanel.add(drawingPageButton);
         this.add(buttonPanel);
         

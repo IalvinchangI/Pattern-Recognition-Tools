@@ -3,14 +3,15 @@ package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JButton;
+// import javax.swing.JButton;
+import javax.swing.JRadioButton;
 
 
 /**
  * 乾淨的 Button
  * @author IalvinchangI
  */
-public abstract class EditableButton extends JButton {
+public abstract class EditableButton extends JRadioButton {
     /**
      * 把預設要繪製的東西清掉
      */
@@ -19,6 +20,10 @@ public abstract class EditableButton extends JButton {
         setFocusPainted(false);  // 不繪製焦點框
         setBorderPainted(false);  // 不繪製按鈕邊框
     }
+
+
+    /** 是否有選取的特效 */
+    public boolean canSelectTF = false;
     
     
     /**
@@ -38,7 +43,6 @@ public abstract class EditableButton extends JButton {
      * @param g2d 元件的 Graphics
      */
     protected abstract void paintComponentContent(Graphics2D g2d);
-
 
     @Override
     protected void paintComponent(Graphics g) {

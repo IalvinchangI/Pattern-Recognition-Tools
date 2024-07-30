@@ -36,30 +36,30 @@ public class DrawingPanel extends TransparentPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.NONE;
-        constraints.insets = new Insets(3, 2, 3, 20);
-
+        
         // new
         this.canvas = new GridCanvasPanel();
         this.labelList = new LabelList(DrawingPanel.labels);
-
+        
         this.patterns = new PatternsPanel();
         this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
-
+        
         // set
         this.labelList.setBackground(Color.MAGENTA);
         this.labelList.setFont(MainFrame.SUBTITLE_FONT);
-
+        
         this.addNewPattern();
-
+        
         this.addPatternButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addNewPattern();
-                canvas.clearCanvas();
+                if (addNewPattern() == true) {
+                    canvas.clearCanvas();
+                }
             }
         });
-
-
+        
+        
         // add
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -69,28 +69,34 @@ public class DrawingPanel extends TransparentPanel {
         constraints.gridx = 2;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
+        constraints.insets = new Insets(3, 20, 3, 2);
         constraints.anchor = GridBagConstraints.WEST;
         this.add(labelList, constraints);
         
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.insets = new Insets(3, 2, 3, 2);
         constraints.anchor = GridBagConstraints.WEST;
         this.add(patterns, constraints);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(3, 10, 3, 2);
+        constraints.anchor = GridBagConstraints.EAST;
         this.add(this.addPatternButton, constraints);
     }
 
-    private GridCanvasPanel canvas = null;
-    private LabelList labelList = null;
+    GridCanvasPanel canvas = null;
+    LabelList labelList = null;
     
     PatternsPanel patterns = null;
     private NormalButton addPatternButton = null;
 
 
-    private void addNewPattern() {
-        this.dataController.newPattern();
-        this.patterns.addPattern(dataController.getPattern());
+    private boolean addNewPattern() {
+        if (this.dataController.newPattern() == true) {
+            this.patterns.addPattern(dataController.getPattern());
+            return true;
+        }
+        return false;
     }
 }

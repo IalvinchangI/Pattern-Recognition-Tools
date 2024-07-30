@@ -17,16 +17,36 @@ public class PatternData {
     private static final String FILE_TYPE = "IaI.PatternRecognition.raw";
 
     /** 圖形 */
-    public byte[][] pattern = null;
+    private byte[][] pattern = null;
 
     /** 畫筆在各點的速度 */
-    public float[][] speed = null;
+    private float[][] speed = null;
 
     /** 畫筆粗度 */
-    public int strokeWidth = 0;
+    private int strokeWidth = 0;
 
     /** 圖形標籤 */
-    public String label = "";
+    private String label = "";
+
+
+    /**
+     * 0: pattern
+     * 1: speed
+     * 2: strokeWidth
+     * 3: label
+     */
+    private byte editCheck = 0;
+
+    private static final byte FINISH_ALL = 15; 
+
+    /**
+     * 確認是否都編輯完了
+     * @return 是否都編輯完了
+     */
+    public boolean getFinishEditing_TF() {
+        return this.editCheck == 1;
+        // TODO return this.editCheck == FINISH_ALL;
+    }
 
 
     public PatternData() {
@@ -35,6 +55,69 @@ public class PatternData {
             Arrays.fill(this.pattern[i], (byte)-1);
         }
         this.speed = new float[App.PATTERN_WIDTH][App.PATTERN_WIDTH];
+    }
+
+
+    /**
+     * 填 pattern 的 圖形
+     * @param pattern 要存入的 圖形
+     * 
+     * @throws IllegalArgumentException
+     */
+    public void fillData(BufferedImage pattern) {
+        if ((this.pattern.length != pattern.getHeight(null)) || (this.pattern[0].length != pattern.getWidth(null))) {
+            throw new IllegalArgumentException("image size is incompatible");
+        }
+
+        byte emptyCheck = ~0;
+
+        byte[] data = ((DataBufferByte) pattern.getRaster().getDataBuffer()).getData();
+        int width = this.pattern[0].length;
+        for (int y = 0; y < this.pattern.length; y++) {
+            for (int x = 0; x < width; x++) {
+                this.pattern[y][x] = data[y * width + x];
+                emptyCheck &= this.pattern[y][x];
+            }
+        }
+
+        if (emptyCheck == ~0) {
+            this.editCheck &= ~1;
+        }
+        else {
+            this.editCheck |= (1);
+        }
+    }
+    
+    /**
+     * 填 pattern 的 各點速度
+     * @param speed 要存入的 畫筆在各點的速度
+     */
+    public void fillData(float[][] speed) {
+        for (int y = 0; y < this.speed.length; y++) {
+            this.speed[y] = speed[y].clone();
+        }
+
+        this.editCheck |= (1 << 1);
+    }
+
+    /**
+     * 填 pattern 的 畫筆粗度
+     * @param strokeWidth 要存入的 畫筆粗度
+     */
+    public void fillData(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+
+        this.editCheck |= (1 << 2);
+    }
+
+    /**
+     * 填 pattern 的 圖形標籤
+     * @param label 要存入的 圖形標籤
+     */
+    public void fillData(String label) {
+        this.label = label;
+
+        this.editCheck |= (1 << 3);
     }
 
 

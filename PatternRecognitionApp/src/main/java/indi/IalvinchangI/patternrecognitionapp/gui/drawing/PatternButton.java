@@ -15,9 +15,9 @@ public class PatternButton extends NormalButton {
     public PatternButton(PatternData pattern, int width) {
         super(pattern.toImage(), width);
         this.pattern = pattern;
-
+        
+        this.canSelectTF = true;
         this.setIconMargin(9);
-        // TODO action listener
     }
 
 

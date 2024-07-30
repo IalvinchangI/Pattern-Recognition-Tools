@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.Box;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
@@ -43,7 +44,7 @@ public class GridCanvasPanel extends TransparentPanel {
 
         // clean
         this.cleanButton = new NormalButton(App.RESOURCES_PATH + "images/clean_canvas.png", 35);
-        this.cleanButton.setIconMargin(8);
+        this.cleanButton.setIconMargin(7);
 
         constraints.gridx = 1;
         constraints.gridy = 1;
@@ -157,6 +158,21 @@ public class GridCanvasPanel extends TransparentPanel {
             this.lastX = -1;
             this.lastY = -1;
             this.emptyCheck = 3;
+            repaint();
+        }
+    }
+
+
+    /**
+     * 顯示 圖形
+     * @param pattern 要顯示的 圖形
+     */
+    public void laodPattern(PatternData pattern) {
+        if (this.emptyCheck == 0) {
+            this.drawingPatternG2D.setColor(Color.WHITE);
+            this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
+            this.drawingPatternG2D.setColor(Color.BLACK);
+            this.drawingPatternG2D.drawImage(pattern.toImage(), 0, 0, null);
             repaint();
         }
     }
