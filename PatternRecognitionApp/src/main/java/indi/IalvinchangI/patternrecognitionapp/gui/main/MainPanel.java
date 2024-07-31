@@ -41,17 +41,15 @@ public class MainPanel extends TransparentPanel {
         
         
         // add
-        this.add(Box.createHorizontalStrut(30));
+        this.add(Box.createHorizontalStrut(1));
 
         this.buttonPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         this.contentPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         
         this.buttonPanel.setLayout(new BoxLayout(this.buttonPanel, BoxLayout.Y_AXIS));
-        // this.buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 1));
         this.settingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.drawingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.buttonPanel.add(settingPageButton);
-        this.buttonPanel.add(Box.createVerticalStrut(100));
         this.buttonPanel.add(drawingPageButton);
         this.add(buttonPanel);
         

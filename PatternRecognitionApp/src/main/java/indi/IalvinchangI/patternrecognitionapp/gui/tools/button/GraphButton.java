@@ -31,6 +31,7 @@ public class GraphButton extends EditableButton {
         this.height = height;
         this.setPreferredSize(new Dimension(width, height));
         this.setMinimumSize(new Dimension(width, height));
+        this.setMaximumSize(new Dimension(width, height));
     }
 
     /**
