@@ -185,7 +185,7 @@ public class GridCanvasPanel extends TransparentPanel {
         drawingPanel.dataController.fillData(drawingPattern);
         // TODO drawingPanel.dataController.fillData();
 
-        drawingPanel.patterns.patterns.get(drawingPanel.dataController.getCurrentIndex()).reloadPattern();
+        drawingPanel.patterns.getButton(drawingPanel.dataController.getCurrentIndex()).reloadPattern();
     }
 
 

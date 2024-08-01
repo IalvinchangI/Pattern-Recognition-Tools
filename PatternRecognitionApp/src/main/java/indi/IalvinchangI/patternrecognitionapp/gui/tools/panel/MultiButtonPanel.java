@@ -59,6 +59,27 @@ public class MultiButtonPanel extends TransparentPanel {
 
 
     /**
+     * 取得 button 數量
+     * @return button 數量
+     */
+    public int getButtonCount() {
+        return this.buttons.size();
+    }
+
+    /**
+     * 取得特定 button
+     * @param index 特定 button 的索引值
+     * @return 特定 button or null
+     */
+    public EditableButton getButton(int index) {
+        if (index < 0 || this.getButtonCount() <= index) {
+            return null;
+        }
+        return this.buttons.get(index);
+    }
+
+
+    /**
      * 取得上一個選取的 button
      * @return 上一個選取的 button
      */
@@ -113,7 +134,20 @@ public class MultiButtonPanel extends TransparentPanel {
     }
 
     private void setSelectedWithoutCheck(EditableButton button, boolean selected_TF) {
-        this.buttonGroup.setSelected(button.getModel(), selected_TF);
-        this.previousSelectedButton.add(button);
+        if (selected_TF == false) {
+            this.clearSelection();
+        }
+        else {
+            this.buttonGroup.setSelected(button.getModel(), selected_TF);
+            this.previousSelectedButton.add(button);
+        }
+    }
+
+
+    /**
+     * 清除選擇的按鈕
+     */
+    public void clearSelection() {
+        this.buttonGroup.clearSelection();
     }
 }

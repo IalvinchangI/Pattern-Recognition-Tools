@@ -11,6 +11,10 @@ import java.awt.RenderingHints;
  * @author IalvinchangI
  */
 public class NormalButton extends GraphButton {
+    
+    public NormalButton(int width, int height) {
+        super(width, height);
+    }
 
     public NormalButton(String path, int width) {
         super(path, width);

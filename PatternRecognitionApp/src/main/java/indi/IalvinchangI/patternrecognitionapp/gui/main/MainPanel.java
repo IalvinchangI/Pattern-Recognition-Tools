@@ -2,7 +2,6 @@ package indi.IalvinchangI.patternrecognitionapp.gui.main;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;

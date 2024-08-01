@@ -21,6 +21,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 public class DrawingPanel extends TransparentPanel {
 
     public static String[] labels = {"圓形", "三角形", "矩形", "五邊形", "五角星"};
+    public static String[] codes =  {"1"   , "3"    , "4"   , "5"     , "50"   };
 
 
     DataController dataController = null;
@@ -39,14 +40,14 @@ public class DrawingPanel extends TransparentPanel {
         
         // new
         this.canvas = new GridCanvasPanel();
-        this.labelList = new LabelList(DrawingPanel.labels);
+        this.labelPanel = new LabelPanel(DrawingPanel.labels, DrawingPanel.codes);
         
         this.patterns = new PatternsPanel();
         this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
         
         // set
-        this.labelList.setBackground(Color.MAGENTA);
-        this.labelList.setFont(MainFrame.SUBTITLE_FONT);
+        this.labelPanel.setBackground(Color.MAGENTA);
+        this.labelPanel.setFont(MainFrame.SUBTITLE_FONT);
         
         this.addNewPattern();
         
@@ -55,6 +56,7 @@ public class DrawingPanel extends TransparentPanel {
             public void actionPerformed(ActionEvent e) {
                 if (addNewPattern() == true) {
                     canvas.clearCanvas();
+                    labelPanel.clearSelection();
                 }
             }
         });
@@ -71,7 +73,7 @@ public class DrawingPanel extends TransparentPanel {
         constraints.gridwidth = 1;
         constraints.insets = new Insets(3, 20, 3, 2);
         constraints.anchor = GridBagConstraints.WEST;
-        this.add(labelList, constraints);
+        this.add(labelPanel, constraints);
         
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -86,7 +88,7 @@ public class DrawingPanel extends TransparentPanel {
     }
 
     GridCanvasPanel canvas = null;
-    LabelList labelList = null;
+    LabelPanel labelPanel = null;
     
     PatternsPanel patterns = null;
     private NormalButton addPatternButton = null;

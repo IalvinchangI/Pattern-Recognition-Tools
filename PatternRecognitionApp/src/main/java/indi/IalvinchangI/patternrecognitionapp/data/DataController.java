@@ -1,7 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.data;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.util.ArrayList;
 import java.util.Iterator;
 

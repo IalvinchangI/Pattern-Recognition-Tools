@@ -132,6 +132,7 @@ public class GraphButton extends EditableButton {
 
     @Override
     protected void paintComponentContent(Graphics2D g2d) {
+        super.paintComponentContent(g2d);
         if (this.icon != null) {
             g2d.drawImage(
                 this.icon, 

@@ -1,7 +1,9 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 // import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -42,7 +44,16 @@ public abstract class EditableButton extends JRadioButton {
      * 繪製按鈕的內容
      * @param g2d 元件的 Graphics
      */
-    protected abstract void paintComponentContent(Graphics2D g2d);
+    protected void paintComponentContent(Graphics2D g2d) {
+        if (this.getText() != null) {
+            FontMetrics fm = g2d.getFontMetrics();
+            Rectangle stringBounds = fm.getStringBounds(getText(), g2d).getBounds();
+            int textX = (this.getSize().width - stringBounds.width) / 2;
+            int textY = (this.getSize().height - stringBounds.height) / 2 + fm.getAscent();
+            g2d.setColor(getForeground());
+            g2d.drawString(getText(), textX, textY);
+        }
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

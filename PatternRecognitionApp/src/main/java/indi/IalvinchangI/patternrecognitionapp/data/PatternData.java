@@ -44,7 +44,7 @@ public class PatternData {
      * @return 是否都編輯完了
      */
     public boolean getFinishEditing_TF() {
-        return this.editCheck == 1;
+        return this.editCheck == 9;
         // TODO return this.editCheck == FINISH_ALL;
     }
 
@@ -142,5 +142,14 @@ public class PatternData {
         }
 
         return output;
+    }
+
+
+    /**
+     * 取得 pattern 的 圖形標籤
+     * @return pattern 的 圖形標籤
+     */
+    public String getLabel() {
+        return this.label;
     }
 }
