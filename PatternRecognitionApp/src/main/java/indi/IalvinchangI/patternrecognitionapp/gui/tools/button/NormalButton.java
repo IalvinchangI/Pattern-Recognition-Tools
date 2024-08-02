@@ -38,6 +38,8 @@ public class NormalButton extends GraphButton {
 
     @Override
     protected void paintComponentBackground(Graphics2D g2d) {
+        super.paintComponentBackground(g2d);
+
         // background
         g2d.setColor(new Color(220, 220, 220));
         g2d.fillRoundRect(

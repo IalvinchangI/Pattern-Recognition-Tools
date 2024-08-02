@@ -41,6 +41,9 @@ public class ChangePageButton extends GraphButton {
 
     @Override
     protected void paintComponentBackground(Graphics2D g2d) {
+        super.paintComponentBackground(g2d);
+        
+        g2d.setColor(this.color);
         g2d.fillRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height, 20, 20);
     }
 

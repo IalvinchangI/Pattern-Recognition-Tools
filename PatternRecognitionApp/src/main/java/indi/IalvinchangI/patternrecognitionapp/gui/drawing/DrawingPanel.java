@@ -46,7 +46,6 @@ public class DrawingPanel extends TransparentPanel {
         this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
         
         // set
-        this.labelPanel.setBackground(Color.MAGENTA);
         this.labelPanel.setFont(MainFrame.SUBTITLE_FONT);
         
         this.addNewPattern();
