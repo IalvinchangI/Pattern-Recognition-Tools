@@ -128,10 +128,7 @@ public class GraphButton extends EditableButton {
     protected void paintComponentSetting(Graphics2D g2d) {}
 
     @Override
-    protected void paintComponentBackground(Graphics2D g2d) {
-        g2d.setColor(this.getBackground());
-        g2d.fillRect(0, 0, this.width, this.height);
-    }
+    protected void paintComponentBackground(Graphics2D g2d) {}
 
     @Override
     protected void paintComponentContent(Graphics2D g2d) {

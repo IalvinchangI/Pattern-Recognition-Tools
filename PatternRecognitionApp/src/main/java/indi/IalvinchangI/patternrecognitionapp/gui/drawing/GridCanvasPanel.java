@@ -15,6 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import javax.swing.Box;
 
@@ -22,6 +23,7 @@ import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
+import indi.IalvinchangI.patternrecognitionapp.util.MotionCalculator;
 
 
 /**
@@ -75,6 +77,7 @@ public class GridCanvasPanel extends TransparentPanel {
 
         
         // draw setting
+        this.velocity = new double[GRID_COUNT][GRID_COUNT][2];
         this.drawingPattern = new BufferedImage(GRID_COUNT, GRID_COUNT, BufferedImage.TYPE_BYTE_GRAY);
         this.drawingPatternG2D = this.drawingPattern.createGraphics();
         clearCanvas();
@@ -88,19 +91,37 @@ public class GridCanvasPanel extends TransparentPanel {
                         savePattern();
                         return;
                     }
-                    int x = e.getX() / GRID_WIDTH;
-                    int y = e.getY() / GRID_WIDTH;
+                    // get current
+                    int preciseX = e.getX();
+                    int preciseY = e.getY();
+                    long time = MotionCalculator.getCurrentTime();
+
+                    int x = preciseX / GRID_WIDTH;
+                    int y = preciseY / GRID_WIDTH;
                     
+                    // fill
+                    velocity[y][x][0] = MotionCalculator.velocity(lastPreciseX, preciseX, lastTime, time);  // px / ms
+                    velocity[y][x][1] = MotionCalculator.velocity(lastPreciseY, preciseY, lastTime, time);  // px / ms
                     drawingPatternG2D.drawLine(lastX, lastY, x, y);
                     repaint();
                     
+                    // set last
+                    lastPreciseX = preciseX;
+                    lastPreciseY = preciseY;
+                    lastTime = time;
+
                     lastX = x;
                     lastY = y;
                 }
                 else if (emptyCheck == 2) {
                     emptyCheck = 1;
-                    lastX = e.getX() / GRID_WIDTH;
-                    lastY = e.getY() / GRID_WIDTH;
+
+                    lastPreciseX = e.getX();
+                    lastPreciseY = e.getY();
+                    lastTime = MotionCalculator.getCurrentTime();
+
+                    lastX = lastPreciseX / GRID_WIDTH;
+                    lastY = lastPreciseY / GRID_WIDTH;
                 }
             }
         });
@@ -128,8 +149,14 @@ public class GridCanvasPanel extends TransparentPanel {
 
     private NormalButton cleanButton = null;
 
+    private double[][][] velocity = null;
+
     private BufferedImage drawingPattern = null;
     private Graphics2D drawingPatternG2D = null;
+
+    private int lastPreciseX = -1;
+    private int lastPreciseY = -1;
+    private long lastTime = -1;
 
     private int lastX = -1;
     private int lastY = -1;
@@ -151,9 +178,22 @@ public class GridCanvasPanel extends TransparentPanel {
     /** 畫布不是空的的時候，會清空畫布 */
     public void clearCanvas() {
         if (this.emptyCheck == 0) {
+            // clear canva
             this.drawingPatternG2D.setColor(Color.WHITE);
             this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
             this.drawingPatternG2D.setColor(Color.BLACK);
+
+            // clear velocity
+            for (int y = 0; y < this.velocity.length; y++) {
+                for (int x = 0; x < this.velocity.length; x++) {
+                    Arrays.fill(this.velocity[y][x], 0.);
+                }
+            }
+
+            // reset
+            this.lastPreciseX = -1;
+            this.lastPreciseY = -1;
+            this.lastTime = -1;
 
             this.lastX = -1;
             this.lastY = -1;
@@ -169,6 +209,7 @@ public class GridCanvasPanel extends TransparentPanel {
      */
     public void laodPattern(PatternData pattern) {
         if (this.emptyCheck == 0) {
+            // canva
             this.drawingPatternG2D.setColor(Color.WHITE);
             this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
             this.drawingPatternG2D.setColor(Color.BLACK);
@@ -178,12 +219,17 @@ public class GridCanvasPanel extends TransparentPanel {
     }
 
 
-    /** 儲存 pattern 的 圖形、各點速度 */
-    public void savePattern() {
+    /**
+     * 儲存 pattern 的 圖形、各點速度
+     * <p>
+     * 只有在 emptyCheck != 0 時可呼叫，避免 {@code drawingPattern} 和 {@code velocity} 的值不同
+     */
+    private void savePattern() {
         DrawingPanel drawingPanel = (DrawingPanel) this.getParent();
 
         drawingPanel.dataController.fillData(drawingPattern);
-        // TODO drawingPanel.dataController.fillData();
+        drawingPanel.dataController.fillData(this.velocity);
+        drawingPanel.dataController.fillData(STROKE_WIDTH);
 
         drawingPanel.patterns.getButton(drawingPanel.dataController.getCurrentIndex()).reloadPattern();
     }

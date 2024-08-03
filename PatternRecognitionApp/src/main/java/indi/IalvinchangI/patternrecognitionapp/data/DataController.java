@@ -103,10 +103,10 @@ public class DataController {
     
     /**
      * 填 pattern 的 各點速度
-     * @param speed 要存入的 畫筆在各點的速度
+     * @param velocity 要存入的 畫筆在各點的速度
      */
-    public void fillData(float[][] speed) {
-        this.getPattern().fillData(speed);
+    public void fillData(double[][][] velocity) {
+        this.getPattern().fillData(velocity);
     }
 
     /**

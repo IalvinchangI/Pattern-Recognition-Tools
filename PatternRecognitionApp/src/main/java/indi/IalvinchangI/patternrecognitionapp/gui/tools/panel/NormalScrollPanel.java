@@ -8,17 +8,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseWheelEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 
@@ -27,6 +23,11 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
  * @author IalvinchangI
  */
 public class NormalScrollPanel extends TransparentPanel {
+
+    public static final int MARGIN = 5;
+
+    public static final int SCROLL_BAR_WIDTH = NormalScrollBarUI.SCROLL_BAR_WIDTH;
+
     
     /**
      * @implNote 創造後，一定要呼叫 addComponent
@@ -51,44 +52,70 @@ public class NormalScrollPanel extends TransparentPanel {
     protected void addComponent(Component view) {
         if (this.scrollPanel == null) {
             this.scrollPanel = new JScrollPane(view);
+
             this.scrollPanel.getVerticalScrollBar().setUI(new NormalScrollBarUI());
             this.scrollPanel.getHorizontalScrollBar().setUI(new NormalScrollBarUI());
 
             this.add(this.scrollPanel, BorderLayout.CENTER);
             
-            this.scrollPanel.setBackground(this.getBackground());
-            this.scrollPanel.setBorder(BorderFactory.createEmptyBorder());
+            this.setBackground(this.getBackground());
+            this.scrollPanel.setBorder(BorderFactory.createEmptyBorder(MARGIN, MARGIN, MARGIN, MARGIN));
 
-            this.scrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-            this.scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPanel.getHorizontalScrollBar().setOpaque(false);
-            scrollPanel.getVerticalScrollBar().setOpaque(false);
+            this.scrollPanel.getVerticalScrollBar().setUnitIncrement(25);
+            this.scrollPanel.getVerticalScrollBar().setBlockIncrement(50);
+            this.scrollPanel.getHorizontalScrollBar().setUnitIncrement(25);
+            this.scrollPanel.getHorizontalScrollBar().setBlockIncrement(50);
+        }
+    }
 
-            this.scrollPanel.addMouseListener(new MouseAdapter() {
-                // @Override
-                // public void mouseEntered(MouseEvent e) {
-                //     scrollPanel.getHorizontalScrollBar().setOpaque(true);
-                //     scrollPanel.getVerticalScrollBar().setOpaque(true);
-                //     System.out.println("enter");
-                // }
-                
-                // @Override
-                // public void mouseExited(MouseEvent e) {
-                //     scrollPanel.getHorizontalScrollBar().setOpaque(false);
-                //     scrollPanel.getVerticalScrollBar().setOpaque(false);
-                //     System.out.println("exit");
-                // }
+    
+    /**
+     * 設定垂直 scroll bar 如何顯示
+     * @param policy
+     * {@code ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER}, 
+     * {@code ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED}, 
+     * {@code ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS}
+     */
+    public void setVerticalScrollBarPolicy(int policy) {
+        if (this.scrollPanel != null) {
+            this.scrollPanel.setVerticalScrollBarPolicy(policy);
+        }
+    }
 
-                // @Override
-                // public void mouseWheelMoved(MouseWheelEvent e) {
-                //     scrollPanel.getVerticalScrollBar().setOpaque(true);
-                // }
+    /**
+     * 設定水平 scroll bar 如何顯示
+     * @param policy
+     * {@code ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER}, 
+     * {@code ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED}, 
+     * {@code ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS}
+     */
+    public void setHorizontalScrollBarPolicy(int policy) {
+        if (this.scrollPanel != null) {
+            this.scrollPanel.setHorizontalScrollBarPolicy(policy);
+        }
+    }
+
+
+    /**
+     * 拉到最底
+     */
+    public void toEnd() {
+        if (this.scrollPanel != null) {
+            SwingUtilities.invokeLater(() -> {
+                scrollPanel.getVerticalScrollBar().setValue(scrollPanel.getViewport().getPreferredSize().height);
+                scrollPanel.getHorizontalScrollBar().setValue(scrollPanel.getViewport().getPreferredSize().width);
             });
-            this.scrollPanel.addMouseMotionListener(new MouseMotionAdapter() {
-                public void mouseDragged(MouseEvent e) {
-                    System.out.println("move");
-                }
-            });
+        }
+    }
+
+
+    @Override
+    public void setBackground(Color bg) {
+        super.setBackground(bg);
+        if (this.scrollPanel != null) {
+            this.scrollPanel.setBackground(bg);
+            this.scrollPanel.getVerticalScrollBar().setBackground(bg);
+            this.scrollPanel.getHorizontalScrollBar().setBackground(bg);
         }
     }
 }
@@ -108,10 +135,6 @@ class NormalScrollBarUI extends BasicScrollBarUI {
     @Override
     protected void configureScrollBarColors() {
         this.thumbColor = Color.GREEN;
-        this.thumbHighlightColor = Color.BLUE;
-        this.thumbDarkShadowColor = new Color(50, 50, 50);
-        this.thumbLightShadowColor = new Color(200, 200, 200);
-        this.trackColor = new Color(0, 0, 0, 0);
     }
 
 

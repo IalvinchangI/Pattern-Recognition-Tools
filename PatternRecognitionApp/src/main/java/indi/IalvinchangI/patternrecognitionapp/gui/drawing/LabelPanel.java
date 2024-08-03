@@ -1,7 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.drawing;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,8 +37,7 @@ public class LabelPanel extends NormalScrollPanel {
         this.buttons = new HashMap<>();
 
         this.addComponent(this.buttonPanel);
-        
-        this.setPreferredSize(new Dimension(BUTTON_WIDTH + 10, BUTTON_HEIGHT * 4));
+        this.buttonPanel.setBackground(this.getBackground());
     }
 
     /**

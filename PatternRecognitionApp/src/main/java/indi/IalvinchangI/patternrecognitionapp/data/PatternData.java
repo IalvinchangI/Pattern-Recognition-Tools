@@ -20,7 +20,7 @@ public class PatternData {
     private byte[][] pattern = null;
 
     /** 畫筆在各點的速度 */
-    private float[][] speed = null;
+    private double[][][] velocity = null;
 
     /** 畫筆粗度 */
     private int strokeWidth = 0;
@@ -44,8 +44,7 @@ public class PatternData {
      * @return 是否都編輯完了
      */
     public boolean getFinishEditing_TF() {
-        return this.editCheck == 9;
-        // TODO return this.editCheck == FINISH_ALL;
+        return this.editCheck == FINISH_ALL;
     }
 
 
@@ -54,7 +53,7 @@ public class PatternData {
         for (int i = 0; i < App.PATTERN_WIDTH; i++) {
             Arrays.fill(this.pattern[i], (byte)-1);
         }
-        this.speed = new float[App.PATTERN_WIDTH][App.PATTERN_WIDTH];
+        this.velocity = new double[App.PATTERN_WIDTH][App.PATTERN_WIDTH][2];
     }
 
 
@@ -90,14 +89,27 @@ public class PatternData {
     
     /**
      * 填 pattern 的 各點速度
-     * @param speed 要存入的 畫筆在各點的速度
+     * @param velocity 要存入的 畫筆在各點的速度
      */
-    public void fillData(float[][] speed) {
-        for (int y = 0; y < this.speed.length; y++) {
-            this.speed[y] = speed[y].clone();
+    public void fillData(double[][][] velocity) {
+        boolean emptyCheck = true;
+        
+        for (int y = 0; y < this.velocity.length; y++) {
+            for (int x = 0; x < this.velocity.length; x++) {
+                this.velocity[y][x] = velocity[y][x].clone();
+
+                if (this.velocity[y][x][0] != 0 || this.velocity[y][x][1] != 0) {
+                    emptyCheck = false;
+                }
+            }
         }
 
-        this.editCheck |= (1 << 1);
+        if (emptyCheck == true) {  // is empty
+            this.editCheck &= ~(1 << 1);
+        }
+        else {
+            this.editCheck |= (1 << 1);
+        }
     }
 
     /**

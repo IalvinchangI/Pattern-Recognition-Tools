@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.ScrollPaneConstants;
+
 import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiButtonPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel;
@@ -21,13 +24,16 @@ public class PatternsPanel extends NormalScrollPanel {
     
     public PatternsPanel() {
         super();
+        this.setBackground(Color.CYAN);
 
         this.buttonPanel = new MultiButtonPanel(MultiButtonPanel.X_AXIS, 10);
-        this.setBackground(Color.CYAN);
         
         this.addComponent(this.buttonPanel);
+        this.buttonPanel.setBackground(this.getBackground());
+        this.buttonPanel.setBorder(BorderFactory.createEmptyBorder(SCROLL_BAR_WIDTH + 3, 0, 0, 0));
+        this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         
-        this.setPreferredSize(new Dimension(450, BUTTON_WIDTH + 10));
+        this.setPreferredSize(new Dimension(450, BUTTON_WIDTH + (3 + SCROLL_BAR_WIDTH) * 2 + MARGIN * 2));
     }
 
     private MultiButtonPanel buttonPanel = null;
@@ -66,5 +72,6 @@ public class PatternsPanel extends NormalScrollPanel {
         });
 
         this.buttonPanel.addButton(button);
+        this.toEnd();
     }
 }
