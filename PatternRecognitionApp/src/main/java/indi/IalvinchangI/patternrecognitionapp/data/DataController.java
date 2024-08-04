@@ -129,7 +129,7 @@ public class DataController {
 
 
     /**
-     * 儲存所有 pattern
+     * 儲存所有 pattern 並刪除
      * @return succeed or not
      */
     public boolean saveAllPatterns() {
@@ -151,6 +151,8 @@ public class DataController {
             writer.writePattern(PREFIX_FILE_NAME + pattern.getLabel() + FILE_EXTENTION, pattern);
             patternsIterator.remove();
         }
+        // reset
+        this.currentIndex = -1;
         return true;
     }
 

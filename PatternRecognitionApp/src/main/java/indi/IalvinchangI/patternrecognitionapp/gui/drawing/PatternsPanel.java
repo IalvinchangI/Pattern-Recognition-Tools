@@ -74,4 +74,12 @@ public class PatternsPanel extends NormalScrollPanel {
         this.buttonPanel.addButton(button);
         this.toEnd();
     }
+
+
+    /**
+     * 清空 button
+     */
+    public void deleteAllButton() {
+        this.buttonPanel.deleteAllButton();
+    }
 }

@@ -3,6 +3,7 @@ package indi.IalvinchangI.patternrecognitionapp.gui.tools.panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -149,5 +150,24 @@ public class MultiButtonPanel extends TransparentPanel {
      */
     public void clearSelection() {
         this.buttonGroup.clearSelection();
+    }
+
+
+    /**
+     * 清空 MultiButtonPanel
+     */
+    public void deleteAllButton() {
+        Iterator<EditableButton> buttonsIterator = buttons.iterator();
+        while (buttonsIterator.hasNext()) {
+            EditableButton button = buttonsIterator.next();
+            this.buttonGroup.remove(button);
+            this.remove(button);
+            buttonsIterator.remove();
+        }
+        this.removeAll();  // remove box
+        revalidate();
+        repaint();
+
+        this.previousSelectedButton.clear();
     }
 }

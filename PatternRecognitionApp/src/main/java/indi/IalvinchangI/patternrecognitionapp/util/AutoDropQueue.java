@@ -62,4 +62,12 @@ public class AutoDropQueue<E> {
         }
         return null;
     }
+
+    
+    /**
+     * remove all elements in AutoDropQueue
+     */
+    public void clear() {
+        this.elements.clear();
+    }
 }

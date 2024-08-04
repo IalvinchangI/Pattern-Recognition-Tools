@@ -42,9 +42,16 @@ public class GridCanvasPanel extends TransparentPanel {
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(GRID_COUNT * GRID_WIDTH, GRID_COUNT * GRID_WIDTH));
         this.setLayout(new GridBagLayout());
+        
+        this.initCleanSetting();
+        
+        this.initDrawingSetting();
+    }
+
+
+    private void initCleanSetting() {
         GridBagConstraints constraints = new GridBagConstraints();
 
-        // clean
         this.cleanButton = new NormalButton(App.RESOURCES_PATH + "images/clean_canvas.png", 35);
         this.cleanButton.setIconMargin(7);
 
@@ -74,13 +81,16 @@ public class GridCanvasPanel extends TransparentPanel {
                 savePattern();
             }
         });
+    }
 
-        
-        // draw setting
+    private NormalButton cleanButton = null;
+
+
+    private void initDrawingSetting() {
         this.velocity = new double[GRID_COUNT][GRID_COUNT][2];
         this.drawingPattern = new BufferedImage(GRID_COUNT, GRID_COUNT, BufferedImage.TYPE_BYTE_GRAY);
         this.drawingPatternG2D = this.drawingPattern.createGraphics();
-        clearCanvas();
+        this.clearCanvas();
         this.drawingPatternG2D.setStroke(new BasicStroke(STROKE_WIDTH, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
@@ -147,8 +157,6 @@ public class GridCanvasPanel extends TransparentPanel {
         });
     }
 
-    private NormalButton cleanButton = null;
-
     private double[][][] velocity = null;
 
     private BufferedImage drawingPattern = null;
@@ -174,6 +182,7 @@ public class GridCanvasPanel extends TransparentPanel {
      */
     private byte emptyCheck = 0;
 
+    
 
     /** 畫布不是空的的時候，會清空畫布 */
     public void clearCanvas() {

@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.DataController;
-import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
@@ -67,7 +66,11 @@ public class DrawingPanel extends TransparentPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dataController.saveAllPatterns();
-                // TODO delete
+                patterns.deleteAllButton();
+                canvas.clearCanvas();
+                labelPanel.clearSelection();
+
+                addNewPattern();
             }
         });
         
