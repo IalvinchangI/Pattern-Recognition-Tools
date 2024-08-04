@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import indi.IalvinchangI.patternrecognitionapp.io.PatternWriter;
+
 /**
  * 管理所有的 Pattern
  * @author IalvinchangI
@@ -128,12 +130,30 @@ public class DataController {
 
     /**
      * 儲存所有 pattern
+     * @return succeed or not
      */
-    public void saveAllPatterns() {
+    public boolean saveAllPatterns() {
+        if (patterns.size() == 0) {
+            return false;
+        }
+        // check the editing of all patterns is complete
+        for (PatternData patternData : patterns) {
+            if (patternData.getFinishEditing_TF() == false) {
+                return false;
+            }
+        }
+
+        // save
         Iterator<PatternData> patternsIterator = this.patterns.iterator();
+        PatternWriter writer = new PatternWriter();
         while (patternsIterator.hasNext()) {
-            patternsIterator.next().save();
+            PatternData pattern = patternsIterator.next();
+            writer.writePattern(PREFIX_FILE_NAME + pattern.getLabel() + FILE_EXTENTION, pattern);
             patternsIterator.remove();
         }
+        return true;
     }
+
+    private final static String FILE_EXTENTION = ".iai";
+    private final static String PREFIX_FILE_NAME = "PatternRecognitionRaw";
 }

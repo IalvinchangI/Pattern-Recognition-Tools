@@ -6,8 +6,12 @@ package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
  * @author IalvinchangI
  */
 public class DecorativeButton extends GraphButton {
+    
     public DecorativeButton(String path, int width) {
         super(path, width);
-        // TODO
+    }
+
+    public DecorativeButton(String path, int width, int height) {
+        super(path, width, height);
     }
 }

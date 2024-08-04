@@ -14,14 +14,14 @@ import indi.IalvinchangI.patternrecognitionapp.App;
 public class PatternData {
 
     /** 檔案類型 */
-    private static final String FILE_TYPE = "IaI.PatternRecognition.raw";
+    public static final String FILE_TYPE = "IaI.PatternRecognition.raw";
 
     /** 圖形 */
     private byte[][] pattern = null;
 
     /** 畫筆在各點的速度 */
     private double[][][] velocity = null;
-
+    
     /** 畫筆粗度 */
     private int strokeWidth = 0;
 
@@ -88,6 +88,33 @@ public class PatternData {
     }
     
     /**
+     * 填 pattern 的 圖形
+     * @param pattern 要存入的 圖形
+     * 
+     * @throws IllegalArgumentException
+     */
+    public void fillData(byte[][] pattern) {
+        if ((this.pattern.length != pattern.length) || (this.pattern[0].length != pattern[0].length)) {
+            throw new IllegalArgumentException("image size is incompatible");
+        }
+
+        byte emptyCheck = ~0;
+        for (int y = 0; y < this.pattern.length; y++) {
+            for (int x = 0; x < this.pattern[0].length; x++) {
+                this.pattern[y][x] = pattern[y][x];
+                emptyCheck &= this.pattern[y][x];
+            }
+        }
+
+        if (emptyCheck == ~0) {
+            this.editCheck &= ~1;
+        }
+        else {
+            this.editCheck |= (1);
+        }
+    }
+    
+    /**
      * 填 pattern 的 各點速度
      * @param velocity 要存入的 畫筆在各點的速度
      */
@@ -133,11 +160,6 @@ public class PatternData {
     }
 
 
-    public void save() {
-        // TODO
-    }
-
-
     /**
      * 把 pattern 轉成 Image
      * @return 轉成 Image 的 pattern
@@ -154,6 +176,33 @@ public class PatternData {
         }
 
         return output;
+    }
+
+
+    /**
+     * 取得 pattern 的 圖形
+     * @return pattern 的 圖形
+     */
+    public byte[][] getPattern() {
+        return this.pattern;
+    }
+
+
+    /**
+     * 取得 pattern 在各點的畫筆速度
+     * @return pattern 在各點的畫筆速度
+     */
+    public double[][][] getVelocity() {
+        return this.velocity;
+    }
+
+
+    /**
+     * 取得 pattern 的 畫筆粗度
+     * @return pattern 的 畫筆粗度
+     */
+    public int getStrokeWidth() {
+        return this.strokeWidth;
     }
 
 
