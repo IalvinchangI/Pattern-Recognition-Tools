@@ -45,7 +45,7 @@ public class DrawingPanel extends TransparentPanel {
         
         this.patterns = new PatternsPanel();
         this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
-        this.saveButton = new DecorativeButton(App.RESOURCES_PATH + "images/save_file.png", 100);
+        this.saveButton = new DecorativeButton(App.RESOURCES_PATH + "images/save_file.png", 100, 75);
         
         // set
         this.labelPanel.setFont(MainFrame.SUBTITLE_FONT);
@@ -65,14 +65,16 @@ public class DrawingPanel extends TransparentPanel {
         this.saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dataController.saveAllPatterns();
-                patterns.deleteAllButton();
-                canvas.clearCanvas();
-                labelPanel.clearSelection();
+                if (dataController.saveAllPatterns() == true) {
+                    patterns.deleteAllButton();
+                    canvas.clearCanvas();
+                    labelPanel.clearSelection();
 
-                addNewPattern();
+                    addNewPattern();
+                }
             }
         });
+        this.saveButton.setBackground(this.getBackground());
         
         
         // add

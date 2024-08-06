@@ -7,8 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
-import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiButtonPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel;
 
@@ -23,7 +23,7 @@ public class LabelPanel extends NormalScrollPanel {
 
     public static final int BUTTON_WIDTH = 100;
 
-    public static final int BUTTON_HEIGHT = 40;
+    public static final int BUTTON_HEIGHT = 50;
 
 
     /**
@@ -67,7 +67,7 @@ public class LabelPanel extends NormalScrollPanel {
      * @param code  label 對應的編碼
      */
     public void addButton(String label, String code) {
-        GraphButton button = new NormalButton(LabelPanel.BUTTON_WIDTH, LabelPanel.BUTTON_HEIGHT);
+        GraphButton button = new DecorativeButton(LabelPanel.BUTTON_WIDTH, LabelPanel.BUTTON_HEIGHT);
         button.canSelectTF = true;
 
         button.setBackground(this.getBackground());
