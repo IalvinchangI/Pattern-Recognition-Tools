@@ -14,6 +14,7 @@ import javax.swing.Timer;
 
 /**
  * 有特殊動畫、外觀的 Button
+ * @apiNote 因為每個 DecorativeButton 背後都有一個 Timer 在動，就算按鈕沒有顯示，所以會耗較多效能
  * @author IalvinchangI
  */
 public class DecorativeButton extends GraphButton {
