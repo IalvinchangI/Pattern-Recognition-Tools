@@ -6,8 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -38,23 +36,8 @@ public class DecorativeButton extends GraphButton {
         this.animationTimer = new Timer(30, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (getModel().isRollover() == false && (canSelectTF == false || getModel().isSelected() == false)) {
-                    animationTimer.stop();
-                }
-                else {
-                    animationStep += 3;
-                }
+                animationStep += 3;
                 repaint();
-            }
-        });
-        
-        this.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("active");
-                if (canSelectTF == true && getModel().isSelected()) {
-                    animationTimer.start();
-                }
             }
         });
 
@@ -73,26 +56,27 @@ public class DecorativeButton extends GraphButton {
                 }
             }
         });
-
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                if (canSelectTF == true && getModel().isSelected()) {
-                    animationTimer.start();
-                }
-            }
-            
-            @Override
-            public void componentHidden(ComponentEvent e) {
-                animationTimer.stop();
-            }
-        });
     }
 
     // for animation
     private byte animationStep = 0;
     private Timer animationTimer = null;
     
+
+    @Override
+    public void select() {
+        if (canSelectTF == true && animationTimer.isRunning() == false) {
+            animationTimer.start();
+        }
+    }
+
+    @Override
+    public void deselect() {
+        if (canSelectTF == true && getModel().isRollover() == false) {
+            animationTimer.stop();
+        }
+    }
+
 
     public Color buttonColor       = new Color(210, 210, 210);
     public Color ringColor         = new Color(255, 255, 255);

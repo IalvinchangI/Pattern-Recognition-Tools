@@ -53,6 +53,25 @@ public class AutoDropQueue<E> {
 
 
     /**
+     * get the element by the given index
+     * @param index
+     * @return element
+     */
+    public E get(int index) {
+        return this.elements.get(index);
+    }
+
+
+    /**
+     * Retrieves, but does not remove, the newest element in AutoDropQueue
+     * @return the newest element in AutoDropQueue
+     */
+    public E peekNewest() {
+        return this.elements.getFirst();
+    }
+
+
+    /**
      * Retrieves, but does not remove, the oldest element in AutoDropQueue
      * @return the oldest element in AutoDropQueue
      */
@@ -69,5 +88,23 @@ public class AutoDropQueue<E> {
      */
     public void clear() {
         this.elements.clear();
+    }
+
+
+    /**
+     * Return true if AutoDropQueue is full; Otherwise, return false.
+     * @return the AutoDropQueue is full or not
+     */
+    public boolean isFull() {
+        return this.capacity <= this.elements.size();
+    }
+
+
+    /**
+     * return the number of elements in AutoDropQueue
+     * @return the number of elements
+     */
+    public int size() {
+        return this.elements.size();
     }
 }

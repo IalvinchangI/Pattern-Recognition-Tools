@@ -97,7 +97,7 @@ public class MultiButtonPanel extends TransparentPanel {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                previousSelectedButton.add((EditableButton) e.getSource());
+                selectAndDeselect((EditableButton) e.getSource());
             }
         });
         
@@ -140,8 +140,21 @@ public class MultiButtonPanel extends TransparentPanel {
         }
         else {
             this.buttonGroup.setSelected(button.getModel(), selected_TF);
-            this.previousSelectedButton.add(button);
+            this.selectAndDeselect(button);
         }
+    }
+
+    /**
+     * 選取 button 並取消 previousSelectedButton 的選取
+     * @param button 要選取的 button
+     */
+    private void selectAndDeselect(EditableButton button) {
+        this.previousSelectedButton.add(button);
+
+        if (this.previousSelectedButton.isFull()) {
+            this.getPreviousSelectedButton().deselect();
+        }
+        button.select();
     }
 
 
@@ -150,6 +163,9 @@ public class MultiButtonPanel extends TransparentPanel {
      */
     public void clearSelection() {
         this.buttonGroup.clearSelection();
+        if (this.previousSelectedButton.size() > 0) {
+            this.previousSelectedButton.peekNewest().deselect();
+        }
     }
 
 

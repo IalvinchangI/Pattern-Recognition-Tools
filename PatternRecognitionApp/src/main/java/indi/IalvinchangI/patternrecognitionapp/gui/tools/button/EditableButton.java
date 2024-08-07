@@ -25,6 +25,12 @@ public abstract class EditableButton extends JRadioButton {
 
     /** 是否有選取的特效 */
     public boolean canSelectTF = false;
+
+    /** 選取 button */
+    public void select() {}
+
+    /** 取消選取 button */
+    public void deselect() {}
     
     
     /**
