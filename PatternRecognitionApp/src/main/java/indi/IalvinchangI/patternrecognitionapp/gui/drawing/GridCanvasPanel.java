@@ -30,7 +30,7 @@ import indi.IalvinchangI.patternrecognitionapp.util.MotionCalculator;
  * 繪圖區
  * @author IalvinchangI
  */
-public class GridCanvasPanel extends TransparentPanel {
+class GridCanvasPanel extends TransparentPanel {
 
     public static final int GRID_COUNT = App.PATTERN_WIDTH;
     public static final int GRID_WIDTH = 8;

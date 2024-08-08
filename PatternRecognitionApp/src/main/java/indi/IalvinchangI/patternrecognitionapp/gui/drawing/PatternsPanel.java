@@ -17,7 +17,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel
  * 顯示已繪製的 Pattern 和 新增新 Pattern
  * @author IalvinchangI
  */
-public class PatternsPanel extends NormalScrollPanel {
+class PatternsPanel extends NormalScrollPanel {
 
     public static final int BUTTON_WIDTH = 50;
 

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.DataController;
+import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
@@ -25,11 +26,14 @@ public class DrawingPanel extends TransparentPanel {
     public static String[] codes =  {"1"   , "3"    , "4"   , "5"     , "50"   };
 
 
+    private SettingData settingData = null;
+
     DataController dataController = null;
 
 
-    public DrawingPanel() {
+    public DrawingPanel(SettingData settingData) {
         // data
+        this.settingData = settingData;
         this.dataController = new DataController();
 
 
@@ -102,7 +106,7 @@ public class DrawingPanel extends TransparentPanel {
         this.add(this.addPatternButton, constraints);
         constraints.gridx = 2;
         constraints.gridy = 1;
-        constraints.insets = new Insets(3, 2, 3, 2);
+        constraints.insets = new Insets(3, 20, 3, 2);
         constraints.anchor = GridBagConstraints.CENTER;
         this.add(this.saveButton, constraints);
     }

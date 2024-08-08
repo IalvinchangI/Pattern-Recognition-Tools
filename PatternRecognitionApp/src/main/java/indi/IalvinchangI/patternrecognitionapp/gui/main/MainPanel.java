@@ -7,6 +7,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.drawing.DrawingPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.setting.SettingPanel;
@@ -25,7 +26,9 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
  * @author IalvinchangI
  */
 public class MainPanel extends TransparentPanel {
-    public MainPanel() {
+    public MainPanel(SettingData settingData) {
+        this.settingData = settingData;
+
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         // new
@@ -35,8 +38,8 @@ public class MainPanel extends TransparentPanel {
         this.settingPageButton = new ChangePageButton(App.RESOURCES_PATH + "images/setting.png", 50);
         this.drawingPageButton = new ChangePageButton(App.RESOURCES_PATH + "images/drawing.png", 100);
 
-        this.settingPanel = new SettingPanel();
-        this.drawingPanel = new DrawingPanel();
+        this.settingPanel = new SettingPanel(this.settingData);
+        this.drawingPanel = new DrawingPanel(this.settingData);
         
         
         // add
@@ -73,6 +76,8 @@ public class MainPanel extends TransparentPanel {
         // show
         this.contentPanel.showPage(DRAWING_PAGE_NAME);
     }
+
+    private SettingData settingData = null;
 
     private TransparentPanel buttonPanel = null;
     public ChangeablePanel contentPanel = null;

@@ -17,7 +17,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel
  * 選擇 label 的地方
  * @author IalvinchangI
  */
-public class LabelPanel extends NormalScrollPanel {
+class LabelPanel extends NormalScrollPanel {
 
     public static final Font LABEL_FONT = MainFrame.SUBTITLE_FONT;
 

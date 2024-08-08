@@ -1,5 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.panel;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -70,7 +71,11 @@ public class MultiBoxPanel extends TransparentPanel {
      * 新增 panel 並設定 要觸發的動作
      * @param panel 要新增的 panel
      */
-    public void addButton(BoxPanel panel) {
+    public void addPanel(BoxPanel panel) {
+        Dimension preferredSize = panel.getPreferredSize();
+        panel.setMinimumSize(preferredSize);
+        panel.setMaximumSize(preferredSize);
+        
         this.panels.add(panel);
 
         // add sep

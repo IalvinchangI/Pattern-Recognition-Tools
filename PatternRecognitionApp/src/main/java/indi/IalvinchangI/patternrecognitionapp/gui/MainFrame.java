@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.main.MainPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.message.MessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
@@ -26,14 +27,18 @@ public class MainFrame extends JFrame {
     /** 背景顏色 */
     public static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
 
-    /** 字體 */
+    /** 小標題的字體 */
     public static final Font SUBTITLE_FONT = new Font("微軟正黑體", Font.BOLD, 18);
+    /** 內文的字體 */
+    public static final Font CONTENT_FONT = new Font("微軟正黑體", Font.BOLD, 14);
 
 
     /**
      * 主視窗
      */
-    public MainFrame() {
+    public MainFrame(SettingData settingData) {
+        this.settingData = settingData;
+
         this.setTitle("pattern recognition app");
         this.setBackground(BACKGROUND_COLOR);
 
@@ -57,6 +62,9 @@ public class MainFrame extends JFrame {
     }
 
 
+    private SettingData settingData = null;
+
+
     /**
      * 包含
      * <ul>
@@ -69,7 +77,7 @@ public class MainFrame extends JFrame {
         // new
         this.outerChangePanel = new ChangeablePanel();
 
-        this.mainPanel = new MainPanel();
+        this.mainPanel = new MainPanel(this.settingData);
         this.teachingPanel = new TeachingPanel();
         this.messagePanel = new MessagePanel();
 
