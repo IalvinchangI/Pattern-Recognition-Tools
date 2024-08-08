@@ -52,8 +52,10 @@ public class DecorativeButton extends GraphButton {
 
             @Override
             public void mouseExited(MouseEvent e) {
+                System.out.println("exit");
                 if (canSelectTF == false || getModel().isSelected() == false) {
                     animationTimer.stop();
+                    repaint();
                 }
             }
         });
@@ -75,6 +77,7 @@ public class DecorativeButton extends GraphButton {
     public void deselect() {
         if (canSelectTF == true && getModel().isRollover() == false) {
             animationTimer.stop();
+            repaint();
         }
     }
 

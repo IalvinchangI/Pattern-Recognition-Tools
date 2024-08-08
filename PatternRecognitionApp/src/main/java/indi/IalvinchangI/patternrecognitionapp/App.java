@@ -12,7 +12,7 @@ public class App {
     public static final String RESOURCES_PATH = App.class.getResource("../../../").getPath();
 
     /** 最底層的資料夾 */
-    public static final String ROOT_PATH = App.class.getResource("../../../../").getPath();
+    public static final String ROOT_PATH = App.class.getResource("../../../").getPath();
 
 
     /** pattern 的邊長 */
