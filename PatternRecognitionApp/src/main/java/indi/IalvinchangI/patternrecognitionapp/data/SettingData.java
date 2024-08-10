@@ -18,7 +18,12 @@ public class SettingData {
     private String fileType = FILE_TYPE;
     
     /** 儲存 pattern 的資料夾路徑 */
-    private String saveDirectoryPath = App.ROOT_PATH;
+    private String saveDirectoryPath = null;
+
+
+    public SettingData() {
+        this.setSaveDirectoryPath();
+    }
 
 
     /**
@@ -30,7 +35,14 @@ public class SettingData {
     }
     
     /**
-     * 設定
+     * 設定儲存 pattern 的資料夾路徑為 最底層的資料夾
+     */
+    public void setSaveDirectoryPath() {
+        this.saveDirectoryPath = App.ROOT_PATH;
+    }
+
+    /**
+     * 設定儲存 pattern 的資料夾路徑
      * @param path 儲存 pattern 的資料夾路徑
      * @return 是否成功
      */
@@ -42,6 +54,36 @@ public class SettingData {
         }
         this.saveDirectoryPath = oldPath;
         return false;
+    }
+
+
+    /**
+     * 檢查資料的正確性
+     * @return 資料是否正確
+     */
+    public boolean check() {
+        if (this.fileType != SettingData.FILE_TYPE) {
+            return false;
+        }
+        if (this.checkSaveDirectoryPath() == false) {
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 檢查資料的正確性，並且將錯誤的部分改成預設值
+     * @return 是否成功修復
+     */
+    public boolean checkAndFix() {
+        if (this.fileType != SettingData.FILE_TYPE) {
+            return false;
+        }
+        if (this.checkSaveDirectoryPath() == false) {
+            this.setSaveDirectoryPath();
+        }
+        return true;
     }
 
 

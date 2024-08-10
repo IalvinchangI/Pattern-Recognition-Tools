@@ -1,10 +1,13 @@
 package indi.IalvinchangI.patternrecognitionapp;
 
+import java.io.File;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
 
 /**
  * 主程式
@@ -19,12 +22,24 @@ public class App {
     public static final String ROOT_PATH = System.getProperty("user.dir");
 
 
+    /** 設定的 File */
+    public static final File SETTING_FILE = new File(ROOT_PATH, "setting.iai");
+
+
     /** pattern 的邊長 */
     public static final int PATTERN_WIDTH = 64;
 
 
     public static void main(String[] args) {
-        SettingData settingData = new SettingData();  // TODO read file
+        // read setting
+        SettingHandler handler = new SettingHandler();
+        SettingData settingData = handler.readSetting(SETTING_FILE);
+
+        boolean firstTimeTF = false;  // 是否是第一次開啟 app
+        if (settingData == null) {
+            settingData =  new SettingData();
+            firstTimeTF = true;
+        }
 
         // for file chooser
         try {
@@ -39,7 +54,7 @@ public class App {
             e.printStackTrace();
         }
 
-        MainFrame mainWindow = new MainFrame(settingData);
+        MainFrame mainWindow = new MainFrame(settingData, firstTimeTF);
 
         mainWindow.setVisible(true);
     }

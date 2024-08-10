@@ -7,10 +7,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.main.MainPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.message.MessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
+import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
 
 
 /**
@@ -36,7 +38,7 @@ public class MainFrame extends JFrame {
     /**
      * 主視窗
      */
-    public MainFrame(SettingData settingData) {
+    public MainFrame(SettingData settingData, boolean firstTimeTF) {
         this.settingData = settingData;
 
         this.setTitle("pattern recognition app");
@@ -48,12 +50,10 @@ public class MainFrame extends JFrame {
 
 
         // set CloseOperation
-        MainFrame window = this;
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                window.dispose();  // 釋放視窗相關的資源
-                System.exit(0);  // 退出程式
+                close();
             }
         });
 
@@ -103,4 +103,21 @@ public class MainFrame extends JFrame {
     public final String MAIN_PAGE_NAME     = "main";
     public final String TEACHING_PAGE_NAME = "teaching";
     public final String MESSAGE_PAGE_NAME  = "message";
+
+
+    /**
+     * 關閉視窗
+     */
+    public void close() {
+        // update setting
+        SettingHandler handler = new SettingHandler();
+        if (handler.writeSetting(App.SETTING_FILE, this.settingData) == false) {
+            this.settingData.checkAndFix();
+            handler.writeSetting(App.SETTING_FILE, this.settingData);
+        }
+
+        // delete
+        this.dispose();  // 釋放視窗相關的資源
+        System.exit(0);  // 退出程式
+    }
 }

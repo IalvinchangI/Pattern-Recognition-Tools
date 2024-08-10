@@ -11,6 +11,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiButtonPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel;
+import indi.IalvinchangI.patternrecognitionapp.io.LabelToCode;
 
 
 /**
@@ -45,15 +46,10 @@ class LabelPanel extends NormalScrollPanel {
      * @param label button 的名字
      * @param code  label 對應的編碼
      */
-    public LabelPanel(String[] label, String[] code) {
+    public LabelPanel(LabelToCode[] labelToCodes) {
         this();
-
-        if (label.length != code.length) {
-            throw new IllegalArgumentException("The length of label and code is differnet. ( " + label.length + " != " + code.length + " )");
-        }
-
-        for (int i = 0; i < label.length; i++) {
-            this.addButton(label[i], code[i]);
+        for (int i = 0; i < labelToCodes.length; i++) {
+            this.addButton(labelToCodes[i]);
         }
     }
 
@@ -66,14 +62,14 @@ class LabelPanel extends NormalScrollPanel {
      * @param label button 的名字
      * @param code  label 對應的編碼
      */
-    public void addButton(String label, String code) {
+    public void addButton(LabelToCode l2c) {
         GraphButton button = new DecorativeButton(LabelPanel.BUTTON_WIDTH, LabelPanel.BUTTON_HEIGHT);
         button.canSelectTF = true;
 
         button.setBackground(this.getBackground());
-        button.setText(label);
+        button.setText(l2c.label);
         button.setFont(LabelPanel.LABEL_FONT);
-        button.setActionCommand(code);
+        button.setActionCommand(l2c.code);
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -85,7 +81,7 @@ class LabelPanel extends NormalScrollPanel {
 
         this.buttonPanel.addButton(button);
         this.buttonPanel.setSelected(button, false);
-        this.buttons.put(code, button);
+        this.buttons.put(l2c.code, button);
     }
 
 

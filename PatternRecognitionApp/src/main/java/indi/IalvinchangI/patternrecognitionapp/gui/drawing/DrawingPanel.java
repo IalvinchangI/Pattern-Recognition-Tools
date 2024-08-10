@@ -14,6 +14,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
+import indi.IalvinchangI.patternrecognitionapp.io.LabelToCode;
 
 
 /**
@@ -21,11 +22,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
  * @author IalvinchangI
  */
 public class DrawingPanel extends TransparentPanel {
-
-    public static String[] labels = {"圓形", "三角形", "矩形", "五邊形", "五角星"};
-    public static String[] codes =  {"1"   , "3"    , "4"   , "5"     , "50"   };
-
-
+    
     private SettingData settingData = null;
 
     DataController dataController = null;
@@ -34,7 +31,8 @@ public class DrawingPanel extends TransparentPanel {
     public DrawingPanel(SettingData settingData) {
         // data
         this.settingData = settingData;
-        this.dataController = new DataController();
+        this.dataController = new DataController(this.settingData);
+        LabelToCode[] labelToCodes = LabelToCode.readFromJson(App.RESOURCES_PATH + "label2code.json");
 
 
         // GUI
@@ -45,7 +43,7 @@ public class DrawingPanel extends TransparentPanel {
         
         // new
         this.canvas = new GridCanvasPanel();
-        this.labelPanel = new LabelPanel(DrawingPanel.labels, DrawingPanel.codes);
+        this.labelPanel = new LabelPanel(labelToCodes);
         
         this.patterns = new PatternsPanel();
         this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);

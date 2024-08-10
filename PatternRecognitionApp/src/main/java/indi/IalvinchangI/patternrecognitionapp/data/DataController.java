@@ -1,10 +1,12 @@
 package indi.IalvinchangI.patternrecognitionapp.data;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import indi.IalvinchangI.patternrecognitionapp.io.PatternWriter;
+
 
 /**
  * 管理所有的 Pattern
@@ -59,12 +61,34 @@ public class DataController {
     /**
      * 管理所有的 Pattern
      * <p>
+     * new 一個空的 DataController 並設定他
+     */
+    public DataController(SettingData settingData) {
+        this();
+        this.setting(settingData);
+    }
+
+
+    /**
+     * 管理所有的 Pattern
+     * <p>
      * new 一個裝有 dirPath 內所有 pattern 的 DataController
      */
     public DataController(String dirPath) {
         this();
         // TODO read all the file in the dirPath
     }
+
+
+    /**
+     * 設定 DataController
+     * @param settingData 設定資料
+     */
+    public void setting(SettingData settingData) {
+        this.settingData = settingData;
+    }
+
+    private SettingData settingData = null;
 
 
     /**
@@ -133,22 +157,26 @@ public class DataController {
      * @return succeed or not
      */
     public boolean saveAllPatterns() {
-        if (patterns.size() == 0) {
+        if (this.settingData == null) {
             return false;
         }
-        // check the editing of all patterns is complete
-        for (PatternData patternData : patterns) {
+        if (this.patterns.size() == 0) {
+            return false;
+        }
+        
+        for (PatternData patternData : this.patterns) {  // check the editing of all patterns is complete
             if (patternData.getFinishEditing_TF() == false) {
                 return false;
             }
         }
 
         // save
+        String format = this.settingData.getSaveDirectoryPath() + File.separator + PREFIX_FILE_NAME + "%s" + FILE_EXTENTION;
         Iterator<PatternData> patternsIterator = this.patterns.iterator();
         PatternWriter writer = new PatternWriter();
         while (patternsIterator.hasNext()) {
             PatternData pattern = patternsIterator.next();
-            writer.writePattern(PREFIX_FILE_NAME + pattern.getLabel() + FILE_EXTENTION, pattern);
+            writer.writePattern(String.format(format, pattern.getLabel()), pattern);
             patternsIterator.remove();
         }
         // reset
