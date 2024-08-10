@@ -1,5 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.panel;
 
+import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -105,15 +106,21 @@ public class MultiButtonPanel extends TransparentPanel {
         this.buttonGroup.add(button);
         this.setSelectedWithoutCheck(button, true);
 
-
-        if (this.sep != 0 && this.getComponentCount() != 0) {
-            if (((BoxLayout) this.getLayout()).getAxis() == X_AXIS) {
+        if (((BoxLayout) this.getLayout()).getAxis() == X_AXIS) {
+            button.setAlignmentY(Component.CENTER_ALIGNMENT);
+            if (this.sep != 0 && this.getComponentCount() != 0) {
                 this.add(Box.createHorizontalStrut(this.sep));
             }
-            else if (((BoxLayout) this.getLayout()).getAxis() == Y_AXIS) {
+        }
+        else if (((BoxLayout) this.getLayout()).getAxis() == Y_AXIS) {
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            if (this.sep != 0 && this.getComponentCount() != 0) {
                 this.add(Box.createVerticalStrut(this.sep));
             }
         }
+
+
+        
         this.add(button);
 
         this.revalidate();

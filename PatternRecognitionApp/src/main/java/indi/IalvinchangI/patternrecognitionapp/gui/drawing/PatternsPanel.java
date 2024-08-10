@@ -1,6 +1,5 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.drawing;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +23,7 @@ class PatternsPanel extends NormalScrollPanel {
     
     public PatternsPanel() {
         super();
-        this.setBackground(Color.CYAN);
+        this.setBackground(PRIMARY_BACKGROUND_COLOR);
 
         this.buttonPanel = new MultiButtonPanel(MultiButtonPanel.X_AXIS, 10);
         
@@ -34,6 +33,7 @@ class PatternsPanel extends NormalScrollPanel {
         this.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         
         this.setPreferredSize(new Dimension(450, BUTTON_WIDTH + (3 + SCROLL_BAR_WIDTH) * 2 + MARGIN * 2));
+        this.setMinimumSize(this.getPreferredSize());
     }
 
     private MultiButtonPanel buttonPanel = null;
@@ -55,6 +55,7 @@ class PatternsPanel extends NormalScrollPanel {
      */
     public void addPattern(PatternData pattern) {
         PatternButton button = new PatternButton(pattern, BUTTON_WIDTH);
+        button.setBackground(this.getBackground());
 
         int index = this.buttonPanel.getButtonCount();
         button.addActionListener(new ActionListener() {

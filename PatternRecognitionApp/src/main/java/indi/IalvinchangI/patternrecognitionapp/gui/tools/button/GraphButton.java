@@ -29,9 +29,7 @@ public class GraphButton extends EditableButton {
     public GraphButton(int width, int height) {
         this.width = width;
         this.height = height;
-        this.setPreferredSize(new Dimension(width, height));
-        this.setMinimumSize(new Dimension(width, height));
-        this.setMaximumSize(new Dimension(width, height));
+        this.setAbsoluteSize(new Dimension(width, height));
     }
 
     /**
@@ -87,8 +85,23 @@ public class GraphButton extends EditableButton {
     }
 
 
+    /**
+     * 設定絕對的大小
+     * @param size 絕對的大小
+     */
+    public void setAbsoluteSize(Dimension size) {
+        this.setPreferredSize(size);
+        this.setMinimumSize(size);
+        this.setMaximumSize(size);
+    }
+
+
     private int iconMargin = 5;
     
+    /**
+     * 設定 icon 要比按鈕小多少
+     * @param margin
+     */
     public void setIconMargin(int margin) {
         this.iconMargin = margin;
         this.setIcon(this.icon);
@@ -128,7 +141,10 @@ public class GraphButton extends EditableButton {
     protected void paintComponentSetting(Graphics2D g2d) {}
 
     @Override
-    protected void paintComponentBackground(Graphics2D g2d) {}
+    protected void paintComponentBackground(Graphics2D g2d) {
+        g2d.setColor(this.getBackground());
+        g2d.fillRect(0, 0, this.getPreferredSize().width, this.getPreferredSize().height);
+    }
 
     @Override
     protected void paintComponentContent(Graphics2D g2d) {

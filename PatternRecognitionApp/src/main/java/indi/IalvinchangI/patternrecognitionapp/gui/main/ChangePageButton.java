@@ -25,25 +25,32 @@ public class ChangePageButton extends GraphButton {
      */
     public void setWidth(int height) {
         this.height = height;
-        this.setPreferredSize(new Dimension(MIN_WIDTH, height));
+        this.setAbsoluteSize(new Dimension(MIN_WIDTH, height));
     }
 
 
     /** 按鈕的顏色 */
-    public Color color = Color.WHITE;
+    public Color buttonColor = SECONDARY_BACKGROUND_COLOR;
+
+    /** 按鈕被選擇時的顏色 */
+    public Color selectedButtonColor = PRIMARY_BACKGROUND_COLOR;
 
 
     @Override
     protected void paintComponentSetting(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setColor(this.color);
     }
 
     @Override
     protected void paintComponentBackground(Graphics2D g2d) {
         super.paintComponentBackground(g2d);
         
-        g2d.setColor(this.color);
+        if (this.getModel().isSelected()) {
+            g2d.setColor(this.selectedButtonColor);
+        }
+        else {
+            g2d.setColor(this.buttonColor);
+        }
         g2d.fillRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height, 20, 20);
     }
 

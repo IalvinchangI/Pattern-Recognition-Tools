@@ -1,7 +1,5 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.setting;
 
-import java.awt.Color;
-
 import javax.swing.BorderFactory;
 
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
@@ -20,7 +18,7 @@ public class SettingPanel extends NormalScrollPanel {
     public SettingPanel(SettingData settingData) {
         super();
         this.settingData = settingData;
-        this.setBackground(Color.ORANGE);
+        this.setBackground(PRIMARY_BACKGROUND_COLOR);
 
         this.panelsPanel = new MultiBoxPanel(MultiBoxPanel.Y_AXIS, 10);
         this.panelsPanel.setBackground(this.getBackground());

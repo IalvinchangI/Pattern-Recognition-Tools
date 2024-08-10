@@ -1,16 +1,14 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.drawing;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.DataController;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
-import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
@@ -22,7 +20,7 @@ import indi.IalvinchangI.patternrecognitionapp.io.LabelToCode;
  * @author IalvinchangI
  */
 public class DrawingPanel extends TransparentPanel {
-    
+
     private SettingData settingData = null;
 
     DataController dataController = null;
@@ -32,26 +30,24 @@ public class DrawingPanel extends TransparentPanel {
         // data
         this.settingData = settingData;
         this.dataController = new DataController(this.settingData);
-        LabelToCode[] labelToCodes = LabelToCode.readFromJson(App.RESOURCES_PATH + "label2code.json");
+        LabelToCode[] labelToCodes = LabelToCode.readFromJson(ResourceConstant.getResourcePath(ResourceConstant.LABEL2CODE));
 
 
         // GUI
-        this.setBackground(Color.YELLOW);
+        this.setBackground(PRIMARY_BACKGROUND_COLOR);
         this.setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.NONE;
         
         // new
         this.canvas = new GridCanvasPanel();
         this.labelPanel = new LabelPanel(labelToCodes);
         
         this.patterns = new PatternsPanel();
-        this.addPatternButton = new NormalButton(App.RESOURCES_PATH + "images/add_pattern.png", PatternsPanel.BUTTON_WIDTH);
-        this.saveButton = new DecorativeButton(App.RESOURCES_PATH + "images/save_file.png", 100, 75);
+        this.addPatternButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.ADD_PATTERN_IMAGE), PatternsPanel.BUTTON_WIDTH);
+        this.saveButton = new DecorativeButton(ResourceConstant.getImagePath(ResourceConstant.SAVE_IMAGE), 100, 65);
         
         // set
-        this.labelPanel.setFont(MainFrame.SUBTITLE_FONT);
-        
+        this.labelPanel.setFont(SUBTITLE_FONT);
+
         this.addNewPattern();
         
         this.addPatternButton.addActionListener(new ActionListener() {
@@ -63,6 +59,7 @@ public class DrawingPanel extends TransparentPanel {
                 }
             }
         });
+        this.addPatternButton.setBackground(this.getBackground());
 
         this.saveButton.addActionListener(new ActionListener() {
             @Override
@@ -80,6 +77,9 @@ public class DrawingPanel extends TransparentPanel {
         
         
         // add
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.NONE;
+        
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
@@ -88,7 +88,7 @@ public class DrawingPanel extends TransparentPanel {
         constraints.gridx = 2;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(3, 20, 3, 2);
+        constraints.insets = new Insets(0, 20, 3, 2);
         constraints.anchor = GridBagConstraints.WEST;
         this.add(labelPanel, constraints);
         

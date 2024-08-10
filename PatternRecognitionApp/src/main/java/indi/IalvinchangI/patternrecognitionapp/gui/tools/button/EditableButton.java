@@ -7,12 +7,14 @@ import java.awt.Rectangle;
 
 import javax.swing.JRadioButton;
 
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUIConstant;
+
 
 /**
  * 乾淨的 Button
  * @author IalvinchangI
  */
-public abstract class EditableButton extends JRadioButton {
+public abstract class EditableButton extends JRadioButton implements GUIConstant {
     /**
      * 把預設要繪製的東西清掉
      */

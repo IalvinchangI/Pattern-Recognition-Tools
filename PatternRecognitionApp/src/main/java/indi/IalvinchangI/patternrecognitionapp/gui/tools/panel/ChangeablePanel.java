@@ -67,6 +67,8 @@ public class ChangeablePanel extends TransparentPanel {
      * 如果 pageName 在 ChangeablePanel 裡，則回傳 ActionListener (ChangeablePanel 內有儲存此頁面)
      * <p>
      * 如果 pageName 不在 ChangeablePanel 裡，則回傳 null (ChangeablePanel 內沒儲存此頁面)
+     * 
+     * @apiNote 因為會先檢查在不在 ChangeablePanel 裡，所以要先 add 進去
      */
     public ActionListener createChangePagePerformed(String pageName) {
         if (this.pageNames.contains(pageName)) {

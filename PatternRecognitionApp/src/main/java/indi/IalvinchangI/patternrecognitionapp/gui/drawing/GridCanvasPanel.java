@@ -20,6 +20,7 @@ import java.util.Arrays;
 import javax.swing.Box;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
@@ -41,6 +42,8 @@ class GridCanvasPanel extends TransparentPanel {
     public GridCanvasPanel() {
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(GRID_COUNT * GRID_WIDTH, GRID_COUNT * GRID_WIDTH));
+        this.setMinimumSize(this.getPreferredSize());
+        this.setMaximumSize(this.getPreferredSize());
         this.setLayout(new GridBagLayout());
         
         this.initCleanSetting();
@@ -52,8 +55,9 @@ class GridCanvasPanel extends TransparentPanel {
     private void initCleanSetting() {
         GridBagConstraints constraints = new GridBagConstraints();
 
-        this.cleanButton = new NormalButton(App.RESOURCES_PATH + "images/clean_canvas.png", 35);
+        this.cleanButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.CLEAN_IMAGE), 35);
         this.cleanButton.setIconMargin(7);
+        this.cleanButton.setBackground(new Color(0, 0, 0, 0));
 
         constraints.gridx = 1;
         constraints.gridy = 1;

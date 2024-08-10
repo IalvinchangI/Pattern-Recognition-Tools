@@ -1,7 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.gui;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -11,6 +10,7 @@ import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.main.MainPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.message.MessagePanel;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUIConstant;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
 import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
 
@@ -19,21 +19,7 @@ import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
  * 主視窗
  * @author IalvinchangI
  */
-public class MainFrame extends JFrame {
-    /** 視窗最小寬度 */
-    public static final int MIN_WIDTH  = 900;
-    /** 視窗最小高度 */
-    public static final int MIN_HEIGHT = 500;
-
-
-    /** 背景顏色 */
-    public static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
-
-    /** 小標題的字體 */
-    public static final Font SUBTITLE_FONT = new Font("微軟正黑體", Font.BOLD, 18);
-    /** 內文的字體 */
-    public static final Font CONTENT_FONT = new Font("微軟正黑體", Font.BOLD, 14);
-
+public class MainFrame extends JFrame implements GUIConstant {
 
     /**
      * 主視窗
@@ -41,12 +27,15 @@ public class MainFrame extends JFrame {
     public MainFrame(SettingData settingData, boolean firstTimeTF) {
         this.settingData = settingData;
 
-        this.setTitle("pattern recognition app");
-        this.setBackground(BACKGROUND_COLOR);
-
         // set size
-        this.setSize(MIN_WIDTH, MIN_HEIGHT);
+        this.setSize(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT);
+        this.setMinimumSize(new Dimension(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT));
+        this.setPreferredSize(new Dimension(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // this.setResizable(false);
+
+        this.setTitle("pattern recognition app");
+        this.setBackground(BOTTOM_COLOR);
 
 
         // set CloseOperation
@@ -77,7 +66,7 @@ public class MainFrame extends JFrame {
         // new
         this.outerChangePanel = new ChangeablePanel();
 
-        this.mainPanel = new MainPanel(this.settingData);
+        this.mainPanel = new MainPanel(this, this.settingData);
         this.teachingPanel = new TeachingPanel();
         this.messagePanel = new MessagePanel();
 

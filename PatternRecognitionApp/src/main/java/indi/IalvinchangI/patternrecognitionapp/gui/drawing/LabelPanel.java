@@ -1,12 +1,13 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.drawing;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import javax.swing.BorderFactory;
+
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiButtonPanel;
@@ -20,7 +21,7 @@ import indi.IalvinchangI.patternrecognitionapp.io.LabelToCode;
  */
 class LabelPanel extends NormalScrollPanel {
 
-    public static final Font LABEL_FONT = MainFrame.SUBTITLE_FONT;
+    public static final Font LABEL_FONT = SUBTITLE_FONT;
 
     public static final int BUTTON_WIDTH = 100;
 
@@ -32,13 +33,17 @@ class LabelPanel extends NormalScrollPanel {
      */
     public LabelPanel() {
         super();
-        this.setBackground(Color.MAGENTA);
+        this.setBackground(PRIMARY_BACKGROUND_COLOR);
 
         this.buttonPanel = new MultiButtonPanel(MultiButtonPanel.Y_AXIS, 10);
         this.buttons = new HashMap<>();
 
         this.addComponent(this.buttonPanel);
         this.buttonPanel.setBackground(this.getBackground());
+
+        this.buttonPanel.setBorder(BorderFactory.createEmptyBorder(SCROLL_BAR_WIDTH + 3, 0, 0, 0));
+        this.setPreferredSize(new Dimension(BUTTON_WIDTH + (SCROLL_BAR_WIDTH) * 2 + MARGIN * 2, GridCanvasPanel.GRID_COUNT * GridCanvasPanel.GRID_WIDTH));
+        this.setMinimumSize(this.getPreferredSize());
     }
 
     /**

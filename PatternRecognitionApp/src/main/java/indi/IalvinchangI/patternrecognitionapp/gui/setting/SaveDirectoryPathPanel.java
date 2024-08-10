@@ -16,9 +16,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
-import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalBoxPanel;
 
@@ -38,8 +37,8 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
         // new
         this.label = new JLabel("儲存位置");
         this.directoryInputField = new JTextField();
-        this.changeDirectoryButton = new NormalButton(App.RESOURCES_PATH + "images/folder.png", TEXT_FIELD_HEIGHT);
-        this.openDirectoryButton = new NormalButton(App.RESOURCES_PATH + "images/pointer.png", TEXT_FIELD_HEIGHT);
+        this.changeDirectoryButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.FOLDER_IMAGE), TEXT_FIELD_HEIGHT);
+        this.openDirectoryButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.PONTER_IMAGE), TEXT_FIELD_HEIGHT);
 
         this.settingComponents();
         
@@ -47,11 +46,11 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
     }
     
     private void settingComponents() {
-        this.label.setFont(MainFrame.SUBTITLE_FONT);
+        this.label.setFont(SUBTITLE_FONT);
 
         this.directoryInputField.setPreferredSize(new Dimension(350, TEXT_FIELD_HEIGHT));
         this.directoryInputField.setText(this.settingData.getSaveDirectoryPath());
-        this.directoryInputField.setFont(MainFrame.CONTENT_FONT);
+        this.directoryInputField.setFont(CONTENT_FONT);
         this.directoryInputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +77,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
                 }
             }
         });
+        this.changeDirectoryButton.setBackground(this.getBackground());
 
         this.openDirectoryButton.addActionListener(new ActionListener() {
             @Override
@@ -96,6 +96,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
                 // TODO 沒辦法開的話
             }
         });
+        this.openDirectoryButton.setBackground(this.getBackground());
     }
 
     private void addingComponents() {
