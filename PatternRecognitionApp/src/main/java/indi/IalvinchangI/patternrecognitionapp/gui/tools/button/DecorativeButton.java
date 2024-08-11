@@ -82,8 +82,8 @@ public class DecorativeButton extends GraphButton {
 
 
     public Color buttonColor       = PRIMARY_BOX_COLOR;
-    public Color ringColor         = SECONDARY_BOX_COLOR;
-    public Color selectedRingColor = BOX_BOTTOM_COLOR;
+    public Color ringColor         = BRIGHT_COLOR;
+    public Color selectedRingColor = SECONDARY_BOX_COLOR;
 
     public int arcDiameter = 10;
 

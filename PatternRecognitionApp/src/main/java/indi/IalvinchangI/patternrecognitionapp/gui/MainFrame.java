@@ -32,10 +32,9 @@ public class MainFrame extends JFrame implements GUIConstant {
         this.setMinimumSize(new Dimension(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT));
         this.setPreferredSize(new Dimension(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        // this.setResizable(false);
 
         this.setTitle("pattern recognition app");
-        this.setBackground(BOTTOM_COLOR);
+        this.setBackground(SECONDARY_BACKGROUND_COLOR);
 
 
         // set CloseOperation

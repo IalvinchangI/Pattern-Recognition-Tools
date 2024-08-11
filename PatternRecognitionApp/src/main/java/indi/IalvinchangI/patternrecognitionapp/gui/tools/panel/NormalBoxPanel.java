@@ -13,12 +13,14 @@ public class NormalBoxPanel extends BoxPanel {
 
     public NormalBoxPanel(int width, int height) {
         super(width, height);
+        this.boxColor = PRIMARY_BOX_COLOR;
+        this.borderColor = SECONDARY_BOX_COLOR;
     }
 
 
     public int arcDiameter = 10;
 
-    private static final int STROKE_RADIUS = 1;
+    private static final int STROKE_RADIUS = 3;
 
 
     @Override

@@ -78,6 +78,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
             }
         });
         this.changeDirectoryButton.setBackground(this.getBackground());
+        this.changeDirectoryButton.buttonColor = SECONDARY_BOX_COLOR;
 
         this.openDirectoryButton.addActionListener(new ActionListener() {
             @Override
@@ -97,6 +98,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
             }
         });
         this.openDirectoryButton.setBackground(this.getBackground());
+        this.openDirectoryButton.buttonColor = SECONDARY_BOX_COLOR;
     }
 
     private void addingComponents() {

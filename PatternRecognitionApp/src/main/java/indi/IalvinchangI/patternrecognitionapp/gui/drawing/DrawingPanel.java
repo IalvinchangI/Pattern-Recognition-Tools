@@ -74,6 +74,7 @@ public class DrawingPanel extends TransparentPanel {
             }
         });
         this.saveButton.setBackground(this.getBackground());
+        this.saveButton.setIconMargin(7);
         
         
         // add

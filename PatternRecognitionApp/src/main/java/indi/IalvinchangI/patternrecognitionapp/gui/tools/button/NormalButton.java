@@ -25,6 +25,12 @@ public class NormalButton extends GraphButton {
     }
 
 
+    public Color buttonColor         = PRIMARY_BOX_COLOR;
+    public Color borderColor         = SECONDARY_BOX_COLOR;
+    public Color selectedBorderColor = DARK_COLOR;
+    public Color hoveredBorderColor  = PRIMARY_BOX_COLOR;
+
+
     public int arcDiameter = 10;
 
     private static final int STROKE_RADIUS = 1;
@@ -41,7 +47,7 @@ public class NormalButton extends GraphButton {
         super.paintComponentBackground(g2d);
 
         // background
-        g2d.setColor(new Color(220, 220, 220));
+        g2d.setColor(this.buttonColor);
         g2d.fillRoundRect(
             STROKE_RADIUS, STROKE_RADIUS, 
             this.getPreferredSize().width - STROKE_RADIUS * 2 - 1, this.getPreferredSize().height - STROKE_RADIUS * 2 - 1, 
@@ -50,13 +56,13 @@ public class NormalButton extends GraphButton {
     
         // border
         if (this.getModel().isPressed() || (this.canSelectTF == true && this.getModel().isSelected())) {
-            g2d.setColor(new Color(180, 180, 180));
+            g2d.setColor(this.selectedBorderColor);
         }
         else if (this.getModel().isRollover()) {
-            g2d.setColor(new Color(210, 210, 210));
+            g2d.setColor(this.hoveredBorderColor);
         }
         else {
-            g2d.setColor(Color.WHITE);
+            g2d.setColor(this.borderColor);
         }
         g2d.drawRoundRect(
             STROKE_RADIUS, STROKE_RADIUS, 

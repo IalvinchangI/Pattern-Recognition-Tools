@@ -16,19 +16,20 @@ public interface GUIConstant {
     public static final int MIN_WINDOW_HEIGHT = 700;
 
 
-    /** 底色 */
-    public static final Color BOTTOM_COLOR = new Color(218, 215, 205);
-    // public static final Color BOTTOM_COLOR = new Color(250, 237, 205);
     /** 主要的背景色 */
     public static final Color PRIMARY_BACKGROUND_COLOR = new Color(204, 213, 174);
     /** 次要的背景色 */
     public static final Color SECONDARY_BACKGROUND_COLOR = new Color(233, 237, 201);
-    /** 區塊底色 */
-    public static final Color BOX_BOTTOM_COLOR = new Color(254, 250, 224);
+    /** 淡色 */
+    public static final Color LIGHT_COLOR = new Color(254, 250, 224);
+    /** 亮色 */
+    public static final Color BRIGHT_COLOR = new Color(243, 235, 167);
+    /** 暗色 */
+    public static final Color DARK_COLOR = new Color(201, 128, 57);
     /** 主要的區塊顏色 */
     public static final Color PRIMARY_BOX_COLOR = new Color(212, 163, 115);
     /** 次要的區塊顏色 */
-    public static final Color SECONDARY_BOX_COLOR = new Color(254, 250, 224);
+    public static final Color SECONDARY_BOX_COLOR = new Color(250, 237, 205);
 
 
     /** 小標題的字體 */

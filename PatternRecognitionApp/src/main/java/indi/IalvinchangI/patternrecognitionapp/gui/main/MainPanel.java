@@ -80,9 +80,7 @@ public class MainPanel extends TransparentPanel {
         this.settingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.drawingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.buttonPanel.add(Box.createVerticalStrut(1));
         this.buttonPanel.add(settingPageButton);
-        this.buttonPanel.add(Box.createVerticalStrut(1));
         this.buttonPanel.add(drawingPageButton);
         this.buttonPanel.add(Box.createVerticalGlue());
         this.buttonPanel.add(exitButton);
@@ -95,7 +93,7 @@ public class MainPanel extends TransparentPanel {
 
 
     private void settingComponents(MainFrame window) {
-        this.buttonPanel.setBackground(MainFrame.BOTTOM_COLOR);
+        this.buttonPanel.setBackground(SECONDARY_BACKGROUND_COLOR);
 
         this.settingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(SETTING_PAGE_NAME));
         this.drawingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(DRAWING_PAGE_NAME));

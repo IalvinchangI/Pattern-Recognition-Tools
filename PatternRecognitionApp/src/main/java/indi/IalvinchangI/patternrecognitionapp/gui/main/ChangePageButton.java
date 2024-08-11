@@ -1,5 +1,6 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.main;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -39,6 +40,7 @@ public class ChangePageButton extends GraphButton {
     @Override
     protected void paintComponentSetting(Graphics2D g2d) {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setStroke(new BasicStroke(0));
     }
 
     @Override
@@ -51,7 +53,10 @@ public class ChangePageButton extends GraphButton {
         else {
             g2d.setColor(this.buttonColor);
         }
-        g2d.fillRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height, 20, 20);
+        g2d.fillRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height - 1, 20, 20);
+
+        g2d.setColor(Color.BLACK);
+        g2d.drawRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height - 1, 20, 20);
     }
 
     /*
