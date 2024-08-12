@@ -37,7 +37,7 @@ public class GraphButton extends EditableButton {
      * <p>
      * 2. 設定按鈕長寬
      * 
-     * @param path 圖檔路徑
+     * @param path 圖檔路徑 (只能是程式內的，不能是外部檔案)
      * @param width 長寬
      */
     public GraphButton(String path, int width) {
@@ -49,7 +49,7 @@ public class GraphButton extends EditableButton {
      * <p>
      * 2. 設定按鈕長寬
      * 
-     * @param path 圖檔路徑
+     * @param path 圖檔路徑 (只能是程式內的，不能是外部檔案)
      * @param width 寬
      * @param height 長 (高)
      */
@@ -120,10 +120,10 @@ public class GraphButton extends EditableButton {
 
     /**
      * 設定 icon 並縮放它
-     * @param path 圖檔路徑
+     * @param resourcePath 圖檔路徑 (只能是程式內的，不能是外部檔案)
      */
-    public void setIcon(String path) {
-        this.setIcon(GUITools.getImage(path));
+    public void setIcon(String resourcePath) {
+        this.setIcon(GUITools.getImageFromResource(resourcePath));
     }
 
 

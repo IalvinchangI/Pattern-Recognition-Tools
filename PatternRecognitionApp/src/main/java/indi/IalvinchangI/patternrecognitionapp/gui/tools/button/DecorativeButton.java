@@ -19,16 +19,38 @@ import javax.swing.Timer;
  */
 public class DecorativeButton extends GraphButton {
 
+    /**
+     * 設定按鈕長寬
+     * @param width 寬
+     * @param height 長 (高)
+     */
     public DecorativeButton(int width, int height) {
         super(width - STROKE_RADIUS, height - STROKE_RADIUS);
         this.timerSetting();
     }
 
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param path 圖檔路徑 (只能是程式內的，不能是外部檔案)
+     * @param width 寬
+     * @param height 長 (高)
+     */
     public DecorativeButton(String path, int width, int height) {
         this(width, height);
         this.setIcon(path);
     }
     
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param path 圖檔路徑 (只能是程式內的，不能是外部檔案)
+     * @param width 長寬
+     */
     public DecorativeButton(String path, int width) {
         this(path, width, width);
     }

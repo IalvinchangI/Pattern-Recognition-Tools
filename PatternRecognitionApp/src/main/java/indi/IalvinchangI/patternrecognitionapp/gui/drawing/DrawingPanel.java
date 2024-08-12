@@ -30,7 +30,7 @@ public class DrawingPanel extends TransparentPanel {
         // data
         this.settingData = settingData;
         this.dataController = new DataController(this.settingData);
-        LabelToCode[] labelToCodes = LabelToCode.readFromJson(ResourceConstant.getResourcePath(ResourceConstant.LABEL2CODE));
+        LabelToCode[] labelToCodes = LabelToCode.readFromJsonResource(ResourceConstant.getResourcePath(ResourceConstant.LABEL2CODE));
 
 
         // GUI

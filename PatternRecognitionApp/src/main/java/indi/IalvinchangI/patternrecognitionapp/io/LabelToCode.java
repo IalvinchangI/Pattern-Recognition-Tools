@@ -1,6 +1,5 @@
 package indi.IalvinchangI.patternrecognitionapp.io;
 
-import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,13 +21,13 @@ public class LabelToCode {
 
     /**
      * 從 json 中讀取 LabelToCode
-     * @param path json 檔的路徑
+     * @param resourcePath json 檔的路徑
      * @return 一串 LabelToCode 物件
      */
-    public static LabelToCode[] readFromJson(String path) {
+    public static LabelToCode[] readFromJsonResource(String resourcePath) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            LabelToCode[] output = mapper.readValue(new File(path), LabelToCode[].class);
+            LabelToCode[] output = mapper.readValue(LabelToCode.class.getResourceAsStream(resourcePath), LabelToCode[].class);
             return output;
         } catch (IOException e) {
             e.printStackTrace();

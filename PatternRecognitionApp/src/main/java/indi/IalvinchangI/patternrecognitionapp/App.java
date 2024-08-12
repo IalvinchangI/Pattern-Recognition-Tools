@@ -15,12 +15,11 @@ import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
  */
 public class App {
 
-    /** "resources/" */
-    public static final String RESOURCES_PATH = App.class.getResource("../../../").getPath();
+    private static final String VERSION = "PatternRecognitionApp-1.0-SNAPSHOT";
 
     /** 最底層的資料夾 */
     public static final String ROOT_PATH = System.getProperty("user.dir");
-
+    
 
     /** 設定的 File */
     public static final File SETTING_FILE = new File(ROOT_PATH, "setting.iai");
@@ -31,6 +30,8 @@ public class App {
 
 
     public static void main(String[] args) {
+        System.out.println("version: " + VERSION);
+
         // read setting
         SettingHandler handler = new SettingHandler();
         SettingData settingData = handler.readSetting(SETTING_FILE);

@@ -11,15 +11,36 @@ import java.awt.RenderingHints;
  * @author IalvinchangI
  */
 public class NormalButton extends GraphButton {
-    
+
+    /**
+     * 設定按鈕長寬
+     * @param width 寬
+     * @param height 長 (高)
+     */
     public NormalButton(int width, int height) {
         super(width, height);
     }
 
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param path 圖檔路徑 (只能是程式內的，不能是外部檔案)
+     * @param width 長寬
+     */
     public NormalButton(String path, int width) {
         super(path, width);
     }
 
+    /**
+     * 1. 設定 icon 並縮放它
+     * <p>
+     * 2. 設定按鈕長寬
+     * 
+     * @param image 圖
+     * @param width 長寬
+     */
     public NormalButton(Image image, int width) {
         super(image, width);
     }

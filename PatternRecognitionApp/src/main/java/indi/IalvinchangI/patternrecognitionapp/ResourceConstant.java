@@ -1,10 +1,15 @@
 package indi.IalvinchangI.patternrecognitionapp;
 
+
 /**
  * 取得 resources 的類別
  * @author IalvinchangI
  */
 public class ResourceConstant {
+
+    /** "resources/" */
+    private static final String RESOURCES_PATH = "/";
+
 
     /** 儲存 圖形的標籤跟與其對應編碼 的檔案 */
     public static final String LABEL2CODE = "label2code.json";
@@ -44,7 +49,7 @@ public class ResourceConstant {
      * @return resources 的路徑
      */
     public static String getResourcePath(String target) {
-        return App.RESOURCES_PATH + target;
+        return RESOURCES_PATH + target;
     }
 
 

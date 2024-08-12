@@ -7,8 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.io.File;
+
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -32,13 +33,13 @@ public class GUITools {
 
     /**
      * 縮放 {@code Image}
-     * @param path 圖檔路徑
+     * @param resourcePath 圖檔路徑
      * @param width 寬度
      * @param height 高度
      * @return 縮放完的 {@code Image} or {@code null}
      */
-    public static Image getScaledImage(String path, int width, int height) {
-        Image image = GUITools.getImage(path);
+    public static Image getScaledImageFromResource(String resourcePath, int width, int height) {
+        Image image = GUITools.getImageFromResource(resourcePath);
         if (image == null) {
             return null;
         }
@@ -47,13 +48,13 @@ public class GUITools {
     
     /**
      * 縮放 {@code ImageIcon}
-     * @param path 圖檔路徑
+     * @param resourcePath 圖檔路徑
      * @param width 寬度
      * @param height 高度
      * @return 縮放完的 {@code ImageIcon} or {@code null}
      */
-    public static ImageIcon getScaledImageIcon(String path, int width, int height) {
-        Image image = getScaledImage(path, width, height);
+    public static ImageIcon getScaledImageIconFromResource(String resourcePath, int width, int height) {
+        Image image = getScaledImageFromResource(resourcePath, width, height);
         if (image == null) {
             return null;
         }
@@ -62,16 +63,30 @@ public class GUITools {
 
     /**
      * 從 path 讀取 {@code Image}
-     * @param path 圖檔路徑
+     * @param resourcePath 圖檔路徑
      * @return 讀取的 {@code Image} or {@code null}
      */
-    public static Image getImage(String path) {
+    public static Image getImageFromResource(String resourcePath) {
+        InputStream inputImage = null;
+        Image output = null;
         try {
-            return ImageIO.read(new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            inputImage = GUITools.class.getResourceAsStream(resourcePath);
+            output = ImageIO.read(inputImage);
         }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (inputImage != null) {
+                    inputImage.close();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return output;
     }
 
 
