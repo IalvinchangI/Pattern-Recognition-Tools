@@ -51,7 +51,7 @@ public class PatternWriter {
 
         for (int y = 0; y < bytePattern.length; y++) {
             for (int x = 0; x < bytePattern[0].length; x++) {
-                pattern[y][x] = (int) bytePattern[y][x];
+                pattern[y][x] = Byte.toUnsignedInt(bytePattern[y][x]);
             }
         }
 

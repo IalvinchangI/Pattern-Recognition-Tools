@@ -134,7 +134,7 @@ class NormalScrollBarUI extends BasicScrollBarUI {
 
     @Override
     protected void configureScrollBarColors() {
-        this.thumbColor = Color.GREEN;
+        this.thumbColor = NormalScrollPanel.LIGHT_COLOR;
     }
 
 
