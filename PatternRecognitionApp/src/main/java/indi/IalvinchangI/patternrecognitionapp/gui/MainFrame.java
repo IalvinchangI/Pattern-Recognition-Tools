@@ -7,10 +7,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
+import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.main.MainPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.message.MessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUIConstant;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
 import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
 
@@ -33,6 +35,8 @@ public class MainFrame extends JFrame implements GUIConstant {
         this.setPreferredSize(new Dimension(MIN_WINDOW_WIDTH, MIN_WINDOW_HEIGHT));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+
+        this.setIconImage(GUITools.getImageFromResource(ResourceConstant.getImagePath(ResourceConstant.LOGO_IMAGE)));
         this.setTitle("pattern recognition app");
         this.setBackground(SECONDARY_BACKGROUND_COLOR);
 

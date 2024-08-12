@@ -42,6 +42,9 @@ public class ResourceConstant {
     /** 存檔的圖檔 */
     public static final String SETTING_IMAGE = "setting.png";
 
+    /** LOGO的圖檔 */
+    public static final String LOGO_IMAGE = "geometry.png";
+
     
     /**
      * 取得目標 resources 的路徑

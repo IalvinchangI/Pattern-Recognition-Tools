@@ -99,62 +99,71 @@ class GridCanvasPanel extends TransparentPanel {
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
-                if (emptyCheck == 1) {
-                    if (contains(e.getPoint()) == false) {  // out of the canvas?
-                        emptyCheck = 0;  // stop it
-                        savePattern();
-                        return;
-                    }
-                    // get current
-                    int preciseX = e.getX();
-                    int preciseY = e.getY();
-                    long time = MotionCalculator.getCurrentTime();
+                switch (emptyCheck) {
+                    case 2:  // 進 繪圖中
+                        emptyCheck = 1;
+                    case 1:  // 繪圖中
+                        if (contains(e.getPoint()) == false) {  // out of the canvas?  // 進 不是空的
+                            emptyCheck = 0;  // stop it
+                            savePattern();
+                            return;
+                        }
+                        // get current
+                        int preciseX = e.getX();
+                        int preciseY = e.getY();
+                        long time = MotionCalculator.getCurrentTime();
 
-                    int x = preciseX / GRID_WIDTH;
-                    int y = preciseY / GRID_WIDTH;
-                    
-                    // fill
-                    velocity[y][x][0] = MotionCalculator.velocity(lastPreciseX, preciseX, lastTime, time);  // px / ms
-                    velocity[y][x][1] = MotionCalculator.velocity(lastPreciseY, preciseY, lastTime, time);  // px / ms
-                    drawingPatternG2D.drawLine(lastX, lastY, x, y);
-                    repaint();
-                    
-                    // set last
-                    lastPreciseX = preciseX;
-                    lastPreciseY = preciseY;
-                    lastTime = time;
+                        int x = preciseX / GRID_WIDTH;
+                        int y = preciseY / GRID_WIDTH;
+                        
+                        // fill
+                        velocity[y][x][0] = MotionCalculator.velocity(lastPreciseX, preciseX, lastTime, time);  // px / ms
+                        velocity[y][x][1] = MotionCalculator.velocity(lastPreciseY, preciseY, lastTime, time);  // px / ms
+                        drawingPatternG2D.drawLine(lastX, lastY, x, y);
+                        repaint();
+                        
+                        // set last
+                        lastPreciseX = preciseX;
+                        lastPreciseY = preciseY;
+                        lastTime = time;
 
-                    lastX = x;
-                    lastY = y;
-                }
-                else if (emptyCheck == 2) {
-                    emptyCheck = 1;
+                        lastX = x;
+                        lastY = y;
+                        break;
+                    case 3:  // 進 last的設定
+                        emptyCheck = 2;
 
-                    lastPreciseX = e.getX();
-                    lastPreciseY = e.getY();
-                    lastTime = MotionCalculator.getCurrentTime();
+                        lastPreciseX = e.getX();
+                        lastPreciseY = e.getY();
+                        lastTime = MotionCalculator.getCurrentTime();
 
-                    lastX = lastPreciseX / GRID_WIDTH;
-                    lastY = lastPreciseY / GRID_WIDTH;
+                        lastX = lastPreciseX / GRID_WIDTH;
+                        lastY = lastPreciseY / GRID_WIDTH;
+                        break;
+                    default:
+                        break;
                 }
             }
         });
         this.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    if (emptyCheck == 1) {
+                    if (emptyCheck == 1) {  // 進 不是空的
                         emptyCheck = 0;
                         savePattern();
                     }
-                    else if (emptyCheck == 2) {
-                        emptyCheck = 3;
+                    else if (emptyCheck == 2) {  // 回 空的
+                        emptyCheck = 4;
+                    }
+                    else if (emptyCheck == 3) {  // 回 空的
+                        emptyCheck = 4;
                     }
                 }
             }
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    if (emptyCheck == 3) {
-                        emptyCheck = 2;
+                    if (emptyCheck == 4) {  // 進 按下 BUTTON1
+                        emptyCheck = 3;
                     }
                 }
             }
@@ -180,9 +189,11 @@ class GridCanvasPanel extends TransparentPanel {
      * <p>
      * 1 -> 繪圖中
      * <p>
-     * 2 -> 按下 BUTTON1
+     * 2 -> last的設定
      * <p>
-     * 3 -> 空的
+     * 3 -> 按下 BUTTON1
+     * <p>
+     * 4 -> 空的
      */
     private byte emptyCheck = 0;
 
@@ -210,7 +221,7 @@ class GridCanvasPanel extends TransparentPanel {
 
             this.lastX = -1;
             this.lastY = -1;
-            this.emptyCheck = 3;
+            this.emptyCheck = 4;
             repaint();
         }
     }
