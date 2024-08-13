@@ -34,17 +34,12 @@ public class DataController {
      * 
      * @throws ArrayIndexOutOfBoundsException
      */
-    public boolean setCurrentIndex(int index) {
-        if (this.getPattern().getFinishEditing_TF() == false) {
-            return false;
-        }
-
+    public void setCurrentIndex(int index) {
         if (index < 0 && index >= this.patterns.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
         
         this.currentIndex = index;
-        return true;
     }
 
 
@@ -92,10 +87,26 @@ public class DataController {
 
 
     /**
+     * 尋找未編輯完的 pattern 並回傳其 index
+     * @apiNote 沒有 pattern 的話，回傳 -1 (算是都編輯完了)
+     * @return 找到的第一個未編輯完的 pattern 的 index，如果都完成了則回傳 -1
+     */
+    public int getNotFinish() {
+        for (int i = 0; i < this.patterns.size(); i++) {  // check the editing of all patterns is complete
+            if (this.patterns.get(i).getFinishEditing_TF() == false) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
      * 新增新的 pattern，並將編輯指針指向他
+     * @return 若有未編輯完的 pattern 就回傳 false，反之，回傳 true
      */
     public boolean newPattern() {
-        if (this.currentIndex != -1 && this.getPattern().getFinishEditing_TF() == false) {
+        if (this.getNotFinish() != -1) {
             return false;
         }
 
@@ -164,11 +175,11 @@ public class DataController {
             return false;
         }
         
-        for (PatternData patternData : this.patterns) {  // check the editing of all patterns is complete
-            if (patternData.getFinishEditing_TF() == false) {
-                return false;
-            }
+        if (this.getNotFinish() != -1) {
+            return false;
         }
+
+        // TODO 檢查資料夾是否存在
 
         // save
         String format = this.settingData.getSaveDirectoryPath() + File.separator + PREFIX_FILE_NAME + "%s" + FILE_EXTENTION;

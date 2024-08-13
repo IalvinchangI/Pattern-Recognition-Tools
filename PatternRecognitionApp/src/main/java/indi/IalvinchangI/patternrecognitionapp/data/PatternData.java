@@ -37,7 +37,16 @@ public class PatternData {
      */
     private byte editCheck = 0;
 
-    private static final byte FINISH_ALL = 15; 
+    private static final byte FINISH_ALL = 15;
+    
+    /** 檢查 圖形 是否已填完 */
+    public static final byte CHECK_PATTERN = 1;
+    /** 檢查 畫筆在各點的速度 是否已填完 */
+    public static final byte CHECK_VELOCITY = 2;
+    /** 檢查 畫筆粗度 是否已填完 */
+    public static final byte CHECK_STROKE_WIDTH = 4;
+    /** 檢查 圖形標籤 是否已填完 */
+    public static final byte CHECK_LABEL = 8;
 
     /**
      * 確認是否都編輯完了
@@ -45,6 +54,16 @@ public class PatternData {
      */
     public boolean getFinishEditing_TF() {
         return this.editCheck == FINISH_ALL;
+    }
+
+    /**
+     * 確認 target 是否編輯完了
+     * @param target 要檢查的資料
+     * {@code CHECK_PATTERN}, {@code CHECK_VELOCITY}, {@code CHECK_STROKE_WIDTH}, {@code CHECK_LABEL}
+     * @return 是否都編輯完了
+     */
+    public boolean getFinishEditing_TF(byte target) {
+        return (this.editCheck & target) != 0;
     }
 
 

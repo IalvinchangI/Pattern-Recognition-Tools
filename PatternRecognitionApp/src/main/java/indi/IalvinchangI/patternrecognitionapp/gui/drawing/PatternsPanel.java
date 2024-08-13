@@ -61,19 +61,22 @@ class PatternsPanel extends NormalScrollPanel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DrawingPanel drawingPanel = (DrawingPanel) getParent();
-                if (drawingPanel.dataController.setCurrentIndex(index) == true) {
-                    drawingPanel.canvas.laodPattern(drawingPanel.dataController.getPattern());
-                    drawingPanel.labelPanel.loadLabel();
-                }
-                else {
-                    buttonPanel.setSelected(buttonPanel.getPreviousSelectedButton(), true);
-                }
+                ((DrawingPanel) getParent()).changeEditingPattern(index);
             }
         });
 
         this.buttonPanel.addButton(button);
         this.toEnd();
+    }
+
+
+    /**
+     * 選取特定 pattern
+     * @param index pattern 的 index
+     * @param selected_TF 選取與否
+     */
+    public void setSelected(int index, boolean selected_TF) {
+        this.buttonPanel.setSelected(this.getButton(index), selected_TF);
     }
 
 

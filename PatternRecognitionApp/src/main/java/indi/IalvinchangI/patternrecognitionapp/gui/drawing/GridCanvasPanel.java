@@ -29,6 +29,7 @@ import indi.IalvinchangI.patternrecognitionapp.util.MotionCalculator;
 
 /**
  * 繪圖區
+ * @apiNote 在 提筆 or 清除畫布 的時候就會儲存資料了
  * @author IalvinchangI
  */
 class GridCanvasPanel extends TransparentPanel {
@@ -232,14 +233,19 @@ class GridCanvasPanel extends TransparentPanel {
      * @param pattern 要顯示的 圖形
      */
     public void laodPattern(PatternData pattern) {
-        if (this.emptyCheck == 0) {
-            // canva
-            this.drawingPatternG2D.setColor(Color.WHITE);
-            this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
-            this.drawingPatternG2D.setColor(Color.BLACK);
+        // canva
+        this.drawingPatternG2D.setColor(Color.WHITE);
+        this.drawingPatternG2D.fillRect(0, 0, GRID_COUNT, GRID_COUNT);
+        this.drawingPatternG2D.setColor(Color.BLACK);
+
+        if (pattern.getFinishEditing_TF(PatternData.CHECK_PATTERN) == true) {
             this.drawingPatternG2D.drawImage(pattern.toImage(), 0, 0, null);
-            repaint();
+            this.emptyCheck = 0;
         }
+        else {
+            this.emptyCheck = 4;
+        }
+        repaint();
     }
 
 

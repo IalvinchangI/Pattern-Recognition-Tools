@@ -57,6 +57,10 @@ public class DrawingPanel extends TransparentPanel {
                     canvas.clearCanvas();
                     labelPanel.clearSelection();
                 }
+                else {
+                    changeEditingPattern(dataController.getNotFinish());
+                    // TODO message
+                }
             }
         });
         this.addPatternButton.setBackground(this.getBackground());
@@ -70,6 +74,14 @@ public class DrawingPanel extends TransparentPanel {
                     labelPanel.clearSelection();
 
                     addNewPattern();
+                }
+                else {
+                    int index = dataController.getNotFinish();
+                    if (index == -1) {
+                        return;
+                    }
+                    changeEditingPattern(index);
+                    // TODO message
                 }
             }
         });
@@ -118,11 +130,28 @@ public class DrawingPanel extends TransparentPanel {
     private DecorativeButton saveButton = null;
 
 
+    /**
+     * 新增 pattern
+     * @return 是否新增成功
+     */
     private boolean addNewPattern() {
         if (this.dataController.newPattern() == true) {
             this.patterns.addPattern(dataController.getPattern());
             return true;
         }
         return false;
+    }
+
+
+    /**
+     * 切換要編輯的 圖形
+     * @param index 第幾個 圖形
+     */
+    public void changeEditingPattern(int index) {
+        this.dataController.setCurrentIndex(index);
+
+        this.canvas.laodPattern(this.dataController.getPattern());
+        this.labelPanel.loadLabel(this.dataController.getPattern());
+        this.patterns.setSelected(this.dataController.getCurrentIndex(), true);
     }
 }

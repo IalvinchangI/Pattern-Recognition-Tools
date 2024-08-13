@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 
+import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiButtonPanel;
@@ -93,14 +94,18 @@ class LabelPanel extends NormalScrollPanel {
     /**
      * 顯示選取的 label
      */
-    public void loadLabel() {
-        DrawingPanel drawingPanel = (DrawingPanel) getParent();
-        this.buttonPanel.setSelected(
-            this.buttons.get(
-                drawingPanel.dataController.getPattern().getLabel()
-            ), 
-            true
-        );
+    public void loadLabel(PatternData pattern) {
+        if (pattern.getFinishEditing_TF(PatternData.CHECK_LABEL) == true) {
+            this.buttonPanel.setSelected(
+                this.buttons.get(
+                    pattern.getLabel()
+                ), 
+                true
+            );
+        }
+        else {
+            this.buttonPanel.clearSelection();
+        }
     }
 
 
