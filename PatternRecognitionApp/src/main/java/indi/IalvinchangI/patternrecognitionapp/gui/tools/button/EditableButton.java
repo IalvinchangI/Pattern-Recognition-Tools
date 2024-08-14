@@ -52,7 +52,7 @@ public abstract class EditableButton extends JRadioButton implements GUIConstant
      * @param g2d 元件的 Graphics
      */
     protected void paintComponentContent(Graphics2D g2d) {
-        if (this.getText() != null) {
+        if (this.getText() != "") {
             FontMetrics fm = g2d.getFontMetrics();
             Rectangle stringBounds = fm.getStringBounds(getText(), g2d).getBounds();
             int textX = (this.getSize().width - stringBounds.width) / 2;

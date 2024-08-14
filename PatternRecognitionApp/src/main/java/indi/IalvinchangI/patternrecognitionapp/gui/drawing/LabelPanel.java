@@ -24,7 +24,7 @@ class LabelPanel extends NormalScrollPanel {
 
     public static final Font LABEL_FONT = SUBTITLE_FONT;
 
-    public static final int BUTTON_WIDTH = 100;
+    public static final int BUTTON_WIDTH = 140;
 
     public static final int BUTTON_HEIGHT = 50;
 
@@ -73,6 +73,8 @@ class LabelPanel extends NormalScrollPanel {
         button.canSelectTF = true;
 
         button.setBackground(this.getBackground());
+        button.setIcon(l2c.getImage());
+        button.setIconMargin(15);
         button.setText(l2c.label);
         button.setFont(LabelPanel.LABEL_FONT);
         button.setActionCommand(l2c.code);

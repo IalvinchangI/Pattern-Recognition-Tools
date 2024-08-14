@@ -1,8 +1,10 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.tools.button;
 
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
 
@@ -148,6 +150,33 @@ public class GraphButton extends EditableButton {
 
     @Override
     protected void paintComponentContent(Graphics2D g2d) {
+        if (this.icon != null && this.getText() != "") {
+            FontMetrics fm = g2d.getFontMetrics();
+            Rectangle stringBounds = fm.getStringBounds(getText(), g2d).getBounds();
+            
+            final int padding = 10;
+            int iconWidth = this.icon.getWidth(null);
+            int contentWidth = iconWidth + padding + stringBounds.width;
+
+            int iconX = (this.getSize().width - contentWidth) / 2;
+            int textX = iconX + iconWidth + padding;
+
+            g2d.setColor(this.getForeground());
+            g2d.drawString(
+                this.getText(), 
+                textX, 
+                (this.getSize().height - stringBounds.height) / 2 + fm.getAscent()
+            );
+
+            g2d.drawImage(
+                this.icon, 
+                iconX, 
+                (this.getPreferredSize().height - this.icon.getHeight(null)) / 2, 
+                null
+            );
+            return;
+        }
+
         super.paintComponentContent(g2d);
         if (this.icon != null) {
             g2d.drawImage(

@@ -1,8 +1,12 @@
 package indi.IalvinchangI.patternrecognitionapp.io;
 
+import java.awt.Image;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
+import indi.IalvinchangI.patternrecognitionapp.gui.tools.GUITools;
 
 
 /**
@@ -17,6 +21,18 @@ public class LabelToCode {
 
     /** 與標籤對應的編碼 */
     public String code = null;
+
+    /** 與標籤對應的編碼 */
+    private String image = null;
+
+
+    /**
+     * 取得標籤對應的圖形
+     * @return 標籤的圖形
+     */
+    public Image getImage() {
+        return GUITools.getImageFromResource(ResourceConstant.getImagePath("pattern_images/" + this.image));
+    }
 
 
     /**

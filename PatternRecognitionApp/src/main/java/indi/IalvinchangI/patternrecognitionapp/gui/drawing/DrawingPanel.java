@@ -146,10 +146,10 @@ public class DrawingPanel extends TransparentPanel {
         PatternData pattern = dataController.getPattern();
         String thing = null;
         if (pattern.getFinishEditing_TF(PatternData.CHECK_PATTERN) == false) {
-            thing = "圖形未畫";
+            thing = "圖形沒畫";
         }
         else if (pattern.getFinishEditing_TF(PatternData.CHECK_LABEL) == false) {
-            thing = "標籤未選";
+            thing = "標籤沒選";
         }
         else {
             throw new IllegalStateException("Filled in pattern but not velocity or strokeWidth.");
