@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -47,6 +49,18 @@ public class MessagePanel extends CenteredComponentPanel {
         g2d.fillRect(0, 0, 1, 1);
 
         g2d.dispose();
+
+        this.addComponentListener(new ComponentAdapter() {  // repaint background when change the size of the window
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if (window.outerChangePanel.getCurrentPage() == window.MESSAGE_PAGE_NAME) {
+                    window.outerChangePanel.showPage(previousPage);
+                    setBackgroundImage();
+                    window.outerChangePanel.showPage(window.MESSAGE_PAGE_NAME);
+                    repaint();
+                }
+            }
+        });
 
 
         // leave
@@ -176,6 +190,19 @@ public class MessagePanel extends CenteredComponentPanel {
         this.previousPage = this.window.outerChangePanel.getCurrentPage();
 
         // background
+        this.setBackgroundImage();
+
+        this.innerPanel.setPreferredSize(new Dimension(
+            Math.max(message.getPreferredSize().width + 50, BUTTON_WIDTH * 2 + 40), 
+            message.getPreferredSize().height + BUTTON_HEIGHT + 50
+        ));
+
+        this.addMessage(message);
+
+        this.window.outerChangePanel.showPage(this.window.MESSAGE_PAGE_NAME);
+    }
+
+    private void setBackgroundImage() {
         BufferedImage backgroundImage = new BufferedImage(
             window.getContentPane().getSize().width, 
             window.getContentPane().getSize().height, 
@@ -186,15 +213,6 @@ public class MessagePanel extends CenteredComponentPanel {
         g2d.dispose();
 
         this.backgroundImage = BLUR_OPERATION.filter(backgroundImage, null);
-
-        this.innerPanel.setPreferredSize(new Dimension(
-            Math.max(message.getPreferredSize().width + 50, BUTTON_WIDTH * 2 + 40), 
-            message.getPreferredSize().height + BUTTON_HEIGHT + 50
-        ));
-
-        this.addMessage(message);
-
-        this.window.outerChangePanel.showPage(this.window.MESSAGE_PAGE_NAME);
     }
 
     private void addMessage(ShowableMessagePanel message) {
