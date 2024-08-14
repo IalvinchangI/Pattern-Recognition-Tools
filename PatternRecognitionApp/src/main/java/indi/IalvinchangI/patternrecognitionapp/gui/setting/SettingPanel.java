@@ -3,6 +3,7 @@ package indi.IalvinchangI.patternrecognitionapp.gui.setting;
 import javax.swing.BorderFactory;
 
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
+import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.MultiBoxPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalScrollPanel;
 
@@ -15,7 +16,7 @@ public class SettingPanel extends NormalScrollPanel {
 
     public static final int PANEL_WIDTH = 500;
 
-    public SettingPanel(SettingData settingData) {
+    public SettingPanel(MainFrame window, SettingData settingData) {
         super();
         this.settingData = settingData;
         this.setBackground(PRIMARY_BACKGROUND_COLOR);
@@ -25,7 +26,7 @@ public class SettingPanel extends NormalScrollPanel {
         this.panelsPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 20, SCROLL_BAR_WIDTH + 3));
         this.addComponent(this.panelsPanel);
 
-        this.panelsPanel.addPanel(new SaveDirectoryPathPanel(this.settingData, PANEL_WIDTH, 100));
+        this.panelsPanel.addPanel(new SaveDirectoryPathPanel(window, this.settingData, PANEL_WIDTH, 100));
     }
 
     private SettingData settingData = null;

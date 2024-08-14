@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 
 import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
+import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.gui.message.TextMessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalBoxPanel;
 
@@ -29,7 +31,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
 
     public static final int TEXT_FIELD_HEIGHT = 30;
 
-    public SaveDirectoryPathPanel(SettingData settingData, int width, int height) {
+    public SaveDirectoryPathPanel(MainFrame window, SettingData settingData, int width, int height) {
         super(width, height);
         this.settingData = settingData;
         this.setLayout(new GridBagLayout());
@@ -40,12 +42,12 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
         this.changeDirectoryButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.FOLDER_IMAGE), TEXT_FIELD_HEIGHT);
         this.openDirectoryButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.PONTER_IMAGE), TEXT_FIELD_HEIGHT);
 
-        this.settingComponents();
+        this.settingComponents(window);
         
         this.addingComponents();
     }
     
-    private void settingComponents() {
+    private void settingComponents(MainFrame window) {
         this.label.setFont(SUBTITLE_FONT);
 
         this.directoryInputField.setPreferredSize(new Dimension(350, TEXT_FIELD_HEIGHT));
@@ -70,6 +72,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fileChooser.setCurrentDirectory(new File(settingData.getSaveDirectoryPath()));
 
                 int returnValue = fileChooser.showOpenDialog(root);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -94,7 +97,7 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
                         }
                     }
                 }
-                // TODO 沒辦法開的話
+                window.messagePanel.showMessage(new TextMessagePanel("未取得檔案管理員的存取權"));
             }
         });
         this.openDirectoryButton.setBackground(this.getBackground());

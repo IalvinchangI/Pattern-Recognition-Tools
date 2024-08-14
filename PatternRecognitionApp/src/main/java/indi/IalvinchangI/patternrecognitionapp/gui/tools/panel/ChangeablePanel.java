@@ -34,12 +34,26 @@ public class ChangeablePanel extends TransparentPanel {
 
 
     /**
+     * 取得現在顯示的頁面名
+     * @return 現在顯示的頁面名
+     */
+    public String getCurrentPage() {
+        return this.currentPage;
+    }
+
+
+    /** 現在顯示的頁面名 */
+    private String currentPage = null;
+
+
+    /**
      * 切換至名為 pageName 的頁面
      * @param pageName 要切換的頁面名
      * @return 是否切換成功
      */
     public boolean showPage(String pageName) {
         if (this.pageNames.contains(pageName)) {
+            this.currentPage = pageName;
             ((CardLayout) this.getLayout()).show(this, pageName);
 
             return true;

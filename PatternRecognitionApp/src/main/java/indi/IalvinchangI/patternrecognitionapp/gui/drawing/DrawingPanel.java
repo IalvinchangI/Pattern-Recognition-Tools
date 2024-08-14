@@ -8,7 +8,11 @@ import java.awt.event.ActionListener;
 
 import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.DataController;
+import indi.IalvinchangI.patternrecognitionapp.data.PatternData;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
+import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.gui.message.MessagePanel;
+import indi.IalvinchangI.patternrecognitionapp.gui.message.TextMessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.DecorativeButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.NormalButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
@@ -26,7 +30,7 @@ public class DrawingPanel extends TransparentPanel {
     DataController dataController = null;
 
 
-    public DrawingPanel(SettingData settingData) {
+    public DrawingPanel(MainFrame window, SettingData settingData) {
         // data
         this.settingData = settingData;
         this.dataController = new DataController(this.settingData);
@@ -59,7 +63,8 @@ public class DrawingPanel extends TransparentPanel {
                 }
                 else {
                     changeEditingPattern(dataController.getNotFinish());
-                    // TODO message
+
+                    sendNotFinishMessage(window.messagePanel);
                 }
             }
         });
@@ -81,7 +86,8 @@ public class DrawingPanel extends TransparentPanel {
                         return;
                     }
                     changeEditingPattern(index);
-                    // TODO message
+                    
+                    sendNotFinishMessage(window.messagePanel);
                 }
             }
         });
@@ -128,6 +134,30 @@ public class DrawingPanel extends TransparentPanel {
     PatternsPanel patterns = null;
     private NormalButton addPatternButton = null;
     private DecorativeButton saveButton = null;
+
+
+    /**
+     * 發送未完成圖形繪製或標籤選擇的錯誤訊息
+     * @param messagePanel 顯示錯誤訊息的地方
+     * 
+     * @throws IllegalStateException Filled in pattern but not velocity or strokeWidth.
+     */
+    private void sendNotFinishMessage(MessagePanel messagePanel) {
+        PatternData pattern = dataController.getPattern();
+        String thing = null;
+        if (pattern.getFinishEditing_TF(PatternData.CHECK_PATTERN) == false) {
+            thing = "圖形未畫";
+        }
+        else if (pattern.getFinishEditing_TF(PatternData.CHECK_LABEL) == false) {
+            thing = "標籤未選";
+        }
+        else {
+            throw new IllegalStateException("Filled in pattern but not velocity or strokeWidth.");
+        }
+        messagePanel.showMessage(new TextMessagePanel(
+            String.format("有圖檔的%s，麻煩再確認一次", thing)
+        ));
+    }
 
 
     /**

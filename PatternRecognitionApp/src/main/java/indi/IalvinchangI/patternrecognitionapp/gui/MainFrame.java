@@ -51,6 +51,10 @@ public class MainFrame extends JFrame implements GUIConstant {
 
 
         setOuterPanel();
+        
+
+        // show
+        this.outerChangePanel.showPage(MAIN_PAGE_NAME);
     }
 
 
@@ -71,7 +75,7 @@ public class MainFrame extends JFrame implements GUIConstant {
 
         this.mainPanel = new MainPanel(this, this.settingData);
         this.teachingPanel = new TeachingPanel();
-        this.messagePanel = new MessagePanel();
+        this.messagePanel = new MessagePanel(this);
 
 
         // add
@@ -80,17 +84,13 @@ public class MainFrame extends JFrame implements GUIConstant {
         this.outerChangePanel.add(messagePanel, MESSAGE_PAGE_NAME);
 
         this.add(outerChangePanel);
-
-
-        // show
-        this.outerChangePanel.showPage(MAIN_PAGE_NAME);
     }
 
     public ChangeablePanel outerChangePanel = null;
 
     private MainPanel     mainPanel = null;
     private TeachingPanel teachingPanel = null;
-    private MessagePanel  messagePanel = null;
+    public MessagePanel  messagePanel = null;
 
     public final String MAIN_PAGE_NAME     = "main";
     public final String TEACHING_PAGE_NAME = "teaching";

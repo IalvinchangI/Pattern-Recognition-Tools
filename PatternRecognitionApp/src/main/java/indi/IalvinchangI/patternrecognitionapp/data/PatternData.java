@@ -60,7 +60,7 @@ public class PatternData {
      * 確認 target 是否編輯完了
      * @param target 要檢查的資料
      * {@code CHECK_PATTERN}, {@code CHECK_VELOCITY}, {@code CHECK_STROKE_WIDTH}, {@code CHECK_LABEL}
-     * @return 是否都編輯完了
+     * @return 是否編輯完 target 了
      */
     public boolean getFinishEditing_TF(byte target) {
         return (this.editCheck & target) != 0;

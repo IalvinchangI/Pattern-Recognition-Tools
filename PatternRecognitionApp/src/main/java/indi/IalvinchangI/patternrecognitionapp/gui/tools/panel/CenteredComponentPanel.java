@@ -10,11 +10,14 @@ import java.awt.GridBagLayout;
  * @author IalvinchangI
  */
 public class CenteredComponentPanel extends TransparentPanel {
+    
     /**
      * 把 Component 放在 Panel 正中央的 Panel
      * @param comp 要放在 Panel 正中央的 Component
      */
     public CenteredComponentPanel(Component comp) {
+        this.comp = comp;
+        
         this.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
@@ -23,4 +26,6 @@ public class CenteredComponentPanel extends TransparentPanel {
         constraints.gridy = 0;
         this.add(comp, constraints);
     }
+
+    protected Component comp = null;
 }

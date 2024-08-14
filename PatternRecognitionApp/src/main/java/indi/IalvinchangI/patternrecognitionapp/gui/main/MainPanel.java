@@ -12,6 +12,7 @@ import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
 import indi.IalvinchangI.patternrecognitionapp.gui.drawing.DrawingPanel;
+import indi.IalvinchangI.patternrecognitionapp.gui.message.TextMessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.setting.SettingPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
@@ -41,10 +42,11 @@ public class MainPanel extends TransparentPanel {
         this.changePageButtonGroup = new ButtonGroup();
         this.settingPageButton = new ChangePageButton(ResourceConstant.getImagePath(ResourceConstant.SETTING_IMAGE), 50);
         this.drawingPageButton = new ChangePageButton(ResourceConstant.getImagePath(ResourceConstant.DRAWING_IMAGE), 100);
+        this.helpButton = new GraphButton(ResourceConstant.getImagePath(ResourceConstant.HELP_IMAGE), this.settingPageButton.getPreferredSize().width);
         this.exitButton = new GraphButton(ResourceConstant.getImagePath(ResourceConstant.EXIT_IMAGE), this.settingPageButton.getPreferredSize().width);
 
-        this.settingPanel = new SettingPanel(this.settingData);
-        this.drawingPanel = new DrawingPanel(this.settingData);
+        this.settingPanel = new SettingPanel(window, this.settingData);
+        this.drawingPanel = new DrawingPanel(window, this.settingData);
 
         
         this.addingComponents();
@@ -63,6 +65,7 @@ public class MainPanel extends TransparentPanel {
 
     private ChangePageButton settingPageButton = null;
     private ChangePageButton drawingPageButton = null;
+    private GraphButton helpButton = null;
     private GraphButton exitButton = null;
     private ButtonGroup changePageButtonGroup = null;
 
@@ -79,10 +82,13 @@ public class MainPanel extends TransparentPanel {
         this.buttonPanel.setLayout(new BoxLayout(this.buttonPanel, BoxLayout.Y_AXIS));
         this.settingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.drawingPageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.helpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.buttonPanel.add(settingPageButton);
         this.buttonPanel.add(drawingPageButton);
         this.buttonPanel.add(Box.createVerticalGlue());
+        this.buttonPanel.add(helpButton);
+        this.buttonPanel.add(Box.createVerticalStrut(3));
         this.buttonPanel.add(exitButton);
         this.add(buttonPanel);
         
@@ -97,12 +103,15 @@ public class MainPanel extends TransparentPanel {
 
         this.settingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(SETTING_PAGE_NAME));
         this.drawingPageButton.addActionListener(this.contentPanel.createChangePagePerformed(DRAWING_PAGE_NAME));
+        this.helpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                window.messagePanel.showMessage(new TextMessagePanel("hihi"));
+            }
+        });
         this.exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // System.out.println("min: " + window.getMinimumSize());
-                // System.out.println("now: " + window.getSize());
-                // System.out.println("pre: " + window.getPreferredSize());
                 window.close();
             }
         });
@@ -115,6 +124,9 @@ public class MainPanel extends TransparentPanel {
         // this.drawingPageButton.setForeground(Color.BLACK);
         this.settingPageButton.setBackground(this.getBackground());
         this.drawingPageButton.setBackground(this.getBackground());
+
+        this.helpButton.setBackground(this.buttonPanel.getBackground());
+        this.helpButton.setIconMargin(11);
 
         this.exitButton.setBackground(this.buttonPanel.getBackground());
         this.exitButton.setIconMargin(11);
