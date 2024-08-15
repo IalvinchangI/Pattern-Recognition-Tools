@@ -89,7 +89,7 @@ public class MainFrame extends JFrame implements GUIConstant {
     public ChangeablePanel outerChangePanel = null;
 
     private MainPanel     mainPanel = null;
-    private TeachingPanel teachingPanel = null;
+    public TeachingPanel teachingPanel = null;
     public MessagePanel  messagePanel = null;
 
     public final String MAIN_PAGE_NAME     = "main";

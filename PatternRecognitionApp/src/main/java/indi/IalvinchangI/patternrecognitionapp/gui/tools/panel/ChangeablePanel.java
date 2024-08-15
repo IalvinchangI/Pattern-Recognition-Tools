@@ -50,6 +50,12 @@ public class ChangeablePanel extends TransparentPanel {
      * 切換至名為 pageName 的頁面
      * @param pageName 要切換的頁面名
      * @return 是否切換成功
+     * <p>
+     * 如果 pageName 在 ChangeablePanel 裡，則回傳 true (ChangeablePanel 內有儲存此頁面)
+     * <p>
+     * 如果 pageName 不在 ChangeablePanel 裡，則回傳 false (ChangeablePanel 內沒儲存此頁面)
+     * 
+     * @apiNote 因為會先檢查在不在 ChangeablePanel 裡，所以要先 add 進去
      */
     public boolean showPage(String pageName) {
         if (this.pageNames.contains(pageName)) {
@@ -77,24 +83,14 @@ public class ChangeablePanel extends TransparentPanel {
      * 設定一個 ActionListener，他的 actionPerformed 是將頁面切換到名為 pageName 的頁面，最後回傳設定好的 ActionListener
      * 
      * @param pageName 要切換的頁面名
-     * @return
-     * 如果 pageName 在 ChangeablePanel 裡，則回傳 ActionListener (ChangeablePanel 內有儲存此頁面)
-     * <p>
-     * 如果 pageName 不在 ChangeablePanel 裡，則回傳 null (ChangeablePanel 內沒儲存此頁面)
-     * 
-     * @apiNote 因為會先檢查在不在 ChangeablePanel 裡，所以要先 add 進去
+     * @return 設定好的 ActionListener
      */
     public ActionListener createChangePagePerformed(String pageName) {
-        if (this.pageNames.contains(pageName)) {
-            CardLayout layout = (CardLayout) this.getLayout();
-            TransparentPanel panel = this;
-            return new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    layout.show(panel, pageName);
-                }
-            };
-        }
-        return null;
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPage(pageName);
+            }
+        };
     }
 }

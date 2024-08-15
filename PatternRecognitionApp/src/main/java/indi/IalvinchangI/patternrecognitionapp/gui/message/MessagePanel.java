@@ -30,7 +30,7 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.NormalBoxPanel;
 public class MessagePanel extends CenteredComponentPanel {
 
     private final static int BUTTON_WIDTH = 80;
-    private final static int BUTTON_HEIGHT = 40;
+    private final static int BUTTON_HEIGHT = 45;
 
     private MainFrame window = null;
 
@@ -42,18 +42,18 @@ public class MessagePanel extends CenteredComponentPanel {
 
 
         // background
-        this.backgroundImage = new BufferedImage(1, 1, BufferedImage.TYPE_3BYTE_BGR);
-        Graphics2D g2d = this.backgroundImage.createGraphics();
+        // this.backgroundImage = new BufferedImage(1, 1, BufferedImage.TYPE_3BYTE_BGR);
+        // Graphics2D g2d = this.backgroundImage.createGraphics();
 
-        g2d.setColor(PRIMARY_BACKGROUND_COLOR);
-        g2d.fillRect(0, 0, 1, 1);
+        // g2d.setColor(PRIMARY_BACKGROUND_COLOR);
+        // g2d.fillRect(0, 0, 1, 1);
 
-        g2d.dispose();
+        // g2d.dispose();
 
         this.addComponentListener(new ComponentAdapter() {  // repaint background when change the size of the window
             @Override
             public void componentResized(ComponentEvent e) {
-                if (window.outerChangePanel.getCurrentPage() == window.MESSAGE_PAGE_NAME) {
+                if (window.outerChangePanel.getCurrentPage().equals(window.MESSAGE_PAGE_NAME)) {
                     window.outerChangePanel.showPage(previousPage);
                     setBackgroundImage();
                     window.outerChangePanel.showPage(window.MESSAGE_PAGE_NAME);
@@ -63,7 +63,7 @@ public class MessagePanel extends CenteredComponentPanel {
         });
 
 
-        // leave
+        // click background
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -141,13 +141,12 @@ public class MessagePanel extends CenteredComponentPanel {
 
         constraints.gridx = 0;
         constraints.gridy = 1;
+        constraints.anchor = GridBagConstraints.WEST;
         this.innerPanel.add(this.confirmButton, constraints);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        constraints.gridwidth = 0;
+        constraints.anchor = GridBagConstraints.EAST;
         this.innerPanel.add(this.cancelButton, constraints);
-
-        // TODO message 加進去時，cancelButton會佔據剩餘空間，導致按鈕偏一邊
     }
 
 

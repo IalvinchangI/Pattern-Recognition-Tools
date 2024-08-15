@@ -11,8 +11,8 @@ import javax.swing.ButtonGroup;
 import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
 import indi.IalvinchangI.patternrecognitionapp.data.SettingData;
 import indi.IalvinchangI.patternrecognitionapp.gui.MainFrame;
+import indi.IalvinchangI.patternrecognitionapp.gui.TeachingPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.drawing.DrawingPanel;
-import indi.IalvinchangI.patternrecognitionapp.gui.message.TextMessagePanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.setting.SettingPanel;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.button.GraphButton;
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.ChangeablePanel;
@@ -88,7 +88,7 @@ public class MainPanel extends TransparentPanel {
         this.buttonPanel.add(drawingPageButton);
         this.buttonPanel.add(Box.createVerticalGlue());
         this.buttonPanel.add(helpButton);
-        this.buttonPanel.add(Box.createVerticalStrut(3));
+        this.buttonPanel.add(Box.createVerticalStrut(5));
         this.buttonPanel.add(exitButton);
         this.add(buttonPanel);
         
@@ -106,7 +106,15 @@ public class MainPanel extends TransparentPanel {
         this.helpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                window.messagePanel.showMessage(new TextMessagePanel("hihi"));
+                int content = 0;
+                if (contentPanel.getCurrentPage().equals(SETTING_PAGE_NAME)) {
+                    content = TeachingPanel.TEACH_SETTING;
+                }
+                else if (contentPanel.getCurrentPage().equals(DRAWING_PAGE_NAME)) {
+                    content = TeachingPanel.TEACH_DRAWING;
+                }
+                window.teachingPanel.setContent(content);
+                window.messagePanel.showMessage(window.teachingPanel);
             }
         });
         this.exitButton.addActionListener(new ActionListener() {
@@ -122,8 +130,6 @@ public class MainPanel extends TransparentPanel {
         // this.drawingPageButton.setText("繪圖");
         // this.drawingPageButton.setFont(MainFrame.SUBTITLE_FONT);
         // this.drawingPageButton.setForeground(Color.BLACK);
-        this.settingPageButton.setBackground(this.getBackground());
-        this.drawingPageButton.setBackground(this.getBackground());
 
         this.helpButton.setBackground(this.buttonPanel.getBackground());
         this.helpButton.setIconMargin(11);
