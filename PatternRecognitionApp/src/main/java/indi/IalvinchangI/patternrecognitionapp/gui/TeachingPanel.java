@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JTextArea;
 
 import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
@@ -16,6 +17,8 @@ import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
 /**
  * 用於使用教學的頁面，屬於 {@code MainFrame}
+ * <p>
+ * 只是存在 MainFrame 而已，不會 add 在 MainFrame
  * @author IalvinchangI
  */
 public class TeachingPanel extends ShowableMessagePanel {
@@ -38,9 +41,7 @@ public class TeachingPanel extends ShowableMessagePanel {
      * 造出 TeachingPanel
      */
     public TeachingPanel() {
-        this.setLayout(new BorderLayout());
-        this.messageType = CONFIRM_MESSAGE;
-        this.setBackground(PRIMARY_BACKGROUND_COLOR);
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         
         this.contentPanel = new ChangeablePanel();
         this.leftButton = new GraphButton(ResourceConstant.getImagePath(ResourceConstant.ADD_PATTERN_IMAGE), 60);
@@ -50,9 +51,9 @@ public class TeachingPanel extends ShowableMessagePanel {
         this.initTeachingSettingPanel();
         this.initTeachingDrawingPanel();
 
-        this.add(contentPanel, BorderLayout.CENTER);
-        this.add(leftButton, BorderLayout.WEST);
-        this.add(rightButton, BorderLayout.EAST);
+        this.add(leftButton);
+        this.add(contentPanel);
+        this.add(rightButton);
         
         // this.leftButton.setVisible(false);
         // this.rightButton.setVisible(false);
@@ -61,12 +62,14 @@ public class TeachingPanel extends ShowableMessagePanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("leftButton");
+                // TODO
             }
         });
         this.rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("rightButton");
+                // TODO
             }
         });
         this.contentPanel.showPage(TEACHING_DRAWING_PAGE_NAME);
@@ -86,26 +89,28 @@ public class TeachingPanel extends ShowableMessagePanel {
 
     private void initTeachingSettingPanel() {
         this.teachingSettingPanel = new TransparentPanel();
+        this.teachingSettingPanel.setLayout(new BorderLayout());
         this.teachingSettingPanel.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
         JTextArea content = new JTextArea();
         content.setFont(CONTENT_FONT);
         content.setText("setting content\n");  // TODO
         content.setEditable(false);
-        this.teachingSettingPanel.add(content);
+        this.teachingSettingPanel.add(content, BorderLayout.CENTER);
 
         this.contentPanel.add(this.teachingSettingPanel, TEACHING_SETTING_PAGE_NAME);
     }
     
     private void initTeachingDrawingPanel() {
         this.teachingDrawingPanel = new TransparentPanel();
+        this.teachingDrawingPanel.setLayout(new BorderLayout());
         this.teachingDrawingPanel.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
 
         JTextArea content = new JTextArea();
         content.setFont(CONTENT_FONT);
         content.setText("drawing content\n");  // TODO
         content.setEditable(false);
-        this.teachingDrawingPanel.add(content);
+        this.teachingDrawingPanel.add(content, BorderLayout.CENTER);
 
         this.contentPanel.add(this.teachingDrawingPanel, TEACHING_DRAWING_PAGE_NAME);
     }

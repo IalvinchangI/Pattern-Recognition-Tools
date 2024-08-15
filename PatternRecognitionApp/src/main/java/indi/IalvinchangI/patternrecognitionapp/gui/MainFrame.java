@@ -65,7 +65,7 @@ public class MainFrame extends JFrame implements GUIConstant {
      * 包含
      * <ul>
      *  <li> MainPanel </li>
-     *  <li> TeachingPanel </li>
+     *  <li> TeachingPanel (不會 add 在 MainFrame) </li>
      *  <li> MessagePanel </li>
      * </ul>
      */
@@ -80,7 +80,6 @@ public class MainFrame extends JFrame implements GUIConstant {
 
         // add
         this.outerChangePanel.add(mainPanel, MAIN_PAGE_NAME);
-        this.outerChangePanel.add(teachingPanel, TEACHING_PAGE_NAME);
         this.outerChangePanel.add(messagePanel, MESSAGE_PAGE_NAME);
 
         this.add(outerChangePanel);
@@ -93,7 +92,6 @@ public class MainFrame extends JFrame implements GUIConstant {
     public MessagePanel  messagePanel = null;
 
     public final String MAIN_PAGE_NAME     = "main";
-    public final String TEACHING_PAGE_NAME = "teaching";
     public final String MESSAGE_PAGE_NAME  = "message";
 
 
