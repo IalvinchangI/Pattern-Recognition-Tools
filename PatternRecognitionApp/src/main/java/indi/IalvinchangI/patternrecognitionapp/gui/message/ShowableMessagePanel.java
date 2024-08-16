@@ -1,5 +1,7 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.message;
 
+import java.awt.Color;
+
 import indi.IalvinchangI.patternrecognitionapp.gui.tools.panel.TransparentPanel;
 
 /**
@@ -24,16 +26,25 @@ public abstract class ShowableMessagePanel extends TransparentPanel {
     protected int messageType = DEFAULT_MESSAGE;
 
 
+    /**
+     * 設定 panel 的背景色
+     * @param color 背景色
+     * @apiNote 會由 MessagePanel 呼叫並傳入 MessagePanel 內層的 {@code NormalBoxPanel} 的背景色
+     * @see MessagePanel
+     */
+    protected abstract void setBackgroundColor(Color color);
+
+
     /** 按下 confirm 時要做的事 */
-    public void clickConfirm() {}
+    protected void clickConfirm() {}
 
 
     /** 按下 cancel 時要做的事 */
-    public void clickCancel() {}
+    protected void clickCancel() {}
 
 
     /**
      * 關閉 meesage 時要做的事
      */
-    public abstract void closeMessage();
+    protected abstract void closeMessage();
 }

@@ -66,14 +66,14 @@ public class MessagePanel extends CenteredComponentPanel {
         // click background
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 currentMessage.clickCancel();
                 closeMessage();
             }
         });
         this.innerPanel.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 // nothing
                 // catch the event
             }
@@ -196,6 +196,7 @@ public class MessagePanel extends CenteredComponentPanel {
             message.getPreferredSize().height + BUTTON_HEIGHT + 50
         ));
 
+        message.setBackgroundColor(this.innerPanel.boxColor);
         this.addMessage(message);
 
         this.window.outerChangePanel.showPage(this.window.MESSAGE_PAGE_NAME);

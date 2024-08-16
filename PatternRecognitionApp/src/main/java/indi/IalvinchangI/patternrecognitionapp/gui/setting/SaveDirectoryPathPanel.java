@@ -91,10 +91,11 @@ public class SaveDirectoryPathPanel extends NormalBoxPanel {
                     if (desktop.isSupported(Desktop.Action.OPEN)) {
                         try {
                             desktop.open(new File(settingData.getSaveDirectoryPath()));
-                            return;
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
+                        } catch (IOException | IllegalArgumentException ioe) {
+                            window.messagePanel.showMessage(new TextMessagePanel(ioe.getMessage()));
+                            ioe.printStackTrace();
                         }
+                        return;
                     }
                 }
                 window.messagePanel.showMessage(new TextMessagePanel("未取得檔案管理員的存取權"));

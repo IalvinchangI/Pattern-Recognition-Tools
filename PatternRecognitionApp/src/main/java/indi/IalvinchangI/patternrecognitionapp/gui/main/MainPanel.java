@@ -1,6 +1,7 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.main;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -131,11 +132,16 @@ public class MainPanel extends TransparentPanel {
         // this.drawingPageButton.setFont(MainFrame.SUBTITLE_FONT);
         // this.drawingPageButton.setForeground(Color.BLACK);
 
+        this.settingPageButton.setBackground(this.buttonPanel.getBackground());
+        this.drawingPageButton.setBackground(this.buttonPanel.getBackground());
+
         this.helpButton.setBackground(this.buttonPanel.getBackground());
         this.helpButton.setIconMargin(11);
-
+        this.helpButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
         this.exitButton.setBackground(this.buttonPanel.getBackground());
         this.exitButton.setIconMargin(11);
+        this.exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     public final String SETTING_PAGE_NAME = "setting";

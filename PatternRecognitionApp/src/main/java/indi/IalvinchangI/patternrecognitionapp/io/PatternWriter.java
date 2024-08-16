@@ -32,8 +32,10 @@ public class PatternWriter {
      * @param fileName the name of the file that store PatternData
      * @param patternData the PatternData you want to store
      * @return succeed or not
+     * 
+     * @throws IOException
      */
-    public boolean writePattern(String fileName, PatternData patternData) {
+    public boolean writePattern(String fileName, PatternData patternData) throws IOException {
         return this.writePattern(new File(fileName), patternData);
     }
 
@@ -42,8 +44,10 @@ public class PatternWriter {
      * @param file the file you want to store PatternData
      * @param patternData the PatternData you want to store
      * @return succeed or not
+     * 
+     * @throws IOException
      */
-    public boolean writePattern(File file, PatternData patternData) {
+    public boolean writePattern(File file, PatternData patternData) throws IOException {
         file = setSuffixFileName(file);
         // byte[][] -> int[][]
         byte[][] bytePattern = patternData.getPattern();
@@ -64,13 +68,7 @@ public class PatternWriter {
                                             patternData.getLabel()
         );
 
-        try {
-            this.mapper.writeValue(file, jsonPattern);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+        this.mapper.writeValue(file, jsonPattern);
         return true;
     }
 

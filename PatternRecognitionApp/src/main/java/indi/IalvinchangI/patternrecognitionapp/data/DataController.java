@@ -2,6 +2,7 @@ package indi.IalvinchangI.patternrecognitionapp.data;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -167,7 +168,7 @@ public class DataController {
      * 儲存所有 pattern 並刪除
      * @return succeed or not
      */
-    public boolean saveAllPatterns() {
+    public boolean saveAllPatterns() throws IOException {
         if (this.settingData == null) {
             return false;
         }
@@ -179,7 +180,9 @@ public class DataController {
             return false;
         }
 
-        // TODO 檢查資料夾是否存在
+        if (this.settingData.checkSaveDirectoryPath() == false) {
+            throw new IOException("存檔位置錯誤，請檢查一下資料夾是否存在");
+        }
 
         // save
         String format = this.settingData.getSaveDirectoryPath() + File.separator + PREFIX_FILE_NAME + "%s" + FILE_EXTENTION;
@@ -187,7 +190,7 @@ public class DataController {
         PatternWriter writer = new PatternWriter();
         while (patternsIterator.hasNext()) {
             PatternData pattern = patternsIterator.next();
-            writer.writePattern(String.format(format, pattern.getLabel()), pattern);
+            writer.writePattern(String.format(format, pattern.getLabel()), pattern);  // may throw IOException
             patternsIterator.remove();
         }
         // reset

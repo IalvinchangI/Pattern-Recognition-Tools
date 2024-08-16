@@ -1,6 +1,7 @@
 package indi.IalvinchangI.patternrecognitionapp.gui.message;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JLabel;
 
@@ -33,6 +34,10 @@ public class TextMessagePanel extends ShowableMessagePanel {
     public void setMessageType(int messageType) {
         this.messageType = messageType;
     }
+
+
+    @Override
+    protected void setBackgroundColor(Color color) {}
 
 
     @Override

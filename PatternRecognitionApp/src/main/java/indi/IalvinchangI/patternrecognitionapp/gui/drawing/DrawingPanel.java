@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 
@@ -94,21 +95,28 @@ public class DrawingPanel extends TransparentPanel {
         this.saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (dataController.saveAllPatterns() == true) {
-                    patterns.deleteAllButton();
-                    canvas.clearCanvas();
-                    labelPanel.clearSelection();
+                try {
+                    boolean result = dataController.saveAllPatterns();
+                    if (result == true) {
+                        patterns.deleteAllButton();
+                        canvas.clearCanvas();
+                        labelPanel.clearSelection();
 
-                    addNewPattern();
-                }
-                else {
-                    int index = dataController.getNotFinish();
-                    if (index == -1) {
-                        return;
+                        addNewPattern();
                     }
-                    changeEditingPattern(index);
-                    
-                    sendNotFinishMessage(window.messagePanel);
+                    else {
+                        int index = dataController.getNotFinish();
+                        if (index == -1) {
+                            return;
+                        }
+                        changeEditingPattern(index);
+                        
+                        sendNotFinishMessage(window.messagePanel);
+                    }
+                }
+                catch (IOException ioe) {
+                    window.messagePanel.showMessage(new TextMessagePanel(ioe.getMessage()));
+                    ioe.printStackTrace();
                 }
             }
         });

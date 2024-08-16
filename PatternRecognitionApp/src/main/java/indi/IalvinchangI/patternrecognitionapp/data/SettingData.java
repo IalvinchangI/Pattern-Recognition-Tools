@@ -91,7 +91,7 @@ public class SettingData {
      * 檢查 saveDirectoryPath 是否 "存在、是目錄"
      * @return 是否 "存在、是目錄"
      */
-    private boolean checkSaveDirectoryPath() {
+    public boolean checkSaveDirectoryPath() {
         File dir = new File(this.saveDirectoryPath);
         if (dir.exists() && dir.isDirectory()) {
             return true;
