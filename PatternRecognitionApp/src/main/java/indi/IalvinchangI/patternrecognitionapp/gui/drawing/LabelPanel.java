@@ -24,9 +24,9 @@ class LabelPanel extends NormalScrollPanel {
 
     public static final Font LABEL_FONT = SUBTITLE_FONT;
 
-    public static final int BUTTON_WIDTH = 140;
+    public static final int BUTTON_WIDTH = 180;
 
-    public static final int BUTTON_HEIGHT = 50;
+    public static final int BUTTON_HEIGHT = 80;
 
 
     /**

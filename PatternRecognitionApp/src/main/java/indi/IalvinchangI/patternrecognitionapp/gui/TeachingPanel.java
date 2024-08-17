@@ -82,7 +82,7 @@ public class TeachingPanel extends ShowableMessagePanel {
                     "<ul style='margin-left: 0'>" + 
                         "<li> 左邊白色的那一大塊是畫布，用來「畫圖形」的。<br> 另外，這個畫布很特別，他只能畫一筆，所以所有的圖形只能「一筆完成」。 </li> " + 
                         "<li> 右邊那一排有圖有文字的按鈕是標籤，點選後可以幫左邊畫好的圖形「上標籤」。 </li>" + 
-                        "<li> 畫布下面那一排按鈕是你之前畫過的圖，你可以點擊然後修改之前畫的圖檔。<br> 最右邊那顆不會動的按鈕是「新增圖檔的按鈕」。 </li>" + 
+                        "<li> 畫布下面那一排按鈕是你之前畫過的圖，你可以點擊然後修改之前畫的圖檔。<br> 最右邊那顆有加號的按鈕是「新增圖檔的按鈕」。 </li>" + 
                         "<li> 標籤下面那一顆比較大的按鈕是「存檔按鈕」（他在新增圖檔的按鈕右邊）。<br> 在按下存檔按鈕前，還請確認每個圖檔的圖和標籤是正確的。 </li>" + 
                     "</ul>" + 
                     "<p> 如果你有圖檔還沒完成，在按下「新增圖檔的按鈕」或「存檔按鈕」時會跳出警告 </p>" + 
@@ -202,6 +202,5 @@ public class TeachingPanel extends ShowableMessagePanel {
             this.rightButton.setVisible(false);
         }
         this.teachContent = 0;
-        // TODO
     }
 }

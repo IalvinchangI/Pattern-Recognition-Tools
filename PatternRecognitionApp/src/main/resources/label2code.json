@@ -1,6 +1,6 @@
 [
     {
-        "label" : "圓形", 
+        "label" : "圓形　", 
         "code"  : "1", 
         "image" : "circle.png"
     }, 
@@ -10,7 +10,7 @@
         "image" : "triangle.png"
     }, 
     {
-        "label" : "矩形", 
+        "label" : "矩形　", 
         "code"  : "4", 
         "image" : "square.png"
     }, 
