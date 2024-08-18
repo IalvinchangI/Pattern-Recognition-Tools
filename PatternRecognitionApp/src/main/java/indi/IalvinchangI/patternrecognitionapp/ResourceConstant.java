@@ -48,6 +48,15 @@ public class ResourceConstant {
     /** help的圖檔 */
     public static final String HELP_IMAGE = "question.png";
 
+    /** 刪除的圖檔 */
+    public static final String DELETE_IMAGE = "delete.png";
+
+    /** 向右箭頭的圖檔 */
+    public static final String RIGHT_ARROW_IMAGE = "right_triangle.png";
+
+    /** 向左箭頭的圖檔 */
+    public static final String LEFT_ARROW_IMAGE = "left_triangle.png";
+
     
     /**
      * 取得目標 resources 的路徑

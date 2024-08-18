@@ -58,18 +58,4 @@ public class ChangePageButton extends GraphButton {
         g2d.setColor(Color.BLACK);
         g2d.drawRoundRect(0, 0, this.getPreferredSize().width + 10, this.getPreferredSize().height - 1, 20, 20);
     }
-
-    /*
-    @Override
-    protected void paintComponentContent(Graphics2D g2d) {
-        if (this.getText() != null) {
-            FontMetrics fm = g2d.getFontMetrics();
-            Rectangle stringBounds = fm.getStringBounds(getText(), g2d).getBounds();
-            int textX = (this.getSize().width - stringBounds.width) / 2;
-            int textY = (this.getSize().height - stringBounds.height) / 2 + fm.getAscent();
-            g2d.setColor(getForeground());
-            g2d.drawString(getText(), textX, textY);
-        }
-    }
-    */
 }
