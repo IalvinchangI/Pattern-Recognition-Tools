@@ -165,6 +165,20 @@ public class DataController {
 
 
     /**
+     * 刪除 pattern
+     * @param index 要刪除的 pattern 的索引值
+     * @implNote 若刪除最後一個 pattern，currentIndex 會在刪除後指向最後一個 pattern
+     */
+    public void deletePattern(int index) {
+        this.patterns.remove(index);
+        
+        if (this.currentIndex >= this.patterns.size()) {
+            this.currentIndex = this.patterns.size() - 1;
+        }
+    }
+
+
+    /**
      * 儲存所有 pattern 並刪除
      * @return succeed or not
      */

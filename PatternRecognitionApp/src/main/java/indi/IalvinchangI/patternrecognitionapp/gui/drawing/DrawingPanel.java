@@ -32,6 +32,8 @@ public class DrawingPanel extends TransparentPanel {
 
     DataController dataController = null;
 
+    MainFrame window = null;
+
 
     public DrawingPanel(MainFrame window, SettingData settingData) {
         // data
@@ -39,6 +41,7 @@ public class DrawingPanel extends TransparentPanel {
         this.dataController = new DataController(this.settingData);
         LabelToCode[] labelToCodes = LabelToCode.readFromJsonResource(ResourceConstant.getResourcePath(ResourceConstant.LABEL2CODE));
 
+        this.window = window;
 
         // GUI
         this.setBackground(PRIMARY_BACKGROUND_COLOR);
@@ -51,11 +54,11 @@ public class DrawingPanel extends TransparentPanel {
         this.canvas = new GridCanvasPanel();
         this.labelPanel = new LabelPanel(labelToCodes);
         
-        this.patterns = new PatternsPanel();
+        this.patterns = new PatternsPanel(this);
         this.addPatternButton = new NormalButton(ResourceConstant.getImagePath(ResourceConstant.ADD_PATTERN_IMAGE), PatternsPanel.BUTTON_WIDTH);
         this.saveButton = new DecorativeButton(ResourceConstant.getImagePath(ResourceConstant.SAVE_IMAGE), 100, 65);
         
-        this.settingComponents(window);
+        this.settingComponents();
         
         this.addingComponents();
     }
@@ -70,7 +73,7 @@ public class DrawingPanel extends TransparentPanel {
     private NormalButton addPatternButton = null;
     private DecorativeButton saveButton = null;
 
-    private void settingComponents(MainFrame window) {
+    private void settingComponents() {
         this.canvasLabel.setFont(SUBTITLE_FONT);
         this.labelLabel.setFont(SUBTITLE_FONT);
 
@@ -84,7 +87,7 @@ public class DrawingPanel extends TransparentPanel {
                     labelPanel.clearSelection();
                 }
                 else {
-                    changeEditingPattern(dataController.getNotFinish());
+                    changeEditingPattern(dataController.getNotFinish(), true);
 
                     sendNotFinishMessage(window.messagePanel);
                 }
@@ -109,7 +112,7 @@ public class DrawingPanel extends TransparentPanel {
                         if (index == -1) {
                             return;
                         }
-                        changeEditingPattern(index);
+                        changeEditingPattern(index, true);
                         
                         sendNotFinishMessage(window.messagePanel);
                     }
@@ -209,14 +212,49 @@ public class DrawingPanel extends TransparentPanel {
 
 
     /**
+     * 刪除特定的 button 和對應的 pattern，並視情況切換所選按鈕
+     * @param index 要刪除的 button 和 pattern 的索引值
+     */
+    public void deleteButton(int index) {
+        boolean changeTF = false;
+        if (index == this.dataController.getCurrentIndex()) {  // if the user remove the button currently select
+            changeTF = true;
+        }
+        
+        this.patterns.deleteButton(index);
+
+        this.dataController.deletePattern(index);
+
+        // change pattern
+        if (changeTF == true) {
+            if (this.patterns.contains(this.patterns.getPreviousSelectedButton()) == false) {
+                // if the previous selected button has been removed, choose the last button
+                if (this.patterns.getButtonCount() != 0) {
+                    this.changeEditingPattern(this.patterns.getButtonCount() - 1, true);
+                }
+                else {
+                    this.addNewPattern();
+                } 
+            }
+            else  {
+                this.changeEditingPattern(this.patterns.indexOf(this.patterns.getPreviousSelectedButton()), true);
+            }
+        }
+    }
+
+
+    /**
      * 切換要編輯的 圖形
      * @param index 第幾個 圖形
+     * @param manualSelectTF 是否要手動選取按鈕 (點擊按鈕時就會自動選取了，不用再 set 一次)
      */
-    public void changeEditingPattern(int index) {
+    public void changeEditingPattern(int index, boolean manualSelectTF) {
         this.dataController.setCurrentIndex(index);
 
         this.canvas.laodPattern(this.dataController.getPattern());
         this.labelPanel.loadLabel(this.dataController.getPattern());
-        this.patterns.setSelected(this.dataController.getCurrentIndex(), true);
+        if (manualSelectTF) {
+            this.patterns.setSelected(this.dataController.getCurrentIndex(), true);
+        }
     }
 }

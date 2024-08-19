@@ -82,11 +82,40 @@ public class MultiButtonPanel extends TransparentPanel {
 
 
     /**
+     * 取得現在選取的 button
+     * @return 現在選取的 button
+     */
+    public EditableButton getCurrentSelectedButton() {
+        return this.previousSelectedButton.peekNewest();
+    }
+
+
+    /**
      * 取得上一個選取的 button
      * @return 上一個選取的 button
      */
     public EditableButton getPreviousSelectedButton() {
         return this.previousSelectedButton.peek();
+    }
+
+
+    /**
+     * MultiButtonPanel 內是否有這個 button
+     * @param button 要檢測的 button
+     * @return 是否在 MultiButtonPanel 內
+     */
+    public boolean contains(EditableButton button) {
+        return this.buttons.contains(button);
+    }
+
+
+    /**
+     * 取得 button 在 MultiButtonPanel 內的索引值
+     * @param button 想取得索引值的 button
+     * @return button 在 MultiButtonPanel 內索引值
+     */
+    public int indexOf(EditableButton button) {
+        return this.buttons.indexOf(button);
     }
 
 
@@ -132,13 +161,16 @@ public class MultiButtonPanel extends TransparentPanel {
      * 設定 button 的選取狀態
      * @param button 要設定的 button
      * @param selected_TF 狀態
+     * @return 成功設定與否
+     * @apiNote 點擊按鈕時就會自動選取了，不用再 set 一次
      */
-    public void setSelected(EditableButton button, boolean selected_TF) {
-        if (this.buttons.contains(button) == false) {
-            return;
+    public boolean setSelected(EditableButton button, boolean selected_TF) {
+        if (this.contains(button) == false) {
+            return false;
         }
 
         this.setSelectedWithoutCheck(button, selected_TF);
+        return true;
     }
 
     private void setSelectedWithoutCheck(EditableButton button, boolean selected_TF) {
@@ -173,6 +205,28 @@ public class MultiButtonPanel extends TransparentPanel {
         if (this.previousSelectedButton.size() > 0) {
             this.previousSelectedButton.peekNewest().deselect();
         }
+    }
+
+
+    /**
+     * 從 MultiButtonPanel 內移除指定的 button
+     * @param buttonIndex 要刪除的 button 的索引值 (索引值就是第幾個加進去的 button)
+     */
+    public void deleteButton(int buttonIndex) {
+        int multiPanelIndex = buttonIndex * 2;
+        if (buttonIndex > 0) {
+            multiPanelIndex -= 1;  // remove box first and then remove button
+        }
+
+        EditableButton button = this.buttons.get(buttonIndex);
+        this.buttons.remove(buttonIndex);
+        this.buttonGroup.remove(button);
+        this.remove(multiPanelIndex);  // button
+        if (this.getComponentCount() != 0) {  // if there are more then one button
+            this.remove(multiPanelIndex);  // box
+        }
+        revalidate();
+        repaint();
     }
 
 

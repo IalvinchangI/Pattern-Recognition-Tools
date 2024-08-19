@@ -112,7 +112,7 @@ public class MessagePanel extends CenteredComponentPanel {
         this.confirmButton.setBackground(this.innerPanel.boxColor);
         this.confirmButton.buttonColor = PRIMARY_BACKGROUND_COLOR;
         this.confirmButton.setFont(CONTENT_FONT);
-        this.confirmButton.setText("確認");
+        this.confirmButton.setText("確定");
         this.cancelButton.setBackground(this.innerPanel.boxColor);
         this.cancelButton.buttonColor = PRIMARY_BACKGROUND_COLOR;
         this.cancelButton.setFont(CONTENT_FONT);
