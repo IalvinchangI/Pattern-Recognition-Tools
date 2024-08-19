@@ -97,9 +97,6 @@ class PatternsPanel extends NormalScrollPanel {
      */
     public void addPattern(PatternData pattern) {
         PatternButton button = new PatternButton(pattern, BUTTON_WIDTH, this.drawingPanel);
-        
-        System.out.println(button.hashCode());
-
         button.setBackground(this.getBackground());
 
         button.addActionListener(new ActionListener() {

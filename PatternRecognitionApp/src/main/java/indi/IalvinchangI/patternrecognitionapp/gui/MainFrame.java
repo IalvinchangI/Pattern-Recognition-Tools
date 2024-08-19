@@ -5,6 +5,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import indi.IalvinchangI.patternrecognitionapp.App;
 import indi.IalvinchangI.patternrecognitionapp.ResourceConstant;
@@ -55,6 +56,13 @@ public class MainFrame extends JFrame implements GUIConstant {
 
         // show
         this.outerChangePanel.showPage(MAIN_PAGE_NAME);
+
+        if (firstTimeTF == true) {
+            SwingUtilities.invokeLater(() -> {
+                this.teachingPanel.setContent(TeachingPanel.DESCRIPTION);
+                this.messagePanel.showMessage(this.teachingPanel);
+            });
+        }
     }
 
 
