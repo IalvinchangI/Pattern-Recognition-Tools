@@ -45,7 +45,7 @@ public class PatternButton extends NormalButton {
         this.deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TextMessagePanel confirmMessage = new TextMessagePanel("確定要刪除嗎？") {
+                TextMessagePanel confirmMessage = new TextMessagePanel("確定要刪除嗎") {
                     @Override
                     protected void clickConfirm() {
                         drawingPanel.deleteButton(drawingPanel.dataController.patterns.indexOf(pattern));
