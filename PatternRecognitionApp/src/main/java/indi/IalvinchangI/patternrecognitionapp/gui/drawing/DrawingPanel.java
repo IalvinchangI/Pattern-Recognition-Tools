@@ -233,8 +233,10 @@ public class DrawingPanel extends TransparentPanel {
                     this.changeEditingPattern(this.patterns.getButtonCount() - 1, true);
                 }
                 else {
+                    canvas.clearCanvas();
+                    labelPanel.clearSelection();
                     this.addNewPattern();
-                } 
+                }
             }
             else  {
                 this.changeEditingPattern(this.patterns.indexOf(this.patterns.getPreviousSelectedButton()), true);

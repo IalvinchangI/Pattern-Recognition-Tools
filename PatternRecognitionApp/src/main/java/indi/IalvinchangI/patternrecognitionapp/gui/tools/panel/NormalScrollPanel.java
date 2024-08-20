@@ -97,6 +97,28 @@ public class NormalScrollPanel extends TransparentPanel {
 
 
     /**
+     * 把垂直的拉桿拉到某個地方
+     * @param verticalValue 要拉到的地方
+     */
+    public void setVerticalValue(int verticalValue) {
+        if (this.scrollPanel != null) {
+            scrollPanel.getVerticalScrollBar().setValue(verticalValue);
+        }
+    }
+
+
+    /**
+     * 把水平的拉桿拉到某個地方
+     * @param horizontalValue 要拉到的地方
+     */
+    public void setHorizontalValue(int horizontalValue) {
+        if (this.scrollPanel != null) {
+            scrollPanel.getHorizontalScrollBar().setValue(horizontalValue);
+        }
+    }
+
+
+    /**
      * 拉到最底
      */
     public void toEnd() {

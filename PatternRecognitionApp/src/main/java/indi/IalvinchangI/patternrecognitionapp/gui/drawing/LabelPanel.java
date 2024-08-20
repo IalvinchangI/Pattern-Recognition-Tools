@@ -28,6 +28,8 @@ class LabelPanel extends NormalScrollPanel {
 
     public static final int BUTTON_HEIGHT = 80;
 
+    private static final int BUTTON_SEP = 10;
+
 
     /**
      * 創造新的 LabelPanel
@@ -36,7 +38,7 @@ class LabelPanel extends NormalScrollPanel {
         super();
         this.setBackground(PRIMARY_BACKGROUND_COLOR);
 
-        this.buttonPanel = new MultiButtonPanel(MultiButtonPanel.Y_AXIS, 10);
+        this.buttonPanel = new MultiButtonPanel(MultiButtonPanel.Y_AXIS, BUTTON_SEP);
         this.buttons = new HashMap<>();
 
         this.addComponent(this.buttonPanel);
@@ -98,12 +100,11 @@ class LabelPanel extends NormalScrollPanel {
      */
     public void loadLabel(PatternData pattern) {
         if (pattern.getFinishEditing_TF(PatternData.CHECK_LABEL) == true) {
-            this.buttonPanel.setSelected(
-                this.buttons.get(
-                    pattern.getLabel()
-                ), 
-                true
-            );
+            GraphButton button = this.buttons.get(pattern.getLabel());
+            this.buttonPanel.setSelected(button, true);
+
+            int index = this.buttonPanel.indexOf(button);
+            this.setVerticalValue(index * (BUTTON_HEIGHT + BUTTON_SEP));
         }
         else {
             this.buttonPanel.clearSelection();

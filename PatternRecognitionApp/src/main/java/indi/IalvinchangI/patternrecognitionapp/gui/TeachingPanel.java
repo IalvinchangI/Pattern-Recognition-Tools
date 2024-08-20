@@ -85,7 +85,7 @@ public class TeachingPanel extends ShowableMessagePanel {
                     "</p>" + 
                     "<p>" + 
                         "訓練資料要在繪圖頁製作，而在設定頁則可以「設定資料的儲存位置」。" + 
-                        "若對於某頁面的操作有疑問，可以按下左下角的問號。" + 
+                        "若對於某頁面的操作有疑問，可以按下「左下角的問號」。" + 
                     "</p>" + 
                 "</dir>" + 
             "</body>" + 
@@ -96,7 +96,7 @@ public class TeachingPanel extends ShowableMessagePanel {
             "<body style='font-family: " + SUBTITLE_FONT.getName() + ";'>" + 
                 "<h1> 繪圖 </h1>" + 
                 "<dir style='font-size: " + CONTENT_FONT.getSize() + ";'>" + 
-                    "<strong> 這個頁面是用來「畫圖、上標籤和存檔」的 </strong>" + 
+                    "<strong> 此頁面是用來「畫圖、上標籤和存檔」的 </strong>" + 
                     "<ul style='margin-left: 0'>" + 
                         "<li> 左邊白色的那一大塊是畫布，用來「畫圖形」的。<br> 另外，這個畫布很特別，他只能畫一筆，所以所有的圖形只能「一筆完成」。 </li> " + 
                         "<li> 右邊那一排有圖有文字的按鈕是標籤，點選後可以幫左邊畫好的圖形「上標籤」。 </li>" + 
