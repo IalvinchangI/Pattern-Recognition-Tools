@@ -15,7 +15,7 @@ import indi.IalvinchangI.patternrecognitionapp.io.SettingHandler;
  */
 public class App {
 
-    private static final String VERSION = "PatternRecognitionApp-1.0-BETA";
+    private static final String VERSION = "PatternRecognitionApp-1.0.0";
 
     /** 最底層的資料夾 */
     public static final String ROOT_PATH = System.getProperty("user.dir");
