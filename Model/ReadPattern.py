@@ -16,7 +16,7 @@ class PatternReader():
         
         _, extension = os.path.splitext(path)
         if extension != ".iai":
-            raise AttributeError("The extension of this file is not 'iai'")
+            raise AttributeError(f"The extension of this file ({path}) is not 'iai'")
 
         self.__file = open(path)
         pattern: dict = json.load(self.__file)
