@@ -62,7 +62,7 @@ class PatternReader():
         return None
 
 if __name__ == "__main__":
-    patterns = PatternReader.read_directory("Model\\patterns")
+    patterns = PatternReader.read_directory("Visualize\\patterns")
     for pattern in patterns:
         if (pattern == None):
             break
